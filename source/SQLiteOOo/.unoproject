@@ -1,0 +1,10 @@
+#UNO project configuration file
+#Mon Jul 24 21:47:48 CEST 2023
+project.prefix=io.github.prrvchr
+project.language=Python
+project.ooo=LibreOffice 7.3
+project.idl=/idl
+project.implementation=SQLiteOOo
+project.build=build
+project.sdk=7.3.3.2
+project.srcdir=/source
