@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description
+  xmlns="http://openoffice.org/extensions/update/2006"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+    <identifier value="io.github.prrvchr.SQLiteOOo" />
+    <version value="0.0.1" />
+    <update-download>
+        <src xlink:href="https://github.com/prrvchr/SQLiteOOo/blob/master/SQLiteOOo.oxt" />
+    </update-download>
+    <dependencies xmlns:dep="http://openoffice.org/extensions/description/2006">
+        <dep:OpenOffice.org-minimal-version value="4.0" dep:name="OpenOffice.org 4.0"/>
+    </dependencies>
+    <publisher>
+        <name xlink:href="https://github.com/prrvchr/SQLiteOOo" lang="en">SQLiteOOo</name>
+    </publisher>
+    <release-notes>
+        <src xlink:href="https://github.com/prrvchr/SQLiteOOo/blob/master/README.md" lang="en" />
+        <src xlink:href="https://github.com/prrvchr/SQLiteOOo/blob/master/README_fr.md" lang="fr" />
+    </release-notes>
+</description>

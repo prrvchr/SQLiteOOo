@@ -1,0 +1,1 @@
+Le pilote intégré SQLite installable comme extension.

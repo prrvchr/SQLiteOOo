@@ -27,7 +27,7 @@
 <!DOCTYPE manifest:manifest PUBLIC "-//OpenOffice.org//DTD Manifest 1.0//EN" "Manifest.dtd">
 <manifest:manifest xmlns:manifest="http://openoffice.org/2001/manifest">
     <manifest:file-entry manifest:media-type="application/vnd.sun.star.uno-typelibrary;type=RDB" manifest:full-path="types.rdb"/>
-    <manifest:file-entry manifest:media-type="application/vnd.sun.star.basic-library" manifest:full-path="HsqlDriverOOo/"/>
+    <manifest:file-entry manifest:media-type="application/vnd.sun.star.basic-library" manifest:full-path="SQLiteOOo/"/>
     <manifest:file-entry manifest:media-type="application/vnd.sun.star.configuration-schema" manifest:full-path="Options.xcs"/>
     <manifest:file-entry manifest:media-type="application/vnd.sun.star.configuration-data" manifest:full-path="Options.xcu"/>
     <manifest:file-entry manifest:media-type="application/vnd.sun.star.configuration-data" manifest:full-path="OptionsDialog.xcu"/>

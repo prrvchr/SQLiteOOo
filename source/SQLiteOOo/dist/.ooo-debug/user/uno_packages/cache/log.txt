@@ -1,0 +1,2 @@
+ERROR: Exception occurred: Could not read file file:///home/prrvchr/github/SQLiteOOo/source/SQLiteOOo/dist/.ooo-debug//user/extensions/tmp/extensions/lu75276dx15i.tmp_/SQLiteOOo.oxt/registration/TermsOfUse_en.md ./desktop/source/deployment/registry/package/dp_package.cxx:551
+ERROR: unopkg failed.

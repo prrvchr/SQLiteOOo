@@ -28,11 +28,9 @@
 """
 
 # General configuration
-g_extension = 'HsqlDriverOOo'
+g_extension = 'SQLiteOOo'
 g_identifier = 'io.github.prrvchr.%s' % g_extension
 g_resource = 'resource'
 g_basename = 'Driver'
-g_defaultlog = 'HsqlDriverLogger'
-g_errorlog = 'HsqlDriverError'
-
-
+g_defaultlog = 'SQLiteLogger'
+g_errorlog = 'SQLiteError'

@@ -32,12 +32,12 @@ import unohelper
 
 from com.sun.star.lang import XServiceInfo
 
-from hsqldriver import sdbc
-from hsqldriver import sdbcx
+from sqlite import sdbc
+from sqlite import sdbcx
 
-from hsqldriver import getConfiguration
+from sqlite import getConfiguration
 
-from hsqldriver import g_identifier
+from sqlite import g_identifier
 
 from threading import Lock
 import traceback
@@ -50,15 +50,17 @@ g_ImplementationName = '%s.Driver' % g_identifier
 class Driver(unohelper.Base,
              XServiceInfo):
     def __new__(cls, ctx, *args, **kwargs):
+        print("Driver.__new__() 1 *******************************")
         if cls._instance is None:
             with cls._lock:
                 if cls._instance is None:
-                    print("Driver.__new__() *******************************")
+                    print("Driver.__new__() 2 *******************************")
+                    protocol = 'sdbc:embedded:sqlite'
                     service = getConfiguration(ctx, g_identifier).getByName('DriverService')
                     if service == 'io.github.prrvchr.jdbcdriver.sdbc.Driver':
-                        instance = sdbc.Driver(ctx, cls._lock, service, g_ImplementationName)
+                        instance = sdbc.Driver(ctx, protocol, '', '', cls._lock, service, g_ImplementationName)
                     else:
-                        instance = sdbcx.Driver(ctx, cls._lock, service, g_ImplementationName)
+                        instance = sdbcx.Driver(ctx, protocol, '', '', cls._lock, service, g_ImplementationName)
                     cls._instance = instance
         return cls._instance
 

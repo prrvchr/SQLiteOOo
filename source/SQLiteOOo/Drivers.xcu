@@ -85,12 +85,12 @@
             <node oor:name="MetaData">
                 <node oor:name="FileSystemBased" oor:op="replace">
                     <prop oor:name="Value" oor:type="xs:boolean">
-                        <value>false</value>
+                        <value>true</value>
                     </prop>
                 </node>
                 <node oor:name="SupportsBrowsing" oor:op="replace">
                     <prop oor:name="Value" oor:type="xs:boolean">
-                        <value>false</value>
+                        <value>true</value>
                     </prop>
                 </node>
                 <node oor:name="SupportsTableCreation" oor:op="replace">
