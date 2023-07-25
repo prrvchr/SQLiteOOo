@@ -121,7 +121,7 @@ ___
 [12]: <https://adoptium.net/releases.html?variant=openjdk11>
 [13]: <https://prrvchr.github.io/jdbcDriverOOo/img/jdbcDriverOOo.svg>
 [14]: <https://github.com/prrvchr/jdbcDriverOOo/raw/master/jdbcDriverOOo.oxt>
-[15]: <https://github.com/prrvchr/SQLiteOOo/raw/master/SQLiteOOo.oxt>
+[15]: <https://github.com/prrvchr/SQLiteOOo/raw/main/SQLiteOOo.oxt>
 [16]: <img/SQLiteOOo-1.png>
 [17]: <img/SQLiteOOo-2.png>
 [18]: <img/SQLiteOOo-3.png>
