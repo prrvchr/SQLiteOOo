@@ -127,7 +127,7 @@ ___
 [18]: <img/SQLiteOOo-3_fr.png>
 [19]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/Driver.html>
 [20]: <https://github.com/prrvchr/jdbcDriverOOo/README_fr>
-[21]: <https://github.com/prrvchr/SQLiteOOo/blob/master/uno/lib/uno/database/documenthandler.py>
+[21]: <https://github.com/prrvchr/SQLiteOOo/blob/main/uno/lib/uno/embedded/documenthandler.py>
 [22]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/util/XCloseListener.html>
 [23]: <http://www.openoffice.org/api/docs/common/ref/com/sun/star/document/XStorageChangeListener.html>
 [24]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/XConnection.html>
