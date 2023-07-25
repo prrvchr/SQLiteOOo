@@ -44,13 +44,14 @@ from .unotool import createService
 from .unotool import getConfiguration
 from .unotool import getPropertyValueSet
 
-from .dbconfig import g_protocol
-
 from .logger import getLogger
 
 from .configuration import g_identifier
 from .configuration import g_defaultlog
 from .configuration import g_basename
+from .configuration import g_protocol
+from .configuration import g_url
+from .configuration import g_user
 
 import traceback
 
@@ -59,11 +60,8 @@ class Driver(unohelper.Base,
              XServiceInfo,
              XDriver):
 
-    def __init__(self, ctx, protocol, user, pwd, lock, service, name):
+    def __init__(self, ctx, lock, service, name):
         self._ctx = ctx
-        self._protocol = protocol
-        self._user = user
-        self._password = pwd
         self._lock = lock
         self._service = service
         self._name = name
@@ -86,10 +84,11 @@ class Driver(unohelper.Base,
             driver = self._getDriver()
             handler = self._getDocumentHandler(location)
             path = handler.getConnectionUrl(document, storage, location)
+            print("driver.connect() Path: %s" % path)
             self._logger.logprb(INFO, 'Driver', 'connect()', 113, location)
             connection = driver.connect(path, newinfos)
             version = connection.getMetaData().getDriverVersion()
-            self._logger.logprb(INFO, 'Driver', 'connect()', 114, version, self._user)
+            self._logger.logprb(INFO, 'Driver', 'connect()', 114, version, g_user)
             return connection
         except SQLException as e:
             self._logger.logp(SEVERE, 'Driver', 'connect()', e.Message)
@@ -99,7 +98,7 @@ class Driver(unohelper.Base,
             raise e
 
     def acceptsURL(self, url):
-        accept = url.startswith(self._protocol)
+        accept = url.startswith(g_url)
         self._logger.logprb(INFO, 'Driver', 'acceptsURL()', 121, url, accept)
         return accept
 
@@ -147,7 +146,7 @@ class Driver(unohelper.Base,
     def _getConnectionInfo(self, infos):
         document = storage = url = None
         service = getConfiguration(self._ctx, g_identifier).getByName('ConnectionService')
-        newinfos = {'Url': self._protocol, 'ConnectionService': service}
+        newinfos = {'Url': g_url, 'ConnectionService': service}
         for info in infos:
             if info.Name == 'URL':
                 url = info.Value

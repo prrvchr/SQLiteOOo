@@ -1,1 +1,0 @@
-The Embedded SQLite driver installable as an extension.

@@ -48,8 +48,6 @@ from ..unotool import getUrl
 
 from ..logger import LogManager
 
-from ..dbconfig import g_jar
-
 from ..configuration import g_extension
 from ..configuration import g_identifier
 from ..configuration import g_defaultlog

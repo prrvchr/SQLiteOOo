@@ -43,11 +43,6 @@ from .unotool import getStringResource
 from .configuration import g_extension
 from .configuration import g_identifier
 
-from .dbconfig import g_options
-from .dbconfig import g_path
-from .dbconfig import g_protocol
-from .dbconfig import g_shutdown
-
 from .options import OptionsManager
 
 from .logger import getLogger

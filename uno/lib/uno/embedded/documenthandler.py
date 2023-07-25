@@ -44,9 +44,9 @@ from .unotool import getUrlTransformer
 from .unotool import hasInterface
 from .unotool import parseUrl
 
-from .dbconfig import g_protocol
-from .dbconfig import g_options
-from .dbconfig import g_shutdown
+from .configuration import g_protocol
+from .configuration import g_options
+from .configuration import g_shutdown
 
 import traceback
 
@@ -71,13 +71,14 @@ class DocumentHandler(unohelper.Base,
     # XCloseListener
     def queryClosing(self, event, owner):
         with self._lock:
-            print("DocumentHandler.queryClosing() ******************************")
+            print("DocumentHandler.queryClosing() 1 ******************************")
             document = event.Source
             if self._closeDataBase(document):
                 sf = getSimpleFile(self._ctx)
                 if sf.isFolder(self._path):
                     sf.kill(self._path)
             self._url = None
+            print("DocumentHandler.queryClosing() 2 ******************************")
 
     def notifyClosing(self, event):
         pass
@@ -111,10 +112,14 @@ class DocumentHandler(unohelper.Base,
     # DocumentHandler getter methods
     def getConnectionUrl(self, document, storage, url):
         with self._lock:
-            # FIXME: With OpenOffice getElementNames() return a String
-            # FIXME: if storage has no elements.
-            if storage.hasElements():
-                self._openDataBase(storage)
+            sf = getSimpleFile(self._ctx)
+            if not sf.exists(self._path):
+                if storage.hasElements():
+                    # FIXME: With OpenOffice getElementNames() return a String
+                    # FIXME: if storage has no elements.
+                    self._openDataBase(sf, storage)
+                else:
+                    sf.createFolder(self._path)
             # FIXME: With OpenOffice there is no Document in the info
             # FIXME: parameter provided during the connection
             if document is None:
@@ -222,8 +227,7 @@ class DocumentHandler(unohelper.Base,
         return empty
 
     # DocumentHandler private setter methods
-    def _openDataBase(self, source):
-        sf = getSimpleFile(self._ctx)
+    def _openDataBase(self, sf, source):
         for name in source.getElementNames():
             url = self._getFileUrl(name)
             if not sf.exists(url):

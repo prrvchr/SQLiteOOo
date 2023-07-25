@@ -34,3 +34,10 @@ g_resource = 'resource'
 g_basename = 'Driver'
 g_defaultlog = 'SQLiteLogger'
 g_errorlog = 'SQLiteError'
+
+# DataBase configuration
+g_protocol = 'xdbc:sqlite:'
+g_url = 'sdbc:embedded:hsqldb'
+g_user = ''
+g_options = ''
+g_shutdown = ''
