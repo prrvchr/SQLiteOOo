@@ -68,12 +68,12 @@ ___
 ## How does it work:
 
 SQLiteOOo is an [com.sun.star.sdbc.Driver][19] UNO service written in Python.  
-It is an overlay to the [jdbcDriverOOo][20] extension allowing to store the HyperSQL database in an odb file (which is, in fact, a compressed file).
+It is an overlay to the [jdbcDriverOOo][20] extension allowing to store the SQLite database in an odb file (which is, in fact, a compressed file).
 
 Its operation is quite basic, namely:
 
 - When requesting a connection, three things are done:
-    1. If it does not already exist, a **subdirectory** with name: `.` + `odb_file_name` + `.lck` is created in the location of the odb file where all HyperSQL files are extracted from the **database** directory of the odb file (unzip).
+    1. If it does not already exist, a **subdirectory** with name: `.` + `odb_file_name` + `.lck` is created in the location of the odb file where all SQLite files are extracted from the **database** directory of the odb file (unzip).
     2. A [DocumentHandler][21] is added as an [com.sun.star.util.XCloseListener][22] and [com.sun.star.document.XStorageChangeListener][23] to the odb file.
     3. The [jdbcDriverOOo][20] extension is used to get the [com.sun.star.sdbc.XConnection][24] interface from the **subdirectory** path + `odb_file_name`.
 
