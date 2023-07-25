@@ -34,7 +34,7 @@ It seems important that the file was not renamed when it was downloaded.
 If necessary, rename it before installing it.
 
 - Install ![jdbcDriverOOo logo][13] **[jdbcDriverOOo.oxt][14]** extension version 1.0.1.  
-This extension is necessary to use HsqlDB version 2.7.2 with all its features.
+This extension is necessary to use SQLite version 3.42.0.0 with all its features.
 
 - Install ![SQLiteOOo logo][1] **[SQLiteOOo.oxt][15]** extension version 1.0.0.
 
