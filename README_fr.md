@@ -101,7 +101,7 @@ ___
 
 ### Ce qui a été fait pour la version 1.0.0:
 
-- Integration de SQLite JDBC version 3.42.0.0.
+- Integration de SQLite JDBC version 3.42.0.0. Je tiens tout particulièrement à remercier [gotson][26] pour les [nombreuses améliorations apportées au pilote SQLite JDBC][27] qui ont rendu possible l'utilisation de SQLite dans LibreOffice/OpenOffice.
 
 ### Que reste-t-il à faire pour la version 1.0.0:
 
@@ -134,3 +134,5 @@ ___
 [23]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/util/XCloseListener.html>
 [24]: <http://www.openoffice.org/api/docs/common/ref/com/sun/star/document/XStorageChangeListener.html>
 [25]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/XConnection.html>
+[26]: <https://github.com/gotson>
+[27]: <https://github.com/xerial/sqlite-jdbc/issues/786>
