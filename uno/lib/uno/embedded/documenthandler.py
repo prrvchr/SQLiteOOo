@@ -70,23 +70,25 @@ class DocumentHandler(unohelper.Base,
 
     # XCloseListener
     def queryClosing(self, event, owner):
+        print("DocumentHandler.queryClosing() 1 ******************************")
         with self._lock:
-            print("DocumentHandler.queryClosing() 1 ******************************")
+            print("DocumentHandler.queryClosing() 2 ******************************")
             document = event.Source
             if self._closeDataBase(document):
                 sf = getSimpleFile(self._ctx)
                 if sf.isFolder(self._path):
                     sf.kill(self._path)
             self._url = None
-            print("DocumentHandler.queryClosing() 2 ******************************")
+        print("DocumentHandler.queryClosing() 3 ******************************")
 
     def notifyClosing(self, event):
         pass
 
     # XStorageChangeListener
     def notifyStorageChange(self, document, storage):
+        print("DocumentHandler.notifyStorageChange() 1 ******************************")
         with self._lock:
-            print("DocumentHandler.notifyStorageChange() ******************************")
+            print("DocumentHandler.notifyStorageChange() 2 ******************************")
             url = document.getLocation()
             newpath, newname = self._getDataBaseInfo(url)
             if self._switchDataBase(document, storage, newname):
@@ -97,17 +99,18 @@ class DocumentHandler(unohelper.Base,
             self._name = newname
             self._url = url
             document.removeCloseListener(self)
+        print("DocumentHandler.notifyStorageChange() 3 ******************************")
 
     # XEventListener
     def disposing(self, event):
+        print("DocumentHandler.disposing() 1 ******************************")
         #mri = createService(self._ctx, 'mytools.Mri')
         #mri.inspect(event.Source)
         document = event.Source
         document.removeCloseListener(self)
         document.removeStorageChangeListener(self)
         self._url = None
-        print("DocumentHandler.disposing() ******************************")
-        #pass
+        print("DocumentHandler.disposing() 2 ******************************")
 
     # DocumentHandler getter methods
     def getConnectionUrl(self, document, storage, url):

@@ -38,8 +38,8 @@
         <src xlink:href="https://prrvchr.github.io/SQLiteOOo/SQLiteOOo.update.xml"/>
     </update-information>
     <publisher>
-        <name xlink:href="https://prrvchr.github.io/SQLiteOOo/" lang="en-US">Embedded Hsqldb driver for LibreOffice / OpenOffice</name>
-        <name xlink:href="https://prrvchr.github.io/SQLiteOOo/README_fr" lang="fr-FR">Pilote Hsqldb intégré pour LibreOffice / OpenOffice</name>
+        <name xlink:href="https://prrvchr.github.io/SQLiteOOo/" lang="en-US">Embedded SQLite driver for LibreOffice / OpenOffice</name>
+        <name xlink:href="https://prrvchr.github.io/SQLiteOOo/README_fr" lang="fr-FR">Pilote SQLite intégré pour LibreOffice / OpenOffice</name>
     </publisher>
     <registration>
         <simple-license accept-by="admin" suppress-on-update="true">
