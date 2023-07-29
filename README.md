@@ -92,6 +92,8 @@ ___
 
 * LibreOffice 6.4.4.2 - Windows 7 SP1
 
+* **Does not work with LibreOffice 7.6.x or higher** (see [bug 156511][26])
+
 I encourage you in case of problem :confused:  
 to create an [issue][9]  
 I will try to solve it :smile:
@@ -101,7 +103,7 @@ ___
 
 ### What has been done for version 1.0.0:
 
-- Integration of SQLite JDBC version 3.42.0.0. I especially want to thank [gotson][26] for the [many improvements to the SQLite JDBC driver][27] that made it possible to use SQLite in LibreOffice/OpenOffice.
+- Integration of SQLite JDBC version 3.42.0.0. I especially want to thank [gotson][27] for the [many improvements to the SQLite JDBC driver][28] that made it possible to use SQLite in LibreOffice/OpenOffice.
 
 ### What remains to be done for version 1.0.0:
 
@@ -134,5 +136,6 @@ ___
 [23]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/util/XCloseListener.html>
 [24]: <http://www.openoffice.org/api/docs/common/ref/com/sun/star/document/XStorageChangeListener.html>
 [25]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/XConnection.html>
-[26]: <https://github.com/gotson>
-[27]: <https://github.com/xerial/sqlite-jdbc/issues/786>
+[26]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156511>
+[27]: <https://github.com/gotson>
+[28]: <https://github.com/xerial/sqlite-jdbc/issues/786>
