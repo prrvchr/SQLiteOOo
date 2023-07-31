@@ -32,6 +32,9 @@ import unohelper
 from com.sun.star.embed.ElementModes import SEEKABLEREAD
 from com.sun.star.embed.ElementModes import READWRITE
 
+from com.sun.star.logging.LogLevel import INFO
+from com.sun.star.logging.LogLevel import SEVERE
+
 from com.sun.star.document import XStorageChangeListener
 
 from com.sun.star.util import XCloseListener
@@ -48,21 +51,26 @@ from .configuration import g_protocol
 from .configuration import g_options
 from .configuration import g_shutdown
 
+from .configuration import g_errorlog
+from .configuration import g_basename
+
 import traceback
 
 
 class DocumentHandler(unohelper.Base,
                       XCloseListener,
                       XStorageChangeListener):
-    def __init__(self, ctx, lock, url):
+    def __init__(self, ctx, lock, logger, url):
         self._ctx = ctx
         self._folder = 'database'
         self._prefix = '.'
         self._suffix = '.lck'
         self._lock = lock
+        self._logger = logger
         self._listening = False
         self._path, self._name = self._getDataBaseInfo(url)
         self._url = url
+        self._errorlog = None
 
     @property
     def URL(self):
@@ -70,27 +78,25 @@ class DocumentHandler(unohelper.Base,
 
     # XCloseListener
     def queryClosing(self, event, owner):
-        print("DocumentHandler.queryClosing() 1 ******************************")
-
-    def notifyClosing(self, event):
-        print("DocumentHandler.notifyClosing() 1 ******************************")
+        url = self._url
+        self._logger.logprb(INFO, 'DocumentHandler', 'queryClosing()', 201, url)
         with self._lock:
-            print("DocumentHandler.notifyClosing() 2 ******************************")
             document = event.Source
             if self._closeDataBase(document):
                 sf = getSimpleFile(self._ctx)
                 if sf.isFolder(self._path):
                     sf.kill(self._path)
             self._url = None
-        print("DocumentHandler.notifyClosing() 3 ******************************")
+        self._logger.logprb(INFO, 'DocumentHandler', 'queryClosing()', 202, url)
 
+    def notifyClosing(self, event):
+        pass
 
     # XStorageChangeListener
     def notifyStorageChange(self, document, storage):
-        print("DocumentHandler.notifyStorageChange() 1 ******************************")
+        url = document.getLocation()
+        self._logger.logprb(INFO, 'DocumentHandler', 'notifyStorageChange()', 211, url)
         with self._lock:
-            print("DocumentHandler.notifyStorageChange() 2 ******************************")
-            url = document.getLocation()
             newpath, newname = self._getDataBaseInfo(url)
             if self._switchDataBase(document, storage, newname):
                 sf = getSimpleFile(self._ctx)
@@ -100,16 +106,17 @@ class DocumentHandler(unohelper.Base,
             self._name = newname
             self._url = url
             document.removeCloseListener(self)
-        print("DocumentHandler.notifyStorageChange() 3 ******************************")
+        self._logger.logprb(INFO, 'DocumentHandler', 'notifyStorageChange()', 212, url)
 
     # XEventListener
     def disposing(self, event):
-        print("DocumentHandler.disposing() 1 ******************************")
+        url = self._url
+        self._logger.logprb(INFO, 'DocumentHandler', 'disposing()', 221, url)
         document = event.Source
         document.removeCloseListener(self)
         document.removeStorageChangeListener(self)
         self._url = None
-        print("DocumentHandler.disposing() 2 ******************************")
+        self._logger.logprb(INFO, 'DocumentHandler', 'disposing()', 222, url)
 
     # DocumentHandler getter methods
     def getConnectionUrl(self, document, storage, url):
@@ -189,72 +196,61 @@ class DocumentHandler(unohelper.Base,
 
     def _closeDataBase(self, document):
         try:
-            print("DocumentHandler._closeDataBase() 1 ******************************")
             target = document.getDocumentSubStorage(self._folder, READWRITE)
-            print("DocumentHandler._closeDataBase() 2 Target: %s" % target)
             service = 'com.sun.star.embed.FileSystemStorageFactory'
             args = (self._path, READWRITE)
-            print("DocumentHandler._closeDataBase() 3 ******************************")
             source = createService(self._ctx, service).createInstanceWithArguments(args)
             # FIXME: With OpenOffice getElementNames() return a String
             # FIXME: if storage has no elements.
-            print("DocumentHandler._closeDataBase() 4 ******************************")
             if source.hasElements():
-                print("DocumentHandler._closeDataBase() 5 ******************************")
                 for name in source.getElementNames():
-                    print("DocumentHandler._closeDataBase() 6 ******************************")
                     if source.isStreamElement(name):
-                        print("DocumentHandler._closeDataBase() 7 ******************************")
                         if target.hasByName(name):
-                            print("DocumentHandler._closeDataBase() 8 ******************************")
                             target.removeElement(name)
-                        print("DocumentHandler._closeDataBase() 9 ******************************")
+                        self._logger.logprb(INFO, 'DocumentHandler', '_closeDataBase()', 231, name)
                         source.moveElementTo(name, target, name)
+                        self._logger.logprb(INFO, 'DocumentHandler', '_closeDataBase()', 232, name)
                 # FIXME: We need to clean the odb file if Save As as been used with a closed connection
-                print("DocumentHandler._closeDataBase() 10 ******************************")
                 if target.hasElements():
                     for name in target.getElementNames():
                         if not name.startswith(self._name):
                             target.removeElement(name)
-            print("DocumentHandler._closeDataBase() 11 ******************************")
             empty = not source.hasElements()
             target.commit()
             target.dispose()
             source.dispose()
             document.store()
-            print("DocumentHandler._closeDataBase() 12 ******************************")
             return empty
         except Exception as e:
-            print("DocumentHandler._closeDataBase() ERROR ******************************")
-            print("ERROR: %s" % (traceback.format_exc(), ))
-
+            self._getErrorLog().logprb(SEVERE, 'DocumentHandler', '_closeDataBase()', 233, self._url, traceback.format_exc())
 
     def _switchDataBase(self, document, storage, newname):
         try:
-            print("DocumentHandler._switchDataBase() 1 ******************************")
             target = storage.openStorageElement(self._folder, READWRITE)
             service = 'com.sun.star.embed.FileSystemStorageFactory'
             args = (self._path, READWRITE)
-            print("DocumentHandler._switchDataBase() 2 Target: %s" % target)
             source = createService(self._ctx, service).createInstanceWithArguments(args)
             # FIXME: With OpenOffice getElementNames() return a String
             # FIXME: if storage has no elements.
             if source.hasElements():
                 for name in source.getElementNames():
                     if source.isStreamElement(name):
-                        print("DocumentHandler._switchDataBase() 3 ******************************")
+                        self._logger.logprb(INFO, 'DocumentHandler', '_switchDataBase()', 241, name)
                         self._moveStorage(source, target, name, newname)
-                        print("DocumentHandler._switchDataBase() 4 ******************************")
+                        self._logger.logprb(INFO, 'DocumentHandler', '_switchDataBase()', 242, name)
             empty = not source.hasElements()
             target.commit()
             target.dispose()
             source.dispose()
             document.store()
-            print("DocumentHandler._switchDataBase() 5 ******************************")
             return empty
         except Exception as e:
-            print("DocumentHandler._switchDataBase() ERROR ******************************")
-            print("ERROR: %s" % (traceback.format_exc(), ))
+            self._getErrorLog().logprb(SEVERE, 'DocumentHandler', '_switchDataBase()', 243, self._url, traceback.format_exc())
+
+    def _getErrorLog(self):
+        if self._errorlog is None:
+            self._errorlog = getLogger(self._ctx, g_errorlog, g_basename)
+        return self._errorlog
 
     # DocumentHandler private setter methods
     def _openDataBase(self, sf, source):
@@ -274,4 +270,3 @@ class DocumentHandler(unohelper.Base,
         if target.hasByName(name):
             target.removeElement(name)
         source.moveElementTo(oldname, target, name)
-
