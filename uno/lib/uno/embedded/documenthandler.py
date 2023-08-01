@@ -204,7 +204,7 @@ class DocumentHandler(unohelper.Base,
                         if target.hasByName(name):
                             target.removeElement(name)
                         self._logger.logprb(INFO, 'DocumentHandler', '_closeDataBase()', 231, name)
-                        source.moveElementTo(name, target, name)
+                        source.copyElementTo(name, target, name)
                         self._logger.logprb(INFO, 'DocumentHandler', '_closeDataBase()', 232, name)
                 # FIXME: We need to clean the odb file if Save As as been used with a closed connection
                 if target.hasElements():
@@ -260,4 +260,4 @@ class DocumentHandler(unohelper.Base,
         name = self._getStorageName(oldname, self._name, newname)
         if target.hasByName(name):
             target.removeElement(name)
-        source.moveElementTo(oldname, target, name)
+        source.copyElementTo(oldname, target, name)

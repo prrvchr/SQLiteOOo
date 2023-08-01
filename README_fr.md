@@ -4,7 +4,7 @@
 
 **L'utilisation de ce logiciel vous soumet à nos [Conditions d'utilisation][3].**
 
-# version [1.0.0][4]
+# version [1.0.1][4]
 
 ## Introduction:
 
@@ -38,7 +38,7 @@ Si nécessaire, renommez-le avant de l'installer.
 - Installer l'extension ![jdbcDriverOOo logo][14] **[jdbcDriverOOo.oxt][15]** version 1.0.1.  
 Cette extension est nécessaire pour utiliser SQLite version 3.42.0.0 avec toutes ses fonctionnalités.
 
-- Installer l'extension ![SQLiteOOo logo][1] **[SQLiteOOo.oxt][16]** version 1.0.0.
+- Installer l'extension ![SQLiteOOo logo][1] **[SQLiteOOo.oxt][16]** version 1.0.1.
 
 Redémarrez LibreOffice / OpenOffice après l'installation.
 
@@ -92,7 +92,9 @@ ___
 
 * LibreOffice 6.4.4.2 - Windows 7 SP1
 
-* **Ne fonctionne pas avec LibreOffice 7.6.x ou supérieur** (voir [bug 156511][26])
+* LibreOffice 7.6.0.1 - Windows 10
+
+* LibreOffice 7.6.0.1 - Ubuntu 22.04
 
 Je vous encourage en cas de problème :confused:  
 de créer un [dysfonctionnement][9]  
@@ -103,9 +105,13 @@ ___
 
 ### Ce qui a été fait pour la version 1.0.0:
 
-- Integration de SQLite JDBC version 3.42.0.0. Je tiens tout particulièrement à remercier [gotson][27] pour les [nombreuses améliorations apportées au pilote SQLite JDBC][28] qui ont rendu possible l'utilisation de SQLite dans LibreOffice/OpenOffice.
+- Intégration de SQLite JDBC version 3.42.0.0. Je tiens tout particulièrement à remercier [gotson][26] pour les [nombreuses améliorations apportées au pilote SQLite JDBC][27] qui ont rendu possible l'utilisation de SQLite dans LibreOffice/OpenOffice.
 
-### Que reste-t-il à faire pour la version 1.0.0:
+### Ce qui a été fait pour la version 1.0.1:
+
+- Résolution du [dysfonctionnement 156511][28] survenant lors de l'utilisation de l'interface com.sun.star.embed.XStorage. Le contournement consiste à utiliser la méthode copyElementTo() au lieu de moveElementTo().
+
+### Que reste-t-il à faire pour la version 1.0.1:
 
 - Ajouter de nouvelles langue pour l'internationalisation...
 
@@ -136,6 +142,6 @@ ___
 [23]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/util/XCloseListener.html>
 [24]: <http://www.openoffice.org/api/docs/common/ref/com/sun/star/document/XStorageChangeListener.html>
 [25]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/XConnection.html>
-[26]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156511>
-[27]: <https://github.com/gotson>
-[28]: <https://github.com/xerial/sqlite-jdbc/issues/786>
+[26]: <https://github.com/gotson>
+[27]: <https://github.com/xerial/sqlite-jdbc/issues/786>
+[28]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156511>

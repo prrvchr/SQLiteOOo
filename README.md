@@ -4,7 +4,7 @@
 
 **The use of this software subjects you to our [Terms Of Use][3].**
 
-# version [1.0.0][4]
+# version [1.0.1][4]
 
 ## Introduction:
 
@@ -38,7 +38,7 @@ If necessary, rename it before installing it.
 - Install ![jdbcDriverOOo logo][14] **[jdbcDriverOOo.oxt][15]** extension version 1.0.1.  
 This extension is necessary to use SQLite version 3.42.0.0 with all its features.
 
-- Install ![SQLiteOOo logo][1] **[SQLiteOOo.oxt][16]** extension version 1.0.0.
+- Install ![SQLiteOOo logo][1] **[SQLiteOOo.oxt][16]** extension version 1.0.1.
 
 Restart LibreOffice / OpenOffice after installation.
 
@@ -92,7 +92,9 @@ ___
 
 * LibreOffice 6.4.4.2 - Windows 7 SP1
 
-* **Does not work with LibreOffice 7.6.x or higher** (see [bug 156511][26])
+* LibreOffice 7.6.0.1 - Windows 10
+
+* LibreOffice 7.6.0.1 - Ubuntu 22.04
 
 I encourage you in case of problem :confused:  
 to create an [issue][9]  
@@ -103,9 +105,13 @@ ___
 
 ### What has been done for version 1.0.0:
 
-- Integration of SQLite JDBC version 3.42.0.0. I especially want to thank [gotson][27] for the [many improvements to the SQLite JDBC driver][28] that made it possible to use SQLite in LibreOffice/OpenOffice.
+- Integration of SQLite JDBC version 3.42.0.0. I especially want to thank [gotson][26] for the [many improvements to the SQLite JDBC driver][27] that made it possible to use SQLite in LibreOffice/OpenOffice.
 
-### What remains to be done for version 1.0.0:
+### What has been done for version 1.0.1:
+
+- Fixed [bug 156511][28] occurring when using the com.sun.star.embed.XStorage interface. The workaround is to use the copyElementTo() method instead of moveElementTo().
+
+### What remains to be done for version 1.0.1:
 
 - Add new language for internationalization...
 
@@ -136,6 +142,6 @@ ___
 [23]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/util/XCloseListener.html>
 [24]: <http://www.openoffice.org/api/docs/common/ref/com/sun/star/document/XStorageChangeListener.html>
 [25]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/XConnection.html>
-[26]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156511>
-[27]: <https://github.com/gotson>
-[28]: <https://github.com/xerial/sqlite-jdbc/issues/786>
+[26]: <https://github.com/gotson>
+[27]: <https://github.com/xerial/sqlite-jdbc/issues/786>
+[28]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156511>
