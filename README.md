@@ -109,7 +109,7 @@ ___
 
 ### What has been done for version 1.0.1:
 
-- Fixed [bug 156511][28] occurring when using the com.sun.star.embed.XStorage interface. The workaround is to use the copyElementTo() method instead of moveElementTo().
+- Fixed [bug 156511][28] occurring when using the com.sun.star.embed.XStorage interface. The [workaround][29] is to use the copyElementTo() method instead of moveElementTo(). Versions of LibreOffice 7.6.x and higher become usable.
 
 ### What remains to be done for version 1.0.1:
 
@@ -145,3 +145,4 @@ ___
 [26]: <https://github.com/gotson>
 [27]: <https://github.com/xerial/sqlite-jdbc/issues/786>
 [28]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156511>
+[29]: <https://github.com/prrvchr/uno/commit/a2fa9f5975a35e8447907e51b0f78ac1b1b76e17>
