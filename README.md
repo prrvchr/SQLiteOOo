@@ -27,7 +27,7 @@ ___
 Its use requires the [installation and configuration][11] in LibreOffice / OpenOffice of a **JRE version 11 or later**.  
 I recommend [Adoptium][12] as your Java installation source.
 
-This extension cannot be installed together with the [HsqlDriverOOo][13] extension. It's one or the other, but at the moment they can't work together.
+This extension cannot be installed together with the [HyperSQLOOo][13] extension. It's one or the other, but at the moment they can't work together.
 
 ___
 ## Installation:
@@ -129,7 +129,7 @@ ___
 [10]: <https://github.com/xerial/sqlite-jdbc>
 [11]: <https://wiki.documentfoundation.org/Documentation/HowTo/Install_the_correct_JRE_-_LibreOffice_on_Windows_10>
 [12]: <https://adoptium.net/releases.html?variant=openjdk11>
-[13]: <https://prrvchr.github.io/HsqlDriverOOo/>
+[13]: <https://prrvchr.github.io/HyperSQLOOo/>
 [14]: <https://prrvchr.github.io/jdbcDriverOOo/img/jdbcDriverOOo.svg>
 [15]: <https://github.com/prrvchr/jdbcDriverOOo/raw/master/jdbcDriverOOo.oxt>
 [16]: <https://github.com/prrvchr/SQLiteOOo/raw/main/SQLiteOOo.oxt>
