@@ -35,7 +35,7 @@ ___
 Il semble important que le fichier n'ait pas été renommé lors de son téléchargement.  
 Si nécessaire, renommez-le avant de l'installer.
 
-- Installer l'extension ![jdbcDriverOOo logo][14] **[jdbcDriverOOo.oxt][15]** version 1.0.1.  
+- Installer l'extension ![jdbcDriverOOo logo][14] **[jdbcDriverOOo.oxt][15]** version 1.0.3.  
 Cette extension est nécessaire pour utiliser SQLite version 3.42.0.0 avec toutes ses fonctionnalités.
 
 - Installer l'extension ![SQLiteOOo logo][1] **[SQLiteOOo.oxt][16]** version 1.0.1.
