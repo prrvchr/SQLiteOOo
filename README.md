@@ -4,7 +4,7 @@
 
 **The use of this software subjects you to our [Terms Of Use][3].**
 
-# version [1.0.1][4]
+# version [1.0.2][4]
 
 ## Introduction:
 
@@ -35,10 +35,10 @@ ___
 It seems important that the file was not renamed when it was downloaded.
 If necessary, rename it before installing it.
 
-- Install ![jdbcDriverOOo logo][14] **[jdbcDriverOOo.oxt][15]** extension version 1.0.3.  
+- Install ![jdbcDriverOOo logo][14] **[jdbcDriverOOo.oxt][15]** extension version 1.0.5.  
 This extension is necessary to use SQLite version 3.42.0.0 with all its features.
 
-- Install ![SQLiteOOo logo][1] **[SQLiteOOo.oxt][16]** extension version 1.0.1.
+- Install ![SQLiteOOo logo][1] **[SQLiteOOo.oxt][16]** extension version 1.0.2.
 
 Restart LibreOffice / OpenOffice after installation.
 
@@ -111,7 +111,13 @@ ___
 
 - Fixed [bug 156511][28] occurring when using the com.sun.star.embed.XStorage interface. The [workaround][29] is to use the copyElementTo() method instead of moveElementTo(). Versions of LibreOffice 7.6.x and higher become usable.
 
-### What remains to be done for version 1.0.1:
+### What has been done for version 1.0.2:
+
+- The absence or obsolescence of **jdbcDriverOOo** extension necessary for the proper functioning of **SQLiteOOo** now displays an error message.
+
+- Many other things...
+
+### What remains to be done for version 1.0.2:
 
 - Add new language for internationalization...
 
