@@ -38,7 +38,7 @@ If necessary, rename it before installing it.
 - Install ![jdbcDriverOOo logo][14] **[jdbcDriverOOo.oxt][15]** extension version 1.0.5.  
 This extension is necessary to use SQLite version 3.42.0.0 with all its features.
 
-- Install ![SQLiteOOo logo][1] **[SQLiteOOo.oxt][16]** extension version 1.0.2.
+- Install ![SQLiteOOo logo][1] **[SQLiteOOo.oxt][16]** extension version [![Version][0]][16]
 
 Restart LibreOffice / OpenOffice after installation.
 
@@ -123,6 +123,7 @@ ___
 
 - Anything welcome...
 
+[0]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.0.2>
 [1]: <img/SQLiteOOo.svg>
 [2]: <https://prrvchr.github.io/SQLiteOOo/README_fr>
 [3]: <https://prrvchr.github.io/SQLiteOOo/source/SQLiteOOo/registration/TermsOfUse_en>
@@ -137,8 +138,8 @@ ___
 [12]: <https://adoptium.net/releases.html?variant=openjdk11>
 [13]: <https://prrvchr.github.io/HyperSQLOOo/>
 [14]: <https://prrvchr.github.io/jdbcDriverOOo/img/jdbcDriverOOo.svg>
-[15]: <https://github.com/prrvchr/jdbcDriverOOo/raw/master/jdbcDriverOOo.oxt>
-[16]: <https://github.com/prrvchr/SQLiteOOo/raw/main/SQLiteOOo.oxt>
+[15]: <https://github.com/prrvchr/jdbcDriverOOo/releases/latest/download/jdbcDriverOOo.oxt>
+[16]: <https://github.com/prrvchr/SQLiteOOo/releases/latest/download/SQLiteOOo.oxt>
 [17]: <img/SQLiteOOo-1.png>
 [18]: <img/SQLiteOOo-2.png>
 [19]: <img/SQLiteOOo-3.png>
