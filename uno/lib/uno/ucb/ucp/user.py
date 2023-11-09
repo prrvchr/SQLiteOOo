@@ -64,7 +64,7 @@ from ..logger import getLogger
 
 from .content import Content
 
-from .contentidentifier import ContentIdentifier
+from .identifier import Identifier
 
 from .contenthelper import getContentInfo
 
@@ -76,48 +76,58 @@ import binascii
 import traceback
 
 
-class ContentUser():
+class User():
     def __init__(self, ctx, logger, source, database, provider, name, sync, lock, password=''):
-        try:
-            self._ctx = ctx
-            self._name = name
-            self._sync = sync
-            self._lock = lock
-            self._expired = None
-            self.Provider = provider
-            #self.CanAddChild = not self.Provider.GenerateIds
-            self.CanAddChild = True
-            self.Request = getRequest(ctx, self.Provider.Scheme, name)
-            self._logger = logger
-            metadata = database.selectUser(name)
-            new = metadata is None
-            if new:
-                if self.Request is None:
-                    msg = self._logger.resolveString(501, g_oauth2)
-                    raise IllegalIdentifierException(msg, source)
-                elif not self.Provider.isOnLine():
-                    msg = self._logger.resolveString(502, name)
-                    raise IllegalIdentifierException(msg, source)
-                user, root = self.Provider.getUser(source, self.Request, name)
-                metadata = database.insertUser(user, root)
-                if metadata is None:
-                    msg = self._logger.resolveString(503, name)
-                    raise IllegalIdentifierException(msg, source)
-                if not database.createUser(name, password):
-                    msg = self._logger.resolveString(504, name)
-                    raise IllegalIdentifierException(msg, source)
-            self.MetaData = metadata
-            self.DataBase = DataBase(ctx, logger, database.Url, sync, name, password)
-            self._identifiers = {}
-            self._contents = {}
-            self._contents[self.RootId] = Content(ctx, self)
-            if new:
-                self._sync.set()
-            self._logger.logprb(INFO, 'ContentUser', '__init__()', 505)
-        except Exception as e:
-            msg = "ContentUser.__init__() Error: %s" % traceback.format_exc()
-            print(msg)
-            raise IllegalIdentifierException(msg, source)
+        self._ctx = ctx
+        self._name = name
+        self._sync = sync
+        self._lock = lock
+        self._expired = None
+        self.Provider = provider
+        #self.CanAddChild = not self.Provider.GenerateIds
+        self.CanAddChild = True
+        self._logger = logger
+        metadata = database.selectUser(name)
+        new = metadata is None
+        if not new:
+            request = getRequest(ctx, self.Provider.Scheme, name)
+            if request is None:
+                # If we have a Null value here then it means that the user has abandoned
+                # the OAuth2 Wizard, there is nothing more to do except throw an exception
+                msg = self._logger.resolveString(501, g_oauth2)
+                self._logger.logp(SEVERE, 'User', '__init__()', msg)
+                raise IllegalIdentifierException(msg, source)
+        else:
+            if not self.Provider.isOnLine():
+                msg = self._logger.resolveString(502, name)
+                self._logger.logp(SEVERE, 'User', '__init__()', msg)
+                raise IllegalIdentifierException(msg, source)
+            request = getRequest(ctx, self.Provider.Scheme, name)
+            if request is None:
+                # If we have a Null value here then it means that the user has abandoned
+                # the OAuth2 Wizard, there is nothing more to do except throw an exception
+                msg = self._logger.resolveString(501, g_oauth2)
+                self._logger.logp(SEVERE, 'User', '__init__()', msg)
+                raise IllegalIdentifierException(msg, source)
+            user, root = self.Provider.getUser(source, request, name)
+            metadata = database.insertUser(user, root)
+            if metadata is None:
+                msg = self._logger.resolveString(503, name)
+                self._logger.logp(SEVERE, 'User', '__init__()', msg)
+                raise IllegalIdentifierException(msg, source)
+            if not database.createUser(name, password):
+                msg = self._logger.resolveString(504, name)
+                self._logger.logp(SEVERE, 'User', '__init__()', msg)
+                raise IllegalIdentifierException(msg, source)
+        self.Request = request
+        self.MetaData = metadata
+        self.DataBase = DataBase(ctx, logger, database.Url, sync, name, password)
+        self._identifiers = {}
+        self._contents = {}
+        self._contents[self.RootId] = Content(ctx, self)
+        if new:
+            self._sync.set()
+        self._logger.logprb(INFO, 'User', '__init__()', 505)
 
     @property
     def Name(self):
@@ -176,7 +186,7 @@ class ContentUser():
 
     def getContentIdentifier(self, authority, path, title, isroot):
         url = self.getContentScheme(authority) + self.getContentPath(path, title, isroot, g_separator)
-        return ContentIdentifier(url)
+        return Identifier(url)
 
     def getContentPath(self, path, title, isroot=False, rootpath=''):
         return rootpath if isroot else path + g_separator + title
@@ -215,7 +225,7 @@ class ContentUser():
             try:
                 sf.writeFile(url, stream)
             except Exception as e:
-                self._logger.logprb(SEVERE, 'ContentUser', 'getDocumentContent()', 511, e, traceback.format_exc())
+                self._logger.logprb(SEVERE, 'User', 'getDocumentContent()', 511, e, traceback.format_exc())
             else:
                 size = sf.getSize(url)
                 loaded = self.DataBase.updateConnectionMode(self.Id, itemid, OFFLINE, ONLINE)
