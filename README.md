@@ -38,9 +38,9 @@ It seems important that the file was not renamed when it was downloaded.
 If necessary, rename it before installing it.
 
 - Install ![jdbcDriverOOo logo][13] **[jdbcDriverOOo.oxt][14]** extension [![Version][15]][14]
-This extension is necessary to use SQLite version 3.42.0.0 with all its features.
+    This extension is necessary to use SQLite version 3.42.0.0 with all its features.
 
-- Install ![SQLiteOOo logo][16] **[SQLiteOOo.oxt][17]** extension version [![Version][18]][17]
+- Install ![SQLiteOOo logo][16] **[SQLiteOOo.oxt][17]** extension [![Version][18]][17]
 
 Restart LibreOffice / OpenOffice after installation.
 
