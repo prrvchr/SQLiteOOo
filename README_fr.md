@@ -37,11 +37,11 @@ ___
 Il semble important que le fichier n'ait pas été renommé lors de son téléchargement.  
 Si nécessaire, renommez-le avant de l'installer.
 
-- Installer l'extension ![jdbcDriverOOo logo][13] **[jdbcDriverOOo.oxt][14]** [![Version][15]][14]
+- [![jdbcDriverOOo logo][13]][14] Installer l'extension **[jdbcDriverOOo.oxt][15]** [![Version][16]][15]
 
     Cette extension est nécessaire pour utiliser SQLite version 3.42.0.0 avec toutes ses fonctionnalités.
 
-- Installer l'extension ![SQLiteOOo logo][16] **[SQLiteOOo.oxt][17]** [![Version][18]][17]
+- ![SQLiteOOo logo][17] Installer l'extension **[SQLiteOOo.oxt][18]** [![Version][19]][18]
 
 Redémarrez LibreOffice / OpenOffice après l'installation.
 
@@ -53,20 +53,20 @@ ___
 
 Dans LibreOffice / OpenOffice aller à: Fichier -> Nouveau -> Base de données...:
 
-![SQLiteOOo screenshot 1][19]
+![SQLiteOOo screenshot 1][20]
 
 A l'étape: Sélectionner une base de données:
 - selectionner: Créer une nouvelle base de données
 - Dans: Base de données intégrée: choisir: Pilote SQLite intégré
 - cliquer sur le bouton: Suivant
 
-![SQLiteOOo screenshot 2][20]
+![SQLiteOOo screenshot 2][21]
 
 A l'étape: Enregistrer et continuer:
 - ajuster les paramètres selon vos besoins...
 - cliquer sur le bouton: Terminer
 
-![SQLiteOOo screenshot 3][21]
+![SQLiteOOo screenshot 3][22]
 
 Maintenant à vous d'en profiter...
 
@@ -74,15 +74,15 @@ ___
 
 ## Comment ça marche:
 
-SQLiteOOo est un service [com.sun.star.sdbc.Driver][22] UNO écrit en Python.  
-Il s'agit d'une surcouche à l'extension [jdbcDriverOOo][23] permettant de stocker la base de données SQLite dans un fichier odb (qui est, en fait, un fichier compressé).
+SQLiteOOo est un service [com.sun.star.sdbc.Driver][23] UNO écrit en Python.  
+Il s'agit d'une surcouche à l'extension [jdbcDriverOOo][14] permettant de stocker la base de données SQLite dans un fichier odb (qui est, en fait, un fichier compressé).
 
 Son fonctionnement est assez basique, à savoir:
 
 - Lors d'une demande de connexion, trois choses sont faites:
     1. S'il n'existe pas déjà, un **sous-répertoire** avec le nom: `.` + `nom_du_fichier_odb` + `.lck` est créé à l'emplacement du fichier odb dans lequel tous les fichiers SQLite sont extraits du répertoire **database** du fichier odb (décompression).
     2. Un [DocumentHandler][24] est ajouté en tant que [com.sun.star.util.XCloseListener][25] et [com.sun.star.document.XStorageChangeListener][26] au fichier odb.
-    3. L'extension [jdbcDriverOOo][23] est utilisée pour obtenir l'interface [com.sun.star.sdbc.XConnection][27] à partir du chemin du **sous-répertoire** + `nom_du_fichier_odb`.
+    3. L'extension [jdbcDriverOOo][14] est utilisée pour obtenir l'interface [com.sun.star.sdbc.XConnection][27] à partir du chemin du **sous-répertoire** + `nom_du_fichier_odb`.
 
 - Lors de la fermeture ou du renommage (Enregistrer sous) d'un fichier odb, le [DocumentHandler][24] copie tous les fichiers présents dans le **sous-répertoire** dans le (nouveau) répertoire **database** du fichier odb (compression) puis supprime le **sous-répertoire**.
 
@@ -143,16 +143,16 @@ ___
 [11]: <https://adoptium.net/releases.html?variant=openjdk11>
 [12]: <https://prrvchr.github.io/HyperSQLOOo/README_fr>
 [13]: <https://prrvchr.github.io/jdbcDriverOOo/img/jdbcDriverOOo.svg#middle>
-[14]: <https://github.com/prrvchr/jdbcDriverOOo/releases/latest/download/jdbcDriverOOo.oxt>
-[15]: <https://img.shields.io/github/v/tag/prrvchr/jdbcDriverOOo?label=latest#right>
-[16]: <img/SQLiteOOo.svg#middle>
-[17]: <https://github.com/prrvchr/SQLiteOOo/releases/latest/download/SQLiteOOo.oxt>
-[18]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.0.2#right>
-[19]: <img/SQLiteOOo-1_fr.png>
-[20]: <img/SQLiteOOo-2_fr.png>
-[21]: <img/SQLiteOOo-3_fr.png>
-[22]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/Driver.html>
-[23]: <https://prrvchr.github.io/jdbcDriverOOo/README_fr>
+[14]: <https://prrvchr.github.io/jdbcDriverOOo/README_fr>
+[15]: <https://github.com/prrvchr/jdbcDriverOOo/releases/latest/download/jdbcDriverOOo.oxt>
+[16]: <https://img.shields.io/github/v/tag/prrvchr/jdbcDriverOOo?label=latest#right>
+[17]: <img/SQLiteOOo.svg#middle>
+[18]: <https://github.com/prrvchr/SQLiteOOo/releases/latest/download/SQLiteOOo.oxt>
+[19]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.0.2#right>
+[20]: <img/SQLiteOOo-1_fr.png>
+[21]: <img/SQLiteOOo-2_fr.png>
+[22]: <img/SQLiteOOo-3_fr.png>
+[23]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/Driver.html>
 [24]: <https://github.com/prrvchr/SQLiteOOo/blob/main/uno/lib/uno/embedded/documenthandler.py>
 [25]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/util/XCloseListener.html>
 [26]: <http://www.openoffice.org/api/docs/common/ref/com/sun/star/document/XStorageChangeListener.html>
