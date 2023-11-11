@@ -147,7 +147,7 @@ ___
 [9]: <https://github.com/xerial/sqlite-jdbc>
 [10]: <https://wiki.documentfoundation.org/Documentation/HowTo/Install_the_correct_JRE_-_LibreOffice_on_Windows_10/fr>
 [11]: <https://adoptium.net/releases.html?variant=openjdk11>
-[12]: <https://prrvchr.github.io/HyperSQLOOo/README_fr>
+[12]: <https://prrvchr.github.io/HyperSQLOOo/README_fr#prérequis>
 [13]: <https://bugs.documentfoundation.org/show_bug.cgi?id=139538>
 [14]: <https://prrvchr.github.io/jdbcDriverOOo/img/jdbcDriverOOo.svg#middle>
 [15]: <https://prrvchr.github.io/jdbcDriverOOo/README_fr>
