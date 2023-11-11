@@ -47,7 +47,7 @@ If necessary, rename it before installing it.
 
     This extension is necessary to use SQLite version 3.42.0.0 with all its features.
 
-- Install ![SQLiteOOo logo][18] **[SQLiteOOo.oxt][19]** extension [![Version][20]][19]
+- ![SQLiteOOo logo][18] Install **[SQLiteOOo.oxt][19]** extension [![Version][20]][19]
 
 Restart LibreOffice / OpenOffice after installation.
 
