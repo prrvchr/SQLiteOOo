@@ -28,7 +28,7 @@
   xmlns="http://openoffice.org/extensions/description/2006"
   xmlns:d="http://openoffice.org/extensions/description/2006"
   xmlns:xlink="http://www.w3.org/1999/xlink">
-    <version value="1.0.2"/>
+    <version value="1.1.0"/>
     <identifier value="io.github.prrvchr.SQLiteOOo"/>
     <platform value="all"/>
     <dependencies>
@@ -38,8 +38,8 @@
         <src xlink:href="https://prrvchr.github.io/SQLiteOOo/SQLiteOOo.update.xml"/>
     </update-information>
     <publisher>
-        <name xlink:href="https://prrvchr.github.io/SQLiteOOo/" lang="en-US">Embedded SQLite driver for LibreOffice / OpenOffice</name>
-        <name xlink:href="https://prrvchr.github.io/SQLiteOOo/README_fr" lang="fr-FR">Pilote SQLite intégré pour LibreOffice / OpenOffice</name>
+        <name xlink:href="https://prrvchr.github.io/SQLiteOOo/" lang="en-US">Embedded SQLite driver for LibreOffice</name>
+        <name xlink:href="https://prrvchr.github.io/SQLiteOOo/README_fr" lang="fr-FR">Pilote SQLite intégré pour LibreOffice</name>
     </publisher>
     <registration>
         <simple-license accept-by="admin" suppress-on-update="true">

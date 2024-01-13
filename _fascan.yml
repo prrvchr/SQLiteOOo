@@ -1,0 +1,14 @@
+namespace: SQLiteOOo
+output:
+  file_path: ./Fluid-Attacks-Results.csv
+  format: CSV
+working_dir: .
+sast:
+  include:
+    - glob(source/SQLiteOOo/service/*.py)
+    - glob(source/SQLiteOOo/service/pythonpath/sqlite/*)
+sca:
+  include:
+    - .
+language: EN
+strict: true

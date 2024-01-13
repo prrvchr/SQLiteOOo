@@ -58,11 +58,11 @@ import traceback
 
 
 class OptionsManager(unohelper.Base):
-    def __init__(self, ctx, window):
+    def __init__(self, ctx, window, url):
         self._ctx = ctx
         self._disposed = False
         self._disabled = False
-        self._model = OptionsModel(ctx)
+        self._model = OptionsModel(ctx, url)
         window.addEventListener(OptionsListener(self))
         self._view = OptionsView(window, *self._model.getViewData())
         self._logmanager = LogManager(ctx, window.getPeer(), 'requirements.txt', g_identifier, g_defaultlog)

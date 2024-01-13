@@ -58,7 +58,7 @@ class OptionsHandler(unohelper.Base,
             handled = False
             if method == 'external_event':
                 if event == 'initialize':
-                    self._manager = OptionsManager(self._ctx, window)
+                    self._manager = OptionsManager(self._ctx, window, 'xdbc:sqlite::memory:')
                     handled = True
                 elif event == 'ok':
                     self._manager.saveSetting()

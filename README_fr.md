@@ -29,18 +29,18 @@
 
 **L'utilisation de ce logiciel vous soumet à nos [Conditions d'utilisation][4].**
 
-# version [1.0.2][5]
+# version [1.1.0][5]
 
 ## Introduction:
 
 **SQLiteOOo** fait partie d'une [Suite][6] d'extensions [LibreOffice][7] et/ou [OpenOffice][8] permettant de vous offrir des services inovants dans ces suites bureautique.  
 
-Cette extension vous permet d'utiliser la base de données SQLite en mode intégré, rendant la base de donnée portable (un seul fichier odb).
+Cette extension vous permet d'utiliser la base de données [SQLite JDBC][9] en mode intégré, rendant la base de donnée portable (un seul fichier odb).
 
 Etant un logiciel libre je vous encourage:
-- A dupliquer son [code source][9].
+- A dupliquer son [code source][10].
 - A apporter des modifications, des corrections, des améliorations.
-- D'ouvrir un [dysfonctionnement][10] si nécessaire.
+- D'ouvrir un [dysfonctionnement][11] si nécessaire.
 
 Bref, à participer au developpement de cette extension.  
 Car c'est ensemble que nous pouvons rendre le Logiciel Libre plus intelligent.
@@ -49,17 +49,17 @@ ___
 
 ## Prérequis:
 
-[SQLite JDBC][11] est une base de données écrite en Java.  
-Son utilisation nécessite [l'installation et la configuration][12] dans LibreOffice / OpenOffice d'un **JRE version 11 ou ultérieure**.  
-Je vous recommande [Adoptium][13] comme source d'installation de Java.
+L'extension SQLiteOOo utilise l'extension jdbcDriverOOo pour fonctionner.  
+Elle doit donc répondre aux [prérequis de l'extension jdbcDriverOOo][12].
 
-Cette extension ne peut pas être installée avec l'extension [HyperSQLOOo][14]. C'est l'une ou l'autre, mais pour le moment, elles ne peuvent pas fonctionner ensemble.
+Cette extension ne peut pas être installée avec l'extension [HyperSQLOOo][13].  
+C'est l'une ou l'autre, mais pour le moment, elles ne peuvent pas fonctionner ensemble (voir [dysfonctionnement #156471][14]).
 
-Si vous utilisez **LibreOffice sous Linux**, alors vous êtes sujet au [dysfonctionnement 139538][15]. Pour contourner le problème, veuillez **désinstaller les paquets** avec les commandes:
-- `sudo apt remove libreoffice-sdbc-hsqldb` (pour désinstaller le paquet libreoffice-sdbc-hsqldb)
-- `sudo apt remove libhsqldb1.8.0-java` (pour désinstaller le paquet libhsqldb1.8.0-java)
-
-OpenOffice et LibreOffice sous Windows ne sont pas soumis à ce dysfonctionnement.
+**Sous Linux et macOS les paquets Python** utilisés par l'extension, peuvent s'il sont déja installé provenir du système et donc, **peuvent ne pas être à jour**.  
+Afin de s'assurer que vos paquets Python sont à jour il est recommandé d'utiliser l'option **Info système** dans les Options de l'extension accessible par:  
+**Outils -> Options -> Pilotes Base -> Pilote SQLite intégré -> Voir journal -> Info système**  
+Si des paquets obsolètes apparaissent, vous pouvez les mettre à jour avec la commande:  
+`pip install --upgrade <package-name>`
 
 ___
 
@@ -155,7 +155,14 @@ ___
 
 - Encore plein d'autres choses...
 
-### Que reste-t-il à faire pour la version 1.0.2:
+### Ce qui a été fait pour la version 1.1.0:
+
+- Tous les paquets Python nécessaires à l'extension sont désormais enregistrés dans un fichier [requirements.txt][35] suivant la [PEP 508][36].
+- Désormais si vous n'êtes pas sous Windows alors les paquets Python nécessaires à l'extension peuvent être facilement installés avec la commande:  
+  `pip install requirements.txt`
+- Modification de la section [Prérequis][37].
+
+### Que reste-t-il à faire pour la version 1.1.0:
 
 - Ajouter de nouvelles langue pour l'internationalisation...
 
@@ -169,20 +176,19 @@ ___
 [6]: <https://prrvchr.github.io/README_fr>
 [7]: <https://fr.libreoffice.org/download/telecharger-libreoffice/>
 [8]: <https://www.openoffice.org/fr/Telecharger/>
-[9]: <https://github.com/prrvchr/SQLiteOOo/>
-[10]: <https://github.com/prrvchr/SQLiteOOo/issues/new>
-[11]: <https://github.com/xerial/sqlite-jdbc>
-[12]: <https://wiki.documentfoundation.org/Documentation/HowTo/Install_the_correct_JRE_-_LibreOffice_on_Windows_10/fr>
-[13]: <https://adoptium.net/releases.html?variant=openjdk11>
-[14]: <https://prrvchr.github.io/HyperSQLOOo/README_fr#prérequis>
-[15]: <https://bugs.documentfoundation.org/show_bug.cgi?id=139538>
+[9]: <https://github.com/xerial/sqlite-jdbc>
+[10]: <https://github.com/prrvchr/SQLiteOOo/>
+[11]: <https://github.com/prrvchr/SQLiteOOo/issues/new>
+[12]: <https://prrvchr.github.io/jdbcDriverOOo/README_fr#pr%C3%A9requis>
+[13]: <https://prrvchr.github.io/HyperSQLOOo/README_fr#prérequis>
+[14]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156471>
 [16]: <https://prrvchr.github.io/jdbcDriverOOo/img/jdbcDriverOOo.svg#middle>
 [17]: <https://prrvchr.github.io/jdbcDriverOOo/README_fr>
 [18]: <https://github.com/prrvchr/jdbcDriverOOo/releases/latest/download/jdbcDriverOOo.oxt>
 [19]: <https://img.shields.io/github/v/tag/prrvchr/jdbcDriverOOo?label=latest#right>
 [20]: <img/SQLiteOOo.svg#middle>
 [21]: <https://github.com/prrvchr/SQLiteOOo/releases/latest/download/SQLiteOOo.oxt>
-[22]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.0.2#right>
+[22]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.1.0#right>
 [23]: <img/SQLiteOOo-1_fr.png>
 [24]: <img/SQLiteOOo-2_fr.png>
 [25]: <img/SQLiteOOo-3_fr.png>
@@ -195,3 +201,6 @@ ___
 [32]: <https://github.com/xerial/sqlite-jdbc/issues/786>
 [33]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156511>
 [34]: <https://github.com/prrvchr/uno/commit/a2fa9f5975a35e8447907e51b0f78ac1b1b76e17>
+[35]: <https://github.com/prrvchr/SQLiteOOo/tree/main/source/SQLiteOOo/requirements.txt>
+[36]: <https://peps.python.org/pep-0508/>
+[37]: <https://prrvchr.github.io/SQLiteOOo/README_fr#pr%C3%A9requis>
