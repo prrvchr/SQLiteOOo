@@ -76,6 +76,9 @@ Si nécessaire, renommez-le avant de l'installer.
 
 Redémarrez LibreOffice / OpenOffice après l'installation.
 
+**Sous Windows, redémarrer LibreOffice peut ne pas suffire.**  
+Pour vous assurer que LibreOffice redémarre correctement, utilisez le Gestionnaire de tâche de Windows pour vérifier qu'aucun service LibreOffice n'est visible après l'arrêt de LibreOffice.
+
 ___
 
 ## Utilisation:

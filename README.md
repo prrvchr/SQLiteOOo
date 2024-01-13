@@ -76,6 +76,9 @@ If necessary, rename it before installing it.
 
 Restart LibreOffice / OpenOffice after installation.
 
+**On Windows, restarting LibreOffice may not be enough.**  
+To ensure that LibreOffice restarts correctly, use the Windows Task Manager to verify that no LibreOffice services are visible after LibreOffice is shut down.
+
 ___
 
 ## Use:
