@@ -61,6 +61,8 @@ To ensure that your Python packages are up to date it is recommended to use the 
 If outdated packages appear, you can update them with the command:  
 `pip install --upgrade <package-name>`
 
+For more information see: [What has been done for version 1.1.0][15].
+
 ___
 
 ## Installation:
@@ -185,6 +187,7 @@ ___
 [12]: <https://prrvchr.github.io/jdbcDriverOOo/#requirement>
 [13]: <https://prrvchr.github.io/HyperSQLOOo/#requirement>
 [14]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156471>
+[15]: <https://prrvchr.github.io/SQLiteOOo/#what-has-been-done-for-version-110>
 [16]: <https://prrvchr.github.io/jdbcDriverOOo/img/jdbcDriverOOo.svg#middle>
 [17]: <https://prrvchr.github.io/jdbcDriverOOo>
 [18]: <https://github.com/prrvchr/jdbcDriverOOo/releases/latest/download/jdbcDriverOOo.oxt>
