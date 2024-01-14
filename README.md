@@ -33,7 +33,7 @@
 
 ## Introduction:
 
-**SQLiteOOo** is part of a [Suite][6] of [LibreOffice][7] and/or [OpenOffice][8] extensions allowing to offer you innovative services in these office suites.  
+**SQLiteOOo** is part of a [Suite][6] of [LibreOffice][7] ~~and/or [OpenOffice][8]~~ extensions allowing to offer you innovative services in these office suites.  
 
 This extension allows you to use [SQLite JDBC][9] database in embedded mode, making the database portable (a single odb file).
 
