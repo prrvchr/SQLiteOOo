@@ -210,6 +210,6 @@ ___
 [34]: <https://github.com/xerial/sqlite-jdbc/issues/786>
 [35]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156511>
 [36]: <https://github.com/prrvchr/uno/commit/a2fa9f5975a35e8447907e51b0f78ac1b1b76e17>
-[37]: <https://github.com/prrvchr/SQLiteOOo/releases/latest/requirements.txt>
+[37]: <https://github.com/prrvchr/SQLiteOOo/releases/latest/download/requirements.txt>
 [38]: <https://peps.python.org/pep-0508/>
 [39]: <https://prrvchr.github.io/SQLiteOOo/README_fr#pr%C3%A9requis>
