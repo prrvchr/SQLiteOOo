@@ -35,12 +35,13 @@
 
 **SQLiteOOo** is part of a [Suite][6] of [LibreOffice][7] ~~and/or [OpenOffice][8]~~ extensions allowing to offer you innovative services in these office suites.  
 
-This extension allows you to use [SQLite JDBC][9] database in embedded mode, making the database portable (a single odb file).
+This extension allows you to use [SQLite JDBC][9] database in embedded mode, making the database portable (a single odb file).  
+It allows you to take advantage of the [ACID][10] properties of the underlying [SQLite][11] database.
 
 Being free software I encourage you:
-- To duplicate its [source code][10].
+- To duplicate its [source code][12].
 - To make changes, corrections, improvements.
-- To open [issue][11] if needed.
+- To open [issue][13] if needed.
 
 In short, to participate in the development of this extension.  
 Because it is together that we can make Free Software smarter.
@@ -50,10 +51,10 @@ ___
 ## Requirement:
 
 The SQLiteOOo extension uses the jdbcDriverOOo extension to work.  
-It must therefore meet the [requirement of the jdbcDriverOOo extension][12].
+It must therefore meet the [requirement of the jdbcDriverOOo extension][14].
 
-This extension cannot be installed together with the [HyperSQLOOo][13] extension.  
-It's one or the other, but at the moment they can't work together (see [issue #156471][14]).
+This extension cannot be installed together with the [HyperSQLOOo][15] extension.  
+It's one or the other, but at the moment they can't work together (see [issue #156471][16]).
 
 **On Linux and macOS the Python packages** used by the extension, if already installed, may come from the system and therefore **may not be up to date**.  
 To ensure that your Python packages are up to date it is recommended to use the **System Info** option in the extension Options accessible by:  
@@ -61,7 +62,7 @@ To ensure that your Python packages are up to date it is recommended to use the 
 If outdated packages appear, you can update them with the command:  
 `pip install --upgrade <package-name>`
 
-For more information see: [What has been done for version 1.1.0][15].
+For more information see: [What has been done for version 1.1.0][17].
 
 ___
 
@@ -70,11 +71,11 @@ ___
 It seems important that the file was not renamed when it was downloaded.  
 If necessary, rename it before installing it.
 
-- [![jdbcDriverOOo logo][16]][17] Install **[jdbcDriverOOo.oxt][18]** extension [![Version][19]][18]
+- [![jdbcDriverOOo logo][18]][19] Install **[jdbcDriverOOo.oxt][20]** extension [![Version][21]][20]
 
     This extension is necessary to use SQLite version 3.42.0.0 with all its features.
 
-- ![SQLiteOOo logo][20] Install **[SQLiteOOo.oxt][21]** extension [![Version][22]][21]
+- ![SQLiteOOo logo][22] Install **[SQLiteOOo.oxt][23]** extension [![Version][24]][23]
 
 Restart LibreOffice after installation.  
 **Be careful, restarting LibreOffice may not be enough.**
@@ -89,20 +90,20 @@ ___
 
 In LibreOffice / OpenOffice go to File -> New -> Database...:
 
-![SQLiteOOo screenshot 1][23]
+![SQLiteOOo screenshot 1][25]
 
 In step: Select database:
 - select: Create a new database
 - in: Emdedded database: choose: Embedded SQLite Driver
 - click on button: Next
 
-![SQLiteOOo screenshot 2][24]
+![SQLiteOOo screenshot 2][26]
 
 In step: Save and proceed:
 - adjust the parameters according to your needs...
 - click on button: Finish
 
-![SQLiteOOo screenshot 3][25]
+![SQLiteOOo screenshot 3][27]
 
 Have fun...
 
@@ -110,17 +111,17 @@ ___
 
 ## How does it work:
 
-SQLiteOOo is an [com.sun.star.sdbc.Driver][26] UNO service written in Python.  
-It is an overlay to the [jdbcDriverOOo][17] extension allowing to store the SQLite database in an odb file (which is, in fact, a compressed file).
+SQLiteOOo is an [com.sun.star.sdbc.Driver][28] UNO service written in Python.  
+It is an overlay to the [jdbcDriverOOo][19] extension allowing to store the SQLite database in an odb file (which is, in fact, a compressed file).
 
 Its operation is quite basic, namely:
 
 - When requesting a connection, three things are done:
     1. If it does not already exist, a **subdirectory** with name: `.` + `odb_file_name` + `.lck` is created in the location of the odb file where all SQLite files are extracted from the **database** directory of the odb file (unzip).
-    2. A [DocumentHandler][27] is added as an [com.sun.star.util.XCloseListener][28] and [com.sun.star.document.XStorageChangeListener][29] to the odb file.
-    3. The [jdbcDriverOOo][17] extension is used to get the [com.sun.star.sdbc.XConnection][30] interface from the **subdirectory** path + `odb_file_name`.
+    2. A [DocumentHandler][29] is added as an [com.sun.star.util.XCloseListener][30] and [com.sun.star.document.XStorageChangeListener][31] to the odb file.
+    3. The [jdbcDriverOOo][19] extension is used to get the [com.sun.star.sdbc.XConnection][32] interface from the **subdirectory** path + `odb_file_name`.
 
-- When closing or renaming (Save as) an odb file the [DocumentHandler][27] copy all the files present in the **subdirectory** into the (new) **database** directory of the odb file (zip) and then delete the **subdirectory**.
+- When closing or renaming (Save as) an odb file the [DocumentHandler][29] copy all the files present in the **subdirectory** into the (new) **database** directory of the odb file (zip) and then delete the **subdirectory**.
 
 ___
 
@@ -139,7 +140,7 @@ ___
 * LibreOffice 7.6.0.1 - Ubuntu 22.04
 
 I encourage you in case of problem :confused:  
-to create an [issue][10]  
+to create an [issue][13]  
 I will try to solve it :smile:
 
 ___
@@ -148,11 +149,11 @@ ___
 
 ### What has been done for version 1.0.0:
 
-- Integration of SQLite JDBC version 3.42.0.0. I especially want to thank [gotson][31] for the [many improvements to the SQLite JDBC driver][32] that made it possible to use SQLite in LibreOffice/OpenOffice.
+- Integration of SQLite JDBC version 3.42.0.0. I especially want to thank [gotson][33] for the [many improvements to the SQLite JDBC driver][34] that made it possible to use SQLite in LibreOffice/OpenOffice.
 
 ### What has been done for version 1.0.1:
 
-- Fixed [bug 156511][33] occurring when using the com.sun.star.embed.XStorage interface. The [workaround][34] is to use the copyElementTo() method instead of moveElementTo(). Versions of LibreOffice 7.6.x and higher become usable.
+- Fixed [bug 156511][35] occurring when using the com.sun.star.embed.XStorage interface. The [workaround][36] is to use the copyElementTo() method instead of moveElementTo(). Versions of LibreOffice 7.6.x and higher become usable.
 
 ### What has been done for version 1.0.2:
 
@@ -162,10 +163,10 @@ ___
 
 ### What has been done for version 1.1.0:
 
-- All Python packages necessary for the extension are now recorded in a [requirements.txt][35] file following [PEP 508][36].
+- All Python packages necessary for the extension are now recorded in a [requirements.txt][37] file following [PEP 508][38].
 - Now if you are not on Windows then the Python packages necessary for the extension can be easily installed with the command:  
   `pip install requirements.txt`
-- Modification of the [Requirement][37] section.
+- Modification of the [Requirement][39] section.
 
 ### What remains to be done for version 1.1.0:
 
@@ -182,31 +183,33 @@ ___
 [7]: <https://www.libreoffice.org/download/download/>
 [8]: <https://www.openoffice.org/download/index.html>
 [9]: <https://github.com/xerial/sqlite-jdbc>
-[10]: <https://github.com/prrvchr/SQLiteOOo/>
-[11]: <https://github.com/prrvchr/SQLiteOOo/issues/new>
-[12]: <https://prrvchr.github.io/jdbcDriverOOo/#requirement>
-[13]: <https://prrvchr.github.io/HyperSQLOOo/#requirement>
-[14]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156471>
-[15]: <https://prrvchr.github.io/SQLiteOOo/#what-has-been-done-for-version-110>
-[16]: <https://prrvchr.github.io/jdbcDriverOOo/img/jdbcDriverOOo.svg#middle>
-[17]: <https://prrvchr.github.io/jdbcDriverOOo>
-[18]: <https://github.com/prrvchr/jdbcDriverOOo/releases/latest/download/jdbcDriverOOo.oxt>
-[19]: <https://img.shields.io/github/v/tag/prrvchr/jdbcDriverOOo?label=latest#right>
-[20]: <img/SQLiteOOo.svg#middle>
-[21]: <https://github.com/prrvchr/SQLiteOOo/releases/latest/download/SQLiteOOo.oxt>
-[22]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.1.0#right>
-[23]: <img/SQLiteOOo-1.png>
-[24]: <img/SQLiteOOo-2.png>
-[25]: <img/SQLiteOOo-3.png>
-[26]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/Driver.html>
-[27]: <https://github.com/prrvchr/SQLiteOOo/blob/main/uno/lib/uno/embedded/documenthandler.py>
-[28]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/util/XCloseListener.html>
-[29]: <http://www.openoffice.org/api/docs/common/ref/com/sun/star/document/XStorageChangeListener.html>
-[30]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/XConnection.html>
-[31]: <https://github.com/gotson>
-[32]: <https://github.com/xerial/sqlite-jdbc/issues/786>
-[33]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156511>
-[34]: <https://github.com/prrvchr/uno/commit/a2fa9f5975a35e8447907e51b0f78ac1b1b76e17>
-[35]: <https://github.com/prrvchr/SQLiteOOo/tree/main/source/SQLiteOOo/requirements.txt>
-[36]: <https://peps.python.org/pep-0508/>
-[37]: <https://prrvchr.github.io/SQLiteOOo/#requirement>
+[10]: <https://en.wikipedia.org/wiki/ACID>
+[11]: <https://www.sqlite.org/transactional.html>
+[12]: <https://github.com/prrvchr/SQLiteOOo/>
+[13]: <https://github.com/prrvchr/SQLiteOOo/issues/new>
+[14]: <https://prrvchr.github.io/jdbcDriverOOo/#requirement>
+[15]: <https://prrvchr.github.io/HyperSQLOOo/#requirement>
+[16]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156471>
+[17]: <https://prrvchr.github.io/SQLiteOOo/#what-has-been-done-for-version-110>
+[18]: <https://prrvchr.github.io/jdbcDriverOOo/img/jdbcDriverOOo.svg#middle>
+[19]: <https://prrvchr.github.io/jdbcDriverOOo>
+[20]: <https://github.com/prrvchr/jdbcDriverOOo/releases/latest/download/jdbcDriverOOo.oxt>
+[21]: <https://img.shields.io/github/v/tag/prrvchr/jdbcDriverOOo?label=latest#right>
+[22]: <img/SQLiteOOo.svg#middle>
+[23]: <https://github.com/prrvchr/SQLiteOOo/releases/latest/download/SQLiteOOo.oxt>
+[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.1.0#right>
+[25]: <img/SQLiteOOo-1.png>
+[26]: <img/SQLiteOOo-2.png>
+[27]: <img/SQLiteOOo-3.png>
+[28]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/Driver.html>
+[29]: <https://github.com/prrvchr/SQLiteOOo/blob/main/uno/lib/uno/embedded/documenthandler.py>
+[30]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/util/XCloseListener.html>
+[31]: <http://www.openoffice.org/api/docs/common/ref/com/sun/star/document/XStorageChangeListener.html>
+[32]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/XConnection.html>
+[33]: <https://github.com/gotson>
+[34]: <https://github.com/xerial/sqlite-jdbc/issues/786>
+[35]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156511>
+[36]: <https://github.com/prrvchr/uno/commit/a2fa9f5975a35e8447907e51b0f78ac1b1b76e17>
+[37]: <https://github.com/prrvchr/SQLiteOOo/releases/latest/requirements.txt>
+[38]: <https://peps.python.org/pep-0508/>
+[39]: <https://prrvchr.github.io/SQLiteOOo/#requirement>
