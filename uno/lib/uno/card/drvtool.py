@@ -4,7 +4,7 @@
 """
 ╔════════════════════════════════════════════════════════════════════════════════════╗
 ║                                                                                    ║
-║   Copyright (c) 2020-24 https://prrvchr.github.io                                  ║ 
+║   Copyright (c) 2020 https://prrvchr.github.io                                     ║
 ║                                                                                    ║
 ║   Permission is hereby granted, free of charge, to any person obtaining            ║
 ║   a copy of this software and associated documentation files (the "Software"),     ║
@@ -27,53 +27,58 @@
 ╚════════════════════════════════════════════════════════════════════════════════════╝
 """
 
+from com.sun.star.sdbc import SQLException
+
+from .database import DataBase
+
+from .datasource import DataSource
+
+from .cardtool import getLogException
+
+from .dbtool import getConnectionUrl
+
 from .unotool import checkVersion
-from .unotool import createMessageBox
-from .unotool import createService
-from .unotool import createWindow
-from .unotool import executeDispatch
-from .unotool import executeFrameDispatch
-from .unotool import executeShell
-from .unotool import generateUuid
-from .unotool import getConfiguration
-from .unotool import getConnectionMode
-from .unotool import getContainerWindow
-from .unotool import getCurrentLocale
-from .unotool import getDateTime
-from .unotool import getDesktop
-from .unotool import getDialog
-from .unotool import getDialogUrl
-from .unotool import getDocument
-from .unotool import getExceptionMessage
 from .unotool import getExtensionVersion
-from .unotool import getFilePicker
-from .unotool import getFileSequence
-from .unotool import getFileUrl
-from .unotool import getInteractionHandler
-from .unotool import getInterfaceTypes
-from .unotool import getMimeTypeFactory
-from .unotool import getNamedValue
-from .unotool import getNamedValueSet
-from .unotool import getParentWindow
-from .unotool import getPathSettings
-from .unotool import getProperty
-from .unotool import getPropertyValue
-from .unotool import getPropertyValueSet
-from .unotool import getResourceLocation
-from .unotool import getSequenceInputStream
-from .unotool import getSimpleFile
-from .unotool import getStreamSequence
-from .unotool import getStringResource
-from .unotool import getStringResourceWithLocation
-from .unotool import getTempFile
-from .unotool import getTypeDetection
-from .unotool import getUriFactory
-from .unotool import getUrl
-from .unotool import getUrlPresentation
-from .unotool import getUrlTransformer
-from .unotool import hasInterface
-from .unotool import hasService
-from .unotool import parseDateTime
-from .unotool import parseUrl
-from .unotool import unparseDateTime
-from .unotool import unparseTimeStamp
+
+from .oauth2 import getOAuth2Version
+from .oauth2 import g_extension as g_oauth2ext
+from .oauth2 import g_version as g_oauth2ver
+
+from .jdbcdriver import g_extension as g_jdbcext
+from .jdbcdriver import g_identifier as g_jdbcid
+from .jdbcdriver import g_version as g_jdbcver
+
+from .configuration import g_extension
+from .configuration import g_host
+
+from .dbconfig import g_folder
+from .dbconfig import g_version
+
+import traceback
+
+
+def getDataSource(ctx, logger, source, cls, mtd):
+    oauth2 = getOAuth2Version(ctx)
+    driver = getExtensionVersion(ctx, g_jdbcid)
+    if oauth2 is None:
+        raise getLogException(logger, source, 1003, 1121, cls, mtd, g_oauth2ext, g_extension)
+    elif not checkVersion(oauth2, g_oauth2ver):
+        raise getLogException(logger, source, 1003, 1122, cls, mtd, oauth2, g_oauth2ext, g_oauth2ver)
+    elif driver is None:
+        raise getLogException(logger, source, 1003, 1121, cls, mtd, g_jdbcext, g_extension)
+    elif not checkVersion(driver, g_jdbcver):
+        raise getLogException(logger, source, 1003, 1122, cls, mtd, driver, g_jdbcext, g_jdbcver)
+    else:
+        path = g_folder + '/' + g_host
+        url = getConnectionUrl(ctx, path)
+        try:
+            database = DataBase(ctx, url)
+        except SQLException as e:
+            raise getLogException(logger, source, 1005, 1123, cls, mtd, url, e.Message)
+        else:
+            if not database.isUptoDate():
+                raise getLogException(logger, source, 1005, 1124, cls, mtd, database.Version, g_version)
+            else:
+                return DataSource(ctx, database)
+    return None
+
