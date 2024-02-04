@@ -29,7 +29,7 @@
 
 **The use of this software subjects you to our [Terms Of Use][4].**
 
-# version [1.1.0][5]
+# version [1.1.1][5]
 
 ## Introduction:
 
@@ -168,7 +168,11 @@ ___
   `pip install requirements.txt`
 - Modification of the [Requirement][39] section.
 
-### What remains to be done for version 1.1.0:
+### What has been done for version 1.1.1:
+
+- Support for [new features][40] in **jdbcDriverOOo 1.1.2**.
+
+### What remains to be done for version 1.1.1:
 
 - Add new language for internationalization...
 
@@ -213,3 +217,4 @@ ___
 [37]: <https://github.com/prrvchr/SQLiteOOo/releases/latest/download/requirements.txt>
 [38]: <https://peps.python.org/pep-0508/>
 [39]: <https://prrvchr.github.io/SQLiteOOo/#requirement>
+[40]: <https://prrvchr.github.io/jdbcDriverOOo/#what-has-been-done-for-version-112>
