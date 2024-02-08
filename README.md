@@ -29,7 +29,7 @@
 
 **The use of this software subjects you to our [Terms Of Use][4].**
 
-# version [1.1.1][5]
+# version [1.1.2][5]
 
 ## Introduction:
 
@@ -172,7 +172,11 @@ ___
 
 - Support for [new features][40] in **jdbcDriverOOo 1.1.2**.
 
-### What remains to be done for version 1.1.1:
+### What has been done for version 1.1.2:
+
+- SQLite driver updated to latest version 3.45.1.3-SNAPSHOT.
+
+### What remains to be done for version 1.1.2:
 
 - Add new language for internationalization...
 
@@ -201,7 +205,7 @@ ___
 [21]: <https://img.shields.io/github/v/tag/prrvchr/jdbcDriverOOo?label=latest#right>
 [22]: <img/SQLiteOOo.svg#middle>
 [23]: <https://github.com/prrvchr/SQLiteOOo/releases/latest/download/SQLiteOOo.oxt>
-[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.1.1#right>
+[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.1.2#right>
 [25]: <img/SQLiteOOo-1.png>
 [26]: <img/SQLiteOOo-2.png>
 [27]: <img/SQLiteOOo-3.png>

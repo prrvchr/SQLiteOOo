@@ -39,11 +39,6 @@
                 <value xml:lang="fr-FR">Pilote SQLite intégré</value>
             </prop>
             <node oor:name="Properties">
-                <node oor:name="GeneratedValues" oor:op="replace">
-                    <prop oor:name="Value" oor:type="xs:boolean">
-                        <value>true</value>
-                    </prop>
-                </node>
                 <node oor:name="IsAutoRetrievingEnabled" oor:op="replace">
                     <prop oor:name="Value" oor:type="xs:boolean">
                         <value>true</value>
@@ -56,7 +51,12 @@
                 </node>
                 <node oor:name="AutoRetrievingStatement" oor:op="replace">
                     <prop oor:name="Value" oor:type="xs:string">
-                        <value></value>
+                        <value>SELECT * FROM %s WHERE %s</value>
+                    </prop>
+                </node>
+                <node oor:name="AutoIncrementIsPrimaryKey" oor:op="replace">
+                    <prop oor:name="Value" oor:type="xs:boolean">
+                        <value>true</value>
                     </prop>
                 </node>
             </node>
@@ -74,11 +74,6 @@
                 <node oor:name="UseDOSLineEnds" oor:op="replace">
                     <prop oor:name="Value" oor:type="xs:boolean">
                         <value>true</value>
-                    </prop>
-                </node>
-                <node oor:name="AddIndexAppendix" oor:op="replace">
-                    <prop oor:name="Value" oor:type="xs:boolean">
-                        <value>false</value>
                     </prop>
                 </node>
                 <node oor:name="UseKeywordAsBeforeAlias" oor:op="replace">
@@ -99,11 +94,6 @@
                     </prop>
                 </node>
                 <node oor:name="SupportsTableCreation" oor:op="replace">
-                    <prop oor:name="Value" oor:type="xs:boolean">
-                        <value>true</value>
-                    </prop>
-                </node>
-                <node oor:name="AutoIncrementIsPrimaryKey" oor:op="replace">
                     <prop oor:name="Value" oor:type="xs:boolean">
                         <value>true</value>
                     </prop>
