@@ -174,7 +174,7 @@ ___
 
 ### Ce qui a été fait pour la version 1.1.2:
 
-- Pilote SQLite mis à jour vers la dernière version 3.45.1.3-SNAPSHOT.
+- Pilote SQLite mis à jour vers la dernière version [SQLite-jdbc-3.45.1.3-SNAPSHOT.jar][41]. Ce nouveau pilote a été implémenté pour supporter une partie des spécifications JDBC 4.1 et plus particulièrement l'interface `java.sql.Statement.getGeneratedKeys()` et permet l'utilisation de l'interface [com.sun.star.sdbc.XGeneratedResultSet][42].
 
 ### Que reste-t-il à faire pour la version 1.1.2:
 
@@ -222,3 +222,5 @@ ___
 [38]: <https://peps.python.org/pep-0508/>
 [39]: <https://prrvchr.github.io/SQLiteOOo/README_fr#pr%C3%A9requis>
 [40]: <https://prrvchr.github.io/jdbcDriverOOo/README_fr#ce-qui-a-%C3%A9t%C3%A9-fait-pour-la-version-112>
+[41]: <https://github.com/prrvchr/sqlite-jdbc/releases/download/3.45.1.3-SNAPSHOT/sqlite-jdbc-3.45.1.3-SNAPSHOT.jar>
+[42]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/XGeneratedResultSet.html>
