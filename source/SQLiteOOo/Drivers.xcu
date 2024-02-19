@@ -51,7 +51,7 @@
                 </node>
                 <node oor:name="AutoRetrievingStatement" oor:op="replace">
                     <prop oor:name="Value" oor:type="xs:string">
-                        <value>SELECT * FROM %s WHERE %s</value>
+                        <value></value>
                     </prop>
                 </node>
                 <node oor:name="AutoIncrementIsPrimaryKey" oor:op="replace">
