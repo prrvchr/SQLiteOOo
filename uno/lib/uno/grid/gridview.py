@@ -4,7 +4,7 @@
 """
 ╔════════════════════════════════════════════════════════════════════════════════════╗
 ║                                                                                    ║
-║   Copyright (c) 2020-24 https://prrvchr.github.io                                  ║ 
+║   Copyright (c) 2020-24 https://prrvchr.github.io                                  ║
 ║                                                                                    ║
 ║   Permission is hereby granted, free of charge, to any person obtaining            ║
 ║   a copy of this software and associated documentation files (the "Software"),     ║
@@ -52,12 +52,6 @@ class GridView(unohelper.Base):
 
     def getGrid(self):
         return self._getGrid()
-
-    def getGridDataModel(self):
-        return self._getGrid().Model.GridDataModel
-
-    def getGridColumnModel(self):
-        return self._getGrid().Model.ColumnModel
 
     def hasSelectedRows(self):
         return self._getGrid().hasSelectedRows()
