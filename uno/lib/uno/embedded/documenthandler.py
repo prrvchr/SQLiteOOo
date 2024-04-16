@@ -245,10 +245,7 @@ class DocumentHandler(unohelper.Base,
         count = 0
         if source.hasElements():
             for name in source.getElementNames():
-                # FIXME: if we want to be able to open files
-                # FIXME: from previous versions we need to rename the files
-                newname = name.replace(self._folder, g_catalog)
-                path = self._getPath(url, newname)
+                path = self._getPath(url, name)
                 if source.isStreamElement(name):
                     input = source.openStreamElement(name, SEEKABLEREAD).getInputStream()
                     sf.writeFile(path, input)
