@@ -51,7 +51,8 @@ from .unotool import parseUrl
 from .configuration import g_protocol
 from .configuration import g_catalog
 from .configuration import g_options
-from .configuration import g_shutdown
+from .configuration import g_create
+from .configuration import g_exist
 
 import traceback
 
@@ -184,8 +185,8 @@ class DocumentHandler(unohelper.Base,
 
     def _getConnectionUrl(self, exist):
         path = self._path[self._index:]
-        url = '%s%s/%s%s' % (g_protocol, path, g_catalog, g_shutdown)
-        return url if exist else url + g_options
+        url = '%s%s/%s%s' % (g_protocol, path, g_catalog, g_options)
+        return url + g_exist if exist else url + g_create
 
     def _getStorageName(self, name, oldname, newname):
         return name.replace(oldname, newname)
