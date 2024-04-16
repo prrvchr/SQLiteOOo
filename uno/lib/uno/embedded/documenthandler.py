@@ -68,6 +68,7 @@ class DocumentHandler(unohelper.Base,
         self._lock = lock
         self._logger = logger
         self._listening = False
+        self._created = False
         self._path, self._folder = self._getDataBaseInfo(url)
         self._url = url
         self._index = index
@@ -130,9 +131,11 @@ class DocumentHandler(unohelper.Base,
             document.addCloseListener(self)
 
     def removeFolder(self):
-        sf = getSimpleFile(self._ctx)
-        if sf.isFolder(self._path):
-            sf.kill(self._path)
+        # XXX: The database folder will be deleted only if it was created
+        if self._created:
+            sf = getSimpleFile(self._ctx)
+            if sf.isFolder(self._path):
+                sf.kill(self._path)
 
     # DocumentHandler getter methods
     def getConnectionUrl(self, storage):
@@ -140,6 +143,8 @@ class DocumentHandler(unohelper.Base,
             exist = storage.hasElements()
             sf = getSimpleFile(self._ctx)
             if not sf.exists(self._path):
+                # XXX: The database folder will be deleted only if it was created
+                self._created = True
                 sf.createFolder(self._path)
                 if exist:
                     count = self._extractStorage(sf, storage, self._path)
