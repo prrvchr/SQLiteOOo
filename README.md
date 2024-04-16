@@ -29,7 +29,7 @@
 
 **The use of this software subjects you to our [Terms Of Use][4].**
 
-# version [1.1.4][5]
+# version [1.1.5][5]
 
 ## Introduction:
 
@@ -188,7 +188,11 @@ ___
 - When saving under a different name, the database if open will be closed correctly.
 - When opening an odb file, if the connection fails, to avoid data destruction, recompression of the database files will not take place. Thanks to Robert for being able to detect this [issue][44].
 
-### What remains to be done for version 1.1.4:
+### What has been done for version 1.1.5:
+
+- Use of the new data format implemented in version 1.1.4. As a result, if you need to open odb files created with a version lower than 1.1.4 you must first open them with version 1.1.4, otherwise an error will be thrown.
+
+### What remains to be done for version 1.1.5:
 
 - Add new language for internationalization...
 
@@ -210,14 +214,14 @@ ___
 [14]: <https://prrvchr.github.io/jdbcDriverOOo/#requirement>
 [15]: <https://prrvchr.github.io/HyperSQLOOo/#requirement>
 [16]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156471>
-[17]: <https://prrvchr.github.io/SQLiteOOo/#what-has-been-done-for-version-114>
+[17]: <https://prrvchr.github.io/SQLiteOOo/#what-has-been-done-for-version-115>
 [18]: <https://prrvchr.github.io/jdbcDriverOOo/img/jdbcDriverOOo.svg#middle>
 [19]: <https://prrvchr.github.io/jdbcDriverOOo>
 [20]: <https://github.com/prrvchr/jdbcDriverOOo/releases/latest/download/jdbcDriverOOo.oxt>
 [21]: <https://img.shields.io/github/v/tag/prrvchr/jdbcDriverOOo?label=latest#right>
 [22]: <img/SQLiteOOo.svg#middle>
 [23]: <https://github.com/prrvchr/SQLiteOOo/releases/latest/download/SQLiteOOo.oxt>
-[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.1.4#right>
+[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.1.5#right>
 [25]: <img/SQLiteOOo-1.png>
 [26]: <img/SQLiteOOo-2.png>
 [27]: <img/SQLiteOOo-3.png>
