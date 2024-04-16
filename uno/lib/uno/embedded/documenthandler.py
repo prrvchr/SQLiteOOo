@@ -82,7 +82,7 @@ class DocumentHandler(unohelper.Base,
         with self._lock:
             document = event.Source
             if self._closeDataBase(document):
-                self._removeFolder()
+                self.removeFolder()
             self._url = None
         self._logger.logprb(INFO, 'DocumentHandler', 'queryClosing()', 202, url)
 
@@ -97,7 +97,7 @@ class DocumentHandler(unohelper.Base,
         with self._lock:
             newpath, newfolder = self._getDataBaseInfo(url)
             if self._switchDataBase(document, storage, newfolder):
-                self._removeFolder()
+                self.removeFolder()
             self._path = newpath
             self._folder = newfolder
             self._url = url
@@ -127,6 +127,11 @@ class DocumentHandler(unohelper.Base,
                 self._listening = True
             # FIXME: If storage has been changed the closeListener has been removed
             document.addCloseListener(self)
+
+    def removeFolder(self):
+        sf = getSimpleFile(self._ctx)
+        if sf.isFolder(self._path):
+            sf.kill(self._path)
 
     # DocumentHandler getter methods
     def getConnectionUrl(self, storage):
@@ -245,11 +250,6 @@ class DocumentHandler(unohelper.Base,
                     count += self._extractStorage(sf, source.openStorageElement(name, SEEKABLEREAD), path)
         source.dispose()
         return count
-
-    def _removeFolder(self):
-        sf = getSimpleFile(self._ctx)
-        if sf.isFolder(self._path):
-            sf.kill(self._path)
 
     def _getPath(self, path, name):
         return '%s/%s' % (path, name)

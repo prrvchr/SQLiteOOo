@@ -84,24 +84,27 @@ class Driver(unohelper.Base,
 
     # XDriver
     def connect(self, url, infos):
+        # XXX: We need to test first if jdbcDriverOOo is installed...
+        driver = self._getDriver()
+        newinfos, document, storage, location = self._getConnectionInfo(infos)
+        if storage is None or location is None:
+            self._logException(112, url, ' ')
+            raise self._getException(1001, None, 111, url, '\n')
+        # XXX: Calling handler unpacks the database files
+        handler = self._getDocumentHandler(location)
+        path = handler.getConnectionUrl(storage)
+        self._logger.logprb(INFO, 'Driver', 'connect()', 113, location)
         try:
-            newinfos, document, storage, location = self._getConnectionInfo(infos)
-            if storage is None or location is None:
-                self._logException(112, url, ' ')
-                raise self._getException(1001, None, 111, url, '\n')
-            handler = self._getDocumentHandler(location)
-            path = handler.getConnectionUrl(storage)
-            self._logger.logprb(INFO, 'Driver', 'connect()', 113, location)
-            connection = self._getDriver().connect(path, newinfos)
-            version = connection.getMetaData().getDriverVersion()
-            handler.setListener(document)
-            self._logger.logprb(INFO, 'Driver', 'connect()', 114, g_dbname, version, g_user)
-            return connection
-        except SQLException as e:
-            raise e
+            connection = driver.connect(path, newinfos)
         except Exception as e:
             self._logger.logprb(SEVERE, 'Driver', 'connect()', 115, str(e), traceback.format_exc())
+            handler.removeFolder()
             raise e
+        # XXX: Connection has been done we can add close and change listener to document
+        handler.setListener(document)
+        version = connection.getMetaData().getDriverVersion()
+        self._logger.logprb(INFO, 'Driver', 'connect()', 114, g_dbname, version, g_user)
+        return connection
 
     def acceptsURL(self, url):
         accept = url.startswith(g_url)
