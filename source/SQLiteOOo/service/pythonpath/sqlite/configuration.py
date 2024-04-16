@@ -28,6 +28,7 @@
 """
 
 # General configuration
+g_catalog = 'sqlite'
 g_dbname = 'SQLite'
 g_extension = '%sOOo' % g_dbname
 g_identifier = 'io.github.prrvchr.%s' % g_extension

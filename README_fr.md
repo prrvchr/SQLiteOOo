@@ -29,7 +29,7 @@
 
 **L'utilisation de ce logiciel vous soumet à nos [Conditions d'utilisation][4].**
 
-# version [1.1.3][5]
+# version [1.1.4][5]
 
 ## Introduction:
 
@@ -182,7 +182,12 @@ ___
 - Maintenant, pour un bon fonctionnement dans Base sous : **Édition -> Base de données -> Paramètres avancés... -> Requête des valeurs générées** doit être laissée vide. Si vous souhaitez utiliser un fichier odb créé avec une version précédente de SQLiteOOo vous devez modifier ce paramètre manuellement.
 - Normalement les prochaines versions de SQLiteOOo devraient pouvoir être mises à jour dans la liste des extensions installées sous LibreOffice: **Outils -> Gestionnaire des extensions... -> Vérifier les mises à jour**.
 
-### Que reste-t-il à faire pour la version 1.1.3:
+### Ce qui a été fait pour la version 1.1.4:
+
+- Prise en charge de la dernière version de **jdbcDriverOOo 1.3.1**.
+- Lors de l'enregistrement sous un nom différent, la base de données si ouverte sera fermée correctement.
+
+### Que reste-t-il à faire pour la version 1.1.4:
 
 - Ajouter de nouvelles langue pour l'internationalisation...
 
@@ -204,14 +209,14 @@ ___
 [14]: <https://prrvchr.github.io/jdbcDriverOOo/README_fr#pr%C3%A9requis>
 [15]: <https://prrvchr.github.io/HyperSQLOOo/README_fr#prérequis>
 [16]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156471>
-[17]: <https://prrvchr.github.io/SQLiteOOo/README_fr#ce-qui-a-%C3%A9t%C3%A9-fait-pour-la-version-110>
+[17]: <https://prrvchr.github.io/SQLiteOOo/README_fr#ce-qui-a-%C3%A9t%C3%A9-fait-pour-la-version-114>
 [18]: <https://prrvchr.github.io/jdbcDriverOOo/img/jdbcDriverOOo.svg#middle>
 [19]: <https://prrvchr.github.io/jdbcDriverOOo/README_fr>
 [20]: <https://github.com/prrvchr/jdbcDriverOOo/releases/latest/download/jdbcDriverOOo.oxt>
 [21]: <https://img.shields.io/github/v/tag/prrvchr/jdbcDriverOOo?label=latest#right>
 [22]: <img/SQLiteOOo.svg#middle>
 [23]: <https://github.com/prrvchr/SQLiteOOo/releases/latest/download/SQLiteOOo.oxt>
-[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.1.3#right>
+[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.1.4#right>
 [25]: <img/SQLiteOOo-1_fr.png>
 [26]: <img/SQLiteOOo-2_fr.png>
 [27]: <img/SQLiteOOo-3_fr.png>

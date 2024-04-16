@@ -29,7 +29,7 @@
 
 **The use of this software subjects you to our [Terms Of Use][4].**
 
-# version [1.1.3][5]
+# version [1.1.4][5]
 
 ## Introduction:
 
@@ -182,7 +182,12 @@ ___
 - Now for proper functioning in Base under: **Edit -> Database -> Advanced Settings... -> Query of generated values** must be left blank. If you want to use an odb file created with a previous version of SQLiteOOo you must change this setting manually.
 - Normally the next versions of SQLiteOOo should be able to be updated in the list of extensions installed under LibreOffice: **Tools -> Extension manager... -> Check for Updates**.
 
-### What remains to be done for version 1.1.3:
+### What has been done for version 1.1.4:
+
+- Support for the latest version of **jdbcDriverOOo 1.3.1**.
+- When saving under a different name, the database if open will be closed correctly.
+
+### What remains to be done for version 1.1.4:
 
 - Add new language for internationalization...
 
@@ -204,14 +209,14 @@ ___
 [14]: <https://prrvchr.github.io/jdbcDriverOOo/#requirement>
 [15]: <https://prrvchr.github.io/HyperSQLOOo/#requirement>
 [16]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156471>
-[17]: <https://prrvchr.github.io/SQLiteOOo/#what-has-been-done-for-version-110>
+[17]: <https://prrvchr.github.io/SQLiteOOo/#what-has-been-done-for-version-114>
 [18]: <https://prrvchr.github.io/jdbcDriverOOo/img/jdbcDriverOOo.svg#middle>
 [19]: <https://prrvchr.github.io/jdbcDriverOOo>
 [20]: <https://github.com/prrvchr/jdbcDriverOOo/releases/latest/download/jdbcDriverOOo.oxt>
 [21]: <https://img.shields.io/github/v/tag/prrvchr/jdbcDriverOOo?label=latest#right>
 [22]: <img/SQLiteOOo.svg#middle>
 [23]: <https://github.com/prrvchr/SQLiteOOo/releases/latest/download/SQLiteOOo.oxt>
-[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.1.3#right>
+[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.1.4#right>
 [25]: <img/SQLiteOOo-1.png>
 [26]: <img/SQLiteOOo-2.png>
 [27]: <img/SQLiteOOo-3.png>

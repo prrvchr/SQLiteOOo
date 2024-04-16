@@ -38,6 +38,7 @@ from sqlite import sdbcx
 from sqlite import getConfiguration
 
 from sqlite import g_identifier
+from sqlite import g_catalog
 
 from threading import Lock
 import traceback
@@ -55,9 +56,9 @@ class Driver(unohelper.Base,
                 if cls._instance is None:
                     service = getConfiguration(ctx, g_identifier).getByName('DriverService')
                     if service == 'io.github.prrvchr.jdbcdriver.sdbc.Driver':
-                        instance = sdbc.Driver(ctx, cls._lock, service, g_ImplementationName)
+                        instance = sdbc.Driver(ctx, cls._lock, service, g_ImplementationName, g_catalog)
                     else:
-                        instance = sdbcx.Driver(ctx, cls._lock, service, g_ImplementationName)
+                        instance = sdbcx.Driver(ctx, cls._lock, service, g_ImplementationName, g_catalog)
                     cls._instance = instance
         return cls._instance
 
