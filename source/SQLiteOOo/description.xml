@@ -35,7 +35,7 @@
         <OpenOffice.org-minimal-version value="4.1" d:name="OpenOffice.org 4.1"/>
     </dependencies>
     <update-information>
-        <src xlink:href="https://prrvchr.github.io/SQLiteOOo/SQLiteOOo.update.xml"/>
+        <src xlink:href="https://github.com/prrvchr/SQLiteOOo/releases/latest/download/SQLiteOOo.update.xml"/>
     </update-information>
     <publisher>
         <name xlink:href="https://prrvchr.github.io/SQLiteOOo/" lang="en-US">Embedded SQLite driver for LibreOffice</name>
