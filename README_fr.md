@@ -201,7 +201,7 @@ ___
 [2]: <https://prrvchr.github.io/SQLiteOOo/>
 [3]: <https://prrvchr.github.io/SQLiteOOo/>
 [4]: <https://prrvchr.github.io/SQLiteOOo/source/SQLiteOOo/registration/TermsOfUse_fr>
-[5]: <https://prrvchr.github.io/SQLiteOOo/README_fr#historique>
+[5]: <https://prrvchr.github.io/SQLiteOOo/README_fr#ce-qui-a-%C3%A9t%C3%A9-fait-pour-la-version-120>
 [6]: <https://prrvchr.github.io/README_fr>
 [7]: <https://fr.libreoffice.org/download/telecharger-libreoffice/>
 [8]: <https://www.openoffice.org/fr/Telecharger/>
