@@ -29,7 +29,7 @@
 
 **The use of this software subjects you to our [Terms Of Use][4].**
 
-# version [1.1.5][5]
+# version [1.2.0][5]
 
 ## Introduction:
 
@@ -53,8 +53,9 @@ ___
 The SQLiteOOo extension uses the jdbcDriverOOo extension to work.  
 It must therefore meet the [requirement of the jdbcDriverOOo extension][14].
 
-This extension cannot be installed together with the [HyperSQLOOo][15] extension.  
-It's one or the other, but at the moment they can't work together (see [issue #156471][16]).
+**Since version 1.2.0, only LibreOffice 24.2.x or higher is supported.**
+If it is not possible for you to use such a version, use the previous version of SQLiteOOo. But in this case, this extension cannot be installed with the [HyperSQLOOo][15] extension, see [bug #156471][16].
+In addition, it will be difficult for you to migrate odb files created under lower versions of SQLiteOOo. I recommend using LibreOffice 24.2.x minimum with SQLiteOOo 1.2.0 or higher.
 
 **On Linux and macOS the Python packages** used by the extension, if already installed, may come from the system and therefore **may not be up to date**.  
 To ensure that your Python packages are up to date it is recommended to use the **System Info** option in the extension Options accessible by:  
@@ -130,17 +131,7 @@ ___
 
 ## Has been tested with:
 
-* OpenOffice 4.1.8 - Ubuntu 20.04 - LxQt 0.14.1
-
-* OpenOffice 4.1.8 - Windows 7 SP1
-
-* LibreOffice 7.0.4.2 - Ubuntu 20.04 - LxQt 0.14.1
-
-* LibreOffice 6.4.4.2 - Windows 7 SP1
-
-* LibreOffice 7.6.0.1 - Windows 10
-
-* LibreOffice 7.6.0.1 - Ubuntu 22.04
+* LibreOffice 24.2.1.2 - Ubuntu 22.04
 
 I encourage you in case of problem :confused:  
 to create an [issue][13]  
@@ -195,7 +186,11 @@ ___
 
 - Use of the new data format implemented in version 1.1.4. As a result, if you need to open odb files created with a version lower than 1.1.4 you must first open them with version 1.1.4, otherwise an error will be thrown.
 
-### What remains to be done for version 1.1.5:
+### What has been done for version 1.2.0:
+
+- This version is based on [fix #154989][45] available since LibreOffice 24.2.x. It can therefore work with other extensions offering integrated database services.
+
+### What remains to be done for version 1.2.0:
 
 - Add new language for internationalization...
 
@@ -224,7 +219,7 @@ ___
 [21]: <https://img.shields.io/github/v/tag/prrvchr/jdbcDriverOOo?label=latest#right>
 [22]: <img/SQLiteOOo.svg#middle>
 [23]: <https://github.com/prrvchr/SQLiteOOo/releases/latest/download/SQLiteOOo.oxt>
-[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.1.5#right>
+[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.2.0#right>
 [25]: <img/SQLiteOOo-1.png>
 [26]: <img/SQLiteOOo-2.png>
 [27]: <img/SQLiteOOo-3.png>
@@ -245,3 +240,4 @@ ___
 [42]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/XGeneratedResultSet.html>
 [43]: <https://github.com/prrvchr/sqlite-jdbc/releases/download/3.45.1.6-SNAPSHOT/sqlite-jdbc-3.45.1.6-SNAPSHOT.jar>
 [44]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156471#c54>
+[45]: <https://gerrit.libreoffice.org/c/core/+/154989>
