@@ -116,12 +116,12 @@ It is an overlay to the [jdbcDriverOOo][19] extension allowing to store the SQLi
 
 Its operation is quite basic, namely:
 
-- When requesting a connection, three things are done:
-    1. If it does not already exist, a **subdirectory** with name: `.` + `odb_file_name` + `.lck` is created in the location of the odb file where all SQLite files are extracted from the **database** directory of the odb file (unzip).
-    2. A [DocumentHandler][29] is added as an [com.sun.star.util.XCloseListener][30] and [com.sun.star.document.XStorageChangeListener][31] to the odb file.
-    3. The [jdbcDriverOOo][19] extension is used to get the [com.sun.star.sdbc.XConnection][32] interface from the **subdirectory** path + `odb_file_name`.
-
-- When closing or renaming (Save as) an odb file the [DocumentHandler][29] copy all the files present in the **subdirectory** into the (new) **database** directory of the odb file (zip) and then delete the **subdirectory**.
+- When requesting a connection, several things are done:
+  - If it does not already exist, a **subdirectory** with name: `.` + `odb_file_name` + `.lck` is created in the location of the odb file where all SQLite files are extracted from the **database** directory of the odb file (unzip).
+  - The [jdbcDriverOOo][19] extension is used to get the [com.sun.star.sdbc.XConnection][29] interface from the **subdirectory** path + `sqlite`.
+  - If the connection is successful, a [DocumentHandler][30] is added as an [com.sun.star.util.XCloseListener][31] and [com.sun.star.document.XStorageChangeListener][32] to the odb file.
+  - If the connection is unsuccessful and the files was extracted in phase 1, the **subdirectory** will be deleted.
+- When closing or renaming (Save As) the odb file, if the connection was successful, the [DocumentHandler][30] copies all files present in the **subdirectory** into the (new) **database** directory of the odb file (zip), then delete the **subdirectory**.
 
 ___
 
@@ -226,10 +226,10 @@ ___
 [26]: <img/SQLiteOOo-2.png>
 [27]: <img/SQLiteOOo-3.png>
 [28]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/Driver.html>
-[29]: <https://github.com/prrvchr/SQLiteOOo/blob/main/uno/lib/uno/embedded/documenthandler.py>
-[30]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/util/XCloseListener.html>
-[31]: <http://www.openoffice.org/api/docs/common/ref/com/sun/star/document/XStorageChangeListener.html>
-[32]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/XConnection.html>
+[29]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/XConnection.html>
+[30]: <https://github.com/prrvchr/SQLiteOOo/blob/main/uno/lib/uno/embedded/documenthandler.py>
+[31]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/util/XCloseListener.html>
+[32]: <http://www.openoffice.org/api/docs/common/ref/com/sun/star/document/XStorageChangeListener.html>
 [33]: <https://github.com/gotson>
 [34]: <https://github.com/xerial/sqlite-jdbc/issues/786>
 [35]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156511>

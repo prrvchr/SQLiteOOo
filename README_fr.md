@@ -116,12 +116,12 @@ Il s'agit d'une surcouche à l'extension [jdbcDriverOOo][19] permettant de stock
 
 Son fonctionnement est assez basique, à savoir:
 
-- Lors d'une demande de connexion, trois choses sont faites:
-    1. S'il n'existe pas déjà, un **sous-répertoire** avec le nom: `.` + `nom_du_fichier_odb` + `.lck` est créé à l'emplacement du fichier odb dans lequel tous les fichiers SQLite sont extraits du répertoire **database** du fichier odb (décompression).
-    2. Un [DocumentHandler][29] est ajouté en tant que [com.sun.star.util.XCloseListener][30] et [com.sun.star.document.XStorageChangeListener][31] au fichier odb.
-    3. L'extension [jdbcDriverOOo][19] est utilisée pour obtenir l'interface [com.sun.star.sdbc.XConnection][32] à partir du chemin du **sous-répertoire** + `nom_du_fichier_odb`.
-
-- Lors de la fermeture ou du renommage (Enregistrer sous) d'un fichier odb, le [DocumentHandler][29] copie tous les fichiers présents dans le **sous-répertoire** dans le (nouveau) répertoire **database** du fichier odb (compression) puis supprime le **sous-répertoire**.
+- Lors d'une demande de connexion, plusieurs choses sont faites:
+  - S'il n'existe pas déjà, un **sous-répertoire** avec le nom: `.` + `nom_du_fichier_odb` + `.lck` est créé à l'emplacement du fichier odb dans lequel tous les fichiers SQLite sont extraits du répertoire **database** du fichier odb (décompression).
+  - L'extension [jdbcDriverOOo][19] est utilisée pour obtenir l'interface [com.sun.star.sdbc.XConnection][29] à partir du chemin du **sous-répertoire** + `sqlite`.
+  - Si la connexion réussi, un [DocumentHandler][30] est ajouté en tant que [com.sun.star.util.XCloseListener][31] et [com.sun.star.document.XStorageChangeListener][32] au fichier odb.
+  - Si la connexion échoue et que les fichiers ont été extraits lors de la phase 1, le **sous-répertoire** est supprimé.
+- Lors de la fermeture ou du changement de nom (Enregistrer sous) du fichier odb, si la connexion a réussi, le [DocumentHandler][30] copie tous les fichiers présents dans le **sous-répertoire** dans le (nouveau) répertoire **database** du fichier odb (zip), puis supprime le **sous-répertoire**.
 
 ___
 
@@ -226,10 +226,10 @@ ___
 [26]: <img/SQLiteOOo-2_fr.png>
 [27]: <img/SQLiteOOo-3_fr.png>
 [28]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/Driver.html>
-[29]: <https://github.com/prrvchr/SQLiteOOo/blob/main/uno/lib/uno/embedded/documenthandler.py>
-[30]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/util/XCloseListener.html>
-[31]: <http://www.openoffice.org/api/docs/common/ref/com/sun/star/document/XStorageChangeListener.html>
-[32]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/XConnection.html>
+[29]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/XConnection.html>
+[30]: <https://github.com/prrvchr/SQLiteOOo/blob/main/uno/lib/uno/embedded/documenthandler.py>
+[31]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/util/XCloseListener.html>
+[32]: <http://www.openoffice.org/api/docs/common/ref/com/sun/star/document/XStorageChangeListener.html>
 [33]: <https://github.com/gotson>
 [34]: <https://github.com/xerial/sqlite-jdbc/issues/786>
 [35]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156511>
