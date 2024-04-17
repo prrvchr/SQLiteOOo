@@ -180,7 +180,6 @@ ___
 
 - Prise en charge de la dernière version de **jdbcDriverOOo 1.3.1**.
 - Lors de l'enregistrement sous un nom différent, la base de données si ouverte sera fermée correctement.
-- Lors de l'ouverture d'un fichier odb, si la connexion échoue, pour éviter la destruction des données, la recompression des fichiers de la base de données n'aura pas lieu. Merci à Robert d'avoir su détecter ce [dysfonctionnement][44].
 
 ### Ce qui a été fait pour la version 1.1.5:
 
@@ -188,8 +187,8 @@ ___
 
 ### Ce qui a été fait pour la version 1.2.0:
 
-- Cette version est basée sur la [correction #154989][45] disponible depuis LibreOffice 24.2.x. Elle peut donc fonctionner avec les autres extensions proposant des services de bases de données intégrées.
-- Désormais, SQLiteOOo est enregistré dans les pilotes embarqués de LibreOffice sous l'url : `sdbc:embedded:sqlite`.
+- Cette version est basée sur la [correction #154989][44] disponible depuis LibreOffice 24.2.x. Elle peut donc fonctionner avec les autres extensions proposant des services de bases de données intégrées.
+- Désormais, SQLiteOOo nécessite LibreOffice 24.2.x minimum et se chargera pour l'URL: `sdbc:embedded:sqlite`.
 
 ### Que reste-t-il à faire pour la version 1.2.0:
 
@@ -240,5 +239,4 @@ ___
 [41]: <https://github.com/prrvchr/sqlite-jdbc/releases/download/3.45.1.3-SNAPSHOT/sqlite-jdbc-3.45.1.3-SNAPSHOT.jar>
 [42]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/XGeneratedResultSet.html>
 [43]: <https://github.com/prrvchr/sqlite-jdbc/releases/download/3.45.1.6-SNAPSHOT/sqlite-jdbc-3.45.1.6-SNAPSHOT.jar>
-[44]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156471#c54>
-[45]: <https://gerrit.libreoffice.org/c/core/+/154989>
+[44]: <https://gerrit.libreoffice.org/c/core/+/154989>

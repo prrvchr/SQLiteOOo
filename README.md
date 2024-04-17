@@ -180,7 +180,6 @@ ___
 
 - Support for the latest version of **jdbcDriverOOo 1.3.1**.
 - When saving under a different name, the database if open will be closed correctly.
-- When opening an odb file, if the connection fails, to avoid data destruction, recompression of the database files will not take place. Thanks to Robert for being able to detect this [issue][44].
 
 ### What has been done for version 1.1.5:
 
@@ -188,8 +187,8 @@ ___
 
 ### What has been done for version 1.2.0:
 
-- This version is based on [fix #154989][45] available since LibreOffice 24.2.x. It can therefore work with other extensions offering integrated database services.
-- From now on, SQLiteOOo is registered in the LibreOffice embedded drivers under the url: `sdbc:embedded:sqlite`.
+- This version is based on [fix #154989][44] available since LibreOffice 24.2.x. It can therefore work with other extensions offering integrated database services.
+- Now SQLiteOOo requires LibreOffice 24.2.x minimum and will load for the url: `sdbc:embedded:sqlite`.
 
 ### What remains to be done for version 1.2.0:
 
@@ -240,5 +239,4 @@ ___
 [41]: <https://github.com/prrvchr/sqlite-jdbc/releases/download/3.45.1.3-SNAPSHOT/sqlite-jdbc-3.45.1.3-SNAPSHOT.jar>
 [42]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/XGeneratedResultSet.html>
 [43]: <https://github.com/prrvchr/sqlite-jdbc/releases/download/3.45.1.6-SNAPSHOT/sqlite-jdbc-3.45.1.6-SNAPSHOT.jar>
-[44]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156471#c54>
-[45]: <https://gerrit.libreoffice.org/c/core/+/154989>
+[44]: <https://gerrit.libreoffice.org/c/core/+/154989>
