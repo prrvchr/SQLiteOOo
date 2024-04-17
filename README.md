@@ -189,6 +189,7 @@ ___
 ### What has been done for version 1.2.0:
 
 - This version is based on [fix #154989][45] available since LibreOffice 24.2.x. It can therefore work with other extensions offering integrated database services.
+- From now on, SQLiteOOo is registered in the LibreOffice embedded drivers under the url: `sdbc:embedded:sqlite`.
 
 ### What remains to be done for version 1.2.0:
 
