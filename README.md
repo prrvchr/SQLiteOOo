@@ -118,10 +118,13 @@ Its operation is quite basic, namely:
 
 - When requesting a connection, several things are done:
   - If it does not already exist, a **subdirectory** with name: `.` + `odb_file_name` + `.lck` is created in the location of the odb file where all SQLite files are extracted from the **database** directory of the odb file (unzip).
-  - The [jdbcDriverOOo][19] extension is used to get the [com.sun.star.sdbc.XConnection][29] interface from the **subdirectory** path + `sqlite`.
+  - The [jdbcDriverOOo][19] extension is used to get the [com.sun.star.sdbc.XConnection][29] interface from the **subdirectory** path + `/sqlite`.
   - If the connection is successful, a [DocumentHandler][30] is added as an [com.sun.star.util.XCloseListener][31] and [com.sun.star.document.XStorageChangeListener][32] to the odb file.
   - If the connection is unsuccessful and the files was extracted in phase 1, the **subdirectory** will be deleted.
 - When closing or renaming (Save As) the odb file, if the connection was successful, the [DocumentHandler][30] copies all files present in the **subdirectory** into the (new) **database** directory of the odb file (zip), then delete the **subdirectory**.
+
+The main purpose of this mode of operation is to take advantage of the ACID characteristics of the underlying database in the event of an abnormal closure of LibreOffice.
+On the other hand, the function: **file -> Save** has **no effect on the underlying database**. Only closing the odb file or saving it under a different name (File -> Save As) will save the database in the odb file.
 
 ___
 
