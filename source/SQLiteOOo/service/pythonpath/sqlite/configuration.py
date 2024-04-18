@@ -39,11 +39,11 @@ g_errorlog = '%sError' % g_dbname
 
 # DataBase configuration
 g_protocol = 'xdbc:sqlite:'
-g_url = 'sdbc:embedded:sqlite'
+g_url = 'sdbc:embedded:hsqldb'
 g_user = ''
 g_options = ''
 g_create = ''
 g_exist = ''
 
 # LibreOffice configuration
-g_lover = '24.2'
+g_lover = '5.0'
