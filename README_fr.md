@@ -188,7 +188,7 @@ ___
 ### Ce qui a été fait pour la version 1.2.0:
 
 - Cette version est basée sur la [correction #154989][44] disponible depuis LibreOffice 24.2.x. Elle peut donc fonctionner avec les autres extensions proposant des services de bases de données intégrées.
-- Désormais, SQLiteOOo nécessite LibreOffice 24.2.x minimum et se chargera pour l'URL: `sdbc:embedded:sqlite`.
+- Désormais, SQLiteOOo nécessite LibreOffice 24.2.x minimum et se chargera pour l'url: `sdbc:embedded:sqlite`.
 
 ### Que reste-t-il à faire pour la version 1.2.0:
 
