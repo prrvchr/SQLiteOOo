@@ -103,7 +103,7 @@ class Driver(unohelper.Base,
             handler.removeFolder()
             raise e
         # XXX: Connection has been done we can add close and change listener to document
-        handler.setListener(document)
+        self._setDocumentHandler(document, handler)
         version = connection.getMetaData().getDriverVersion()
         self._logger.logprb(INFO, 'Driver', 'connect()', 114, g_dbname, version, g_user)
         return connection
@@ -188,6 +188,7 @@ class Driver(unohelper.Base,
 
     def _getHandler(self, location):
         document = None
+        # XXX: If we want to be able to remove dead handler we need to do copy
         for handler in self._handlers[:]:
             url = handler.URL
             # XXX: The URL is None for a closed connection and can be cleared.
@@ -202,8 +203,25 @@ class Driver(unohelper.Base,
             handler = self._getHandler(location)
             if handler is None:
                 handler = DocumentHandler(self._ctx, self._lock, self._logger, location, self._index)
-                self._handlers.append(handler)
             return handler
+
+    def _setDocumentHandler(self, document, handler):
+        with self._lock:
+            # FIXME: We only add handler if connection is successful
+            if handler not in self._handlers:
+                if self._setListener(document, handler):
+                    self._handlers.append(handler)
+
+    def _setListener(self, document, handler):
+        # FIXME: With OpenOffice there is no Document in the info
+        # FIXME: parameter provided during the connection
+        if document is None:
+            document = handler.getDocument()
+        if document is not None:
+            document.addStorageChangeListener(handler)
+            document.addCloseListener(handler)
+            return True
+        return False
 
     def _logException(self, resource, *args):
         self._logger.logprb(SEVERE, 'Driver', 'connect()', resource, *args)
