@@ -29,7 +29,7 @@
 
 **L'utilisation de ce logiciel vous soumet à nos [Conditions d'utilisation][4].**
 
-# version [1.2.0][5]
+# version [1.2.1][5]
 
 ## Introduction:
 
@@ -190,7 +190,13 @@ ___
 - Cette version est basée sur la [correction #154989][44] disponible depuis LibreOffice 24.2.x. Elle peut donc fonctionner avec les autres extensions proposant des services de bases de données intégrées.
 - Désormais, SQLiteOOo nécessite LibreOffice 24.2.x minimum et se chargera pour l'url: `sdbc:embedded:sqlite`.
 
-### Que reste-t-il à faire pour la version 1.2.0:
+### Ce qui a été fait pour la version 1.2.1:
+
+- Mise à jour du paquet [Python packaging][45] vers la version 24.1.
+- Mise à jour du paquet [Python setuptools][46] vers la version 72.1.0.
+- L'extension vous demandera d'installer l'extensions jdbcDriverOOo en version 1.4.2 minimum.
+
+### Que reste-t-il à faire pour la version 1.2.1:
 
 - Ajouter de nouvelles langue pour l'internationalisation...
 
@@ -200,7 +206,7 @@ ___
 [2]: <https://prrvchr.github.io/SQLiteOOo/>
 [3]: <https://prrvchr.github.io/SQLiteOOo/>
 [4]: <https://prrvchr.github.io/SQLiteOOo/source/SQLiteOOo/registration/TermsOfUse_fr>
-[5]: <https://prrvchr.github.io/SQLiteOOo/README_fr#ce-qui-a-%C3%A9t%C3%A9-fait-pour-la-version-120>
+[5]: <https://prrvchr.github.io/SQLiteOOo/README_fr#ce-qui-a-%C3%A9t%C3%A9-fait-pour-la-version-121>
 [6]: <https://prrvchr.github.io/README_fr>
 [7]: <https://fr.libreoffice.org/download/telecharger-libreoffice/>
 [8]: <https://www.openoffice.org/fr/Telecharger/>
@@ -219,7 +225,7 @@ ___
 [21]: <https://img.shields.io/github/v/tag/prrvchr/jdbcDriverOOo?label=latest#right>
 [22]: <img/SQLiteOOo.svg#middle>
 [23]: <https://github.com/prrvchr/SQLiteOOo/releases/latest/download/SQLiteOOo.oxt>
-[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.2.0#right>
+[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.2.1#right>
 [25]: <img/SQLiteOOo-1_fr.png>
 [26]: <img/SQLiteOOo-2_fr.png>
 [27]: <img/SQLiteOOo-3_fr.png>
@@ -240,3 +246,5 @@ ___
 [42]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/XGeneratedResultSet.html>
 [43]: <https://github.com/prrvchr/sqlite-jdbc/releases/download/3.45.1.6-SNAPSHOT/sqlite-jdbc-3.45.1.6-SNAPSHOT.jar>
 [44]: <https://gerrit.libreoffice.org/c/core/+/154989>
+[45]: <https://pypi.org/project/packaging/>
+[46]: <https://pypi.org/project/setuptools/>

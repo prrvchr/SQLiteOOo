@@ -29,7 +29,7 @@
 
 **The use of this software subjects you to our [Terms Of Use][4].**
 
-# version [1.2.0][5]
+# version [1.2.1][5]
 
 ## Introduction:
 
@@ -190,7 +190,13 @@ ___
 - This version is based on [fix #154989][44] available since LibreOffice 24.2.x. It can therefore work with other extensions offering integrated database services.
 - Now SQLiteOOo requires LibreOffice 24.2.x minimum and will load for the url: `sdbc:embedded:sqlite`.
 
-### What remains to be done for version 1.2.0:
+### What has been done for version 1.2.1:
+
+- Updated the [Python packaging][45] package to version 24.1.
+- Updated the [Python setuptools][46] package to version 72.1.0.
+- The extension will ask you to install the jdbcDriverOOo extension in versions 1.4.2 minimum.
+
+### What remains to be done for version 1.2.1:
 
 - Add new language for internationalization...
 
@@ -200,7 +206,7 @@ ___
 [2]: <https://prrvchr.github.io/SQLiteOOo/>
 [3]: <https://prrvchr.github.io/SQLiteOOo/README_fr>
 [4]: <https://prrvchr.github.io/SQLiteOOo/source/SQLiteOOo/registration/TermsOfUse_en>
-[5]: <https://prrvchr.github.io/SQLiteOOo#what-has-been-done-for-version-120>
+[5]: <https://prrvchr.github.io/SQLiteOOo#what-has-been-done-for-version-121>
 [6]: <https://prrvchr.github.io/>
 [7]: <https://www.libreoffice.org/download/download/>
 [8]: <https://www.openoffice.org/download/index.html>
@@ -219,7 +225,7 @@ ___
 [21]: <https://img.shields.io/github/v/tag/prrvchr/jdbcDriverOOo?label=latest#right>
 [22]: <img/SQLiteOOo.svg#middle>
 [23]: <https://github.com/prrvchr/SQLiteOOo/releases/latest/download/SQLiteOOo.oxt>
-[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.2.0#right>
+[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.2.1#right>
 [25]: <img/SQLiteOOo-1.png>
 [26]: <img/SQLiteOOo-2.png>
 [27]: <img/SQLiteOOo-3.png>
@@ -240,3 +246,5 @@ ___
 [42]: <https://www.openoffice.org/api/docs/common/ref/com/sun/star/sdbc/XGeneratedResultSet.html>
 [43]: <https://github.com/prrvchr/sqlite-jdbc/releases/download/3.45.1.6-SNAPSHOT/sqlite-jdbc-3.45.1.6-SNAPSHOT.jar>
 [44]: <https://gerrit.libreoffice.org/c/core/+/154989>
+[45]: <https://pypi.org/project/packaging/>
+[46]: <https://pypi.org/project/setuptools/>
