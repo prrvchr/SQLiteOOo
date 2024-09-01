@@ -27,49 +27,33 @@
 ╚════════════════════════════════════════════════════════════════════════════════════╝
 """
 
-import uno
-import unohelper
-
-from ..unotool import getContainerWindow
-
-from ..configuration import g_extension
-
 import traceback
 
 
-class OptionsView(unohelper.Base):
-    def __init__(self, window, driver, connection, updated, enabled, version, reboot):
+class OptionsView():
+    def __init__(self, window, restart):
         self._window = window
-        self.initView(driver, connection, updated, enabled, version, reboot)
+        self.setRestart(restart)
 
 # OptionsView setter methods
-    def initView(self, driver, connection, updated, enabled, version, reboot):
+    def initView(self, driver, connection, enabled, version):
         self._getVersion().Text = version
         self._getDriverService(driver).State = 1
-        if updated:
-            self.disableDriverLevel()
         self._getConnectionService(connection).State = 1
         self._getConnectionService(0).Model.Enabled = enabled
-        self._getReboot().setVisible(reboot)
 
     def setDriverVersion(self, version):
         self._getVersion().Text = version
 
     def setDriverLevel(self, level, updated):
         self._getDriverService(level).State = 1
-        if updated:
-            self.disableDriverLevel()
 
     def setConnectionLevel(self, level, enabled):
         self._getConnectionService(level).State = 1
         self._getConnectionService(0).Model.Enabled = enabled
 
-    def disableDriverLevel(self):
-        self._getDriverService(0).Model.Enabled = False
-        self._getDriverService(1).Model.Enabled = False
-
-    def setReboot(self, state):
-        self._getReboot().setVisible(state)
+    def setRestart(self, enabled):
+        self._getRestart().setVisible(enabled)
 
 # OptionsView private control methods
     def _getDriverService(self, index):
@@ -81,6 +65,6 @@ class OptionsView(unohelper.Base):
     def _getVersion(self):
         return self._window.getControl('Label2')
 
-    def _getReboot(self):
+    def _getRestart(self):
         return self._window.getControl('Label5')
 
