@@ -205,6 +205,7 @@ ___
 - Les options de l'extension sont désormais accessibles via: **Outils -> Options... -> LibreOffice Base -> Pilote SQLite intégré**
 - La journalisation accessible dans les options de l’extension s’affiche désormais correctement sous Windows.
 - Les modifications apportées aux options de l'extension, qui nécessitent un redémarrage de LibreOffice, entraîneront l'affichage d'un message.
+- Dans les options de l'extension il est possible de définir les options: **Afficher les tables système**, **Utiliser les signets** et **Forcer le mode SQL** qui seront spécifiques à ce pilote.
 - Support de LibreOffice version 24.8.x.
 
 ### Que reste-t-il à faire pour la version 1.2.2:

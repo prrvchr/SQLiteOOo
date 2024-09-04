@@ -205,6 +205,7 @@ ___
 - The extension options are now accessible via: **Tools -> Options... -> LibreOffice Base -> Embedded SQLite Driver**
 - Logging accessible in extension options now displays correctly on Windows.
 - Changes to extension options that require a restart of LibreOffice will result in a message being displayed.
+- In the extension options it is possible to define the options: **View system tables**, **Use bookmarks** and **Force SQL mode** which will be specific to this driver.
 - Support for LibreOffice version 24.8.x.
 
 ### What remains to be done for version 1.2.2:
