@@ -39,6 +39,11 @@
                 <value xml:lang="fr-FR">Pilote SQLite intégré</value>
             </prop>
             <node oor:name="Properties">
+                <node oor:name="RespectDriverResultSetType" oor:op="replace">
+                    <prop oor:name="Value" oor:type="xs:boolean">
+                        <value>true</value>
+                    </prop>
+                </node>
                 <node oor:name="IsAutoRetrievingEnabled" oor:op="replace">
                     <prop oor:name="Value" oor:type="xs:boolean">
                         <value>true</value>
@@ -66,6 +71,11 @@
                 </node>
             </node>
             <node oor:name="Features">
+                <node oor:name="RespectDriverResultSetType" oor:op="replace">
+                    <prop oor:name="Value" oor:type="xs:boolean">
+                        <value>true</value>
+                    </prop>
+                </node>
                 <node oor:name="GeneratedValues" oor:op="replace">
                     <prop oor:name="Value" oor:type="xs:boolean">
                         <value>true</value>

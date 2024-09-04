@@ -29,7 +29,7 @@
 
 **The use of this software subjects you to our [Terms Of Use][4].**
 
-# version [1.2.1][5]
+# version [1.2.2][5]
 
 ## Introduction:
 
@@ -131,7 +131,9 @@ ___
 
 ## Has been tested with:
 
-* LibreOffice 24.2.1.2 - Ubuntu 22.04
+* LibreOffice 24.2.1.2 - Lubuntu 22.04
+
+* LibreOffice 24.8.0.3 (x86_64) - Windows 10(x64) - Python version 3.9.19 (under Lubuntu 22.04 / VirtualBox 6.1.38)
 
 I encourage you in case of problem :confused:  
 to create an [issue][13]  
@@ -196,7 +198,16 @@ ___
 - Updated the [Python setuptools][46] package to version 72.1.0.
 - The extension will ask you to install the jdbcDriverOOo extension in versions 1.4.2 minimum.
 
-### What remains to be done for version 1.2.1:
+### What has been done for version 1.2.2:
+
+- Fixed [issue #2][47] which appears to be a regression related to the release of JaybirdOOo. Thanks to madalienist for reporting it.
+- Updated the [Python setuptools][48] package to version 73.0.1.
+- The extension options are now accessible via: **Tools -> Options... -> LibreOffice Base -> Embedded SQLite Driver**
+- Logging accessible in extension options now displays correctly on Windows.
+- Changes to extension options that require a restart of LibreOffice will result in a message being displayed.
+- Support for LibreOffice version 24.8.x.
+
+### What remains to be done for version 1.2.2:
 
 - Add new language for internationalization...
 
@@ -206,7 +217,7 @@ ___
 [2]: <https://prrvchr.github.io/SQLiteOOo/>
 [3]: <https://prrvchr.github.io/SQLiteOOo/README_fr>
 [4]: <https://prrvchr.github.io/SQLiteOOo/source/SQLiteOOo/registration/TermsOfUse_en>
-[5]: <https://prrvchr.github.io/SQLiteOOo#what-has-been-done-for-version-121>
+[5]: <https://prrvchr.github.io/SQLiteOOo#what-has-been-done-for-version-122>
 [6]: <https://prrvchr.github.io/>
 [7]: <https://www.libreoffice.org/download/download/>
 [8]: <https://www.openoffice.org/download/index.html>
@@ -225,7 +236,7 @@ ___
 [21]: <https://img.shields.io/github/v/tag/prrvchr/jdbcDriverOOo?label=latest#right>
 [22]: <img/SQLiteOOo.svg#middle>
 [23]: <https://github.com/prrvchr/SQLiteOOo/releases/latest/download/SQLiteOOo.oxt>
-[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.2.1#right>
+[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.2.2#right>
 [25]: <img/SQLiteOOo-1.png>
 [26]: <img/SQLiteOOo-2.png>
 [27]: <img/SQLiteOOo-3.png>
@@ -248,3 +259,5 @@ ___
 [44]: <https://gerrit.libreoffice.org/c/core/+/154989>
 [45]: <https://pypi.org/project/packaging/>
 [46]: <https://pypi.org/project/setuptools/>
+[47]: <https://github.com/prrvchr/SQLiteOOo/issues/2>
+[48]: <https://pypi.org/project/setuptools/>

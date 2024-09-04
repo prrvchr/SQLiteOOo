@@ -7,6 +7,7 @@ plugins:
 favicon: true
 logo: /img/sqlite.svg
 email: prrvchr@gmail.com
+google_analytics: G-G5V0DWSLXM
 title: SQLiteOOo
 blank_title: true
 description: The latest version of SQLite database in a single odb file.

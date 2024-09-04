@@ -81,6 +81,15 @@ class OptionsHandler(unohelper.Base,
             elif method == 'Level2':
                 self._manager.setConnectionService(2)
                 handled = True
+            elif method == 'SystemTable':
+                self._manager.setSystemTable(event.Source.State)
+                handled = True
+            elif method == 'UseBookmark':
+                self._manager.setBookmark(event.Source.State)
+                handled = True
+            elif method == 'SQLMode':
+                self._manager.setSQLMode(event.Source.State)
+                handled = True
             return handled
         except Exception as e:
             print("ERROR: %s - %s" % (e, traceback.format_exc()))
@@ -91,7 +100,10 @@ class OptionsHandler(unohelper.Base,
                 'Enhanced',
                 'Level0',
                 'Level1',
-                'Level2')
+                'Level2',
+                'SystemTable',
+                'UseBookmark',
+                'SQLMode')
 
     # XServiceInfo
     def supportsService(self, service):

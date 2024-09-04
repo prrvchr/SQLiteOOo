@@ -37,4 +37,13 @@
     <prop oor:name="ConnectionService" oor:op="fuse">
         <value>com.sun.star.sdb.Connection</value>
     </prop>
+    <prop oor:name="ShowSystemTable" oor:op="fuse">
+        <value>false</value>
+    </prop>
+    <prop oor:name="UseBookmark" oor:op="fuse">
+        <value>true</value>
+    </prop>
+    <prop oor:name="SQLMode" oor:op="fuse">
+        <value>false</value>
+    </prop>
 </oor:component-data>
