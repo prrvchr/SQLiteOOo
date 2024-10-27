@@ -32,12 +32,14 @@ import unohelper
 import traceback
 
 
-class OptionsView(unohelper.Base):
-    def __init__(self, window, timeout, view, enabled):
+class OptionsView():
+    def __init__(self, window, restart, offset, timeout, view, enabled):
         self._window = window
         self._getTimeout().Value = timeout
         self._getDatasource().Model.Enabled = enabled
         self._setViewName(view, not enabled)
+        self.setRestart(restart)
+        self._getRestart().Model.PositionY += offset
 
 # OptionsView getter methods
     def getViewData(self):
@@ -49,6 +51,9 @@ class OptionsView(unohelper.Base):
 
     def setViewName(self, view):
         self._getViewName().Text = view
+
+    def setRestart(self, enabled):
+        self._getRestart().setVisible(enabled)
 
 # OptionsView private setter methods
     def _setViewName(self, view, disabled):
@@ -69,3 +74,7 @@ class OptionsView(unohelper.Base):
 
     def _getViewName(self):
         return self._window.getControl('TextField1')
+
+    def _getRestart(self):
+        return self._window.getControl('Label4')
+

@@ -27,82 +27,55 @@
 ╚════════════════════════════════════════════════════════════════════════════════════╝
 """
 
-from com.sun.star.ui.dialogs.ExecutableDialogResults import OK
+from .loghandler import getRollerHandlerUrl
 
-from com.sun.star.logging.LogLevel import INFO
-from com.sun.star.logging.LogLevel import SEVERE
+from ..unotool import createService
+from ..unotool import getConfiguration
+from ..unotool import getFileSequence
 
-from .optionsmodel import OptionsModel
-from .optionsview import OptionsView
-from .optionshandler import OptionsListener
-
-from ..logger import LogManager
-
-from ..configuration import g_defaultlog
-
-import os
-import sys
 import traceback
 
-
-class OptionsManager():
-    def __init__(self, ctx, window, url=None):
+# XXX: LogConfig allows access to the Logger configuration
+# XXX: it is used by ./dialog/LogModel and ./LogController
+class LogConfig():
+    def __init__(self, ctx):
         self._ctx = ctx
-        self._disposed = False
-        self._disabled = False
-        self._model = OptionsModel(ctx, url)
-        window.addEventListener(OptionsListener(self))
-        self._view = OptionsView(window, OptionsManager._restart)
-        self._view.initView(*self._model.getViewData())
-        self._logmanager = LogManager(ctx, window.getPeer(), 'requirements.txt', g_defaultlog)
-
-    _restart = False
-
-    def dispose(self):
-        self._logmanager.dispose()
-        self._disposed = True
-
-    # TODO: One shot disabler handler
-    def isHandlerEnabled(self):
-        if self._disabled:
-            self._disabled = False
-            return False
-        return True
-
-# OptionsManager setter methods
-    def updateView(self, versions):
-        with self._lock:
-            self.updateVersion(versions)
-
-    def updateVersion(self, versions):
-        with self._lock:
-            if not self._disposed:
-                protocol = self._view.getSelectedProtocol()
-                if protocol in versions:
-                    self._view.setVersion(versions[protocol])
-
-    def saveSetting(self):
-        if self._logmanager.saveSetting() or self._model.saveSetting():
-            OptionsManager._restart = True
-            self._view.setRestart(True)
+        self._setting = '/org.openoffice.Office.Logging/Settings'
+        self.loadSetting()
 
     def loadSetting(self):
-        self._logmanager.loadSetting()
-        self._view.initView(*self._model.loadSetting())
+        self._config = getConfiguration(self._ctx, self._setting, True)
 
-    def setDriverService(self, driver):
-        self._view.setConnectionLevel(*self._model.setDriverService(driver))
+    def getLoggerUrl(self, name):
+        url = '$(userurl)/$(loggername).log'
+        settings = self.getSetting(name).getByName('HandlerSettings')
+        if settings.hasByName('FileURL'):
+            url = settings.getByName('FileURL')
+        path = createService(self._ctx, 'com.sun.star.util.PathSubstitution')
+        url = url.replace('$(loggername)', name)
+        return path.substituteVariables(url, True)
 
-    def setConnectionService(self, level):
-        self._model.setConnectionService(level)
+    def getLoggerContent(self, name, roller=False):
+        url, text, length = self.getLoggerData(name, roller)
+        return text, length
 
-    def setSystemTable(self, state):
-        self._model.setSystemTable(state)
+    def getLoggerData(self, name, roller=False):
+        url = self._getLoggerUrl(name, roller)
+        length, sequence = getFileSequence(self._ctx, url)
+        text = sequence.value.decode('utf-8')
+        return url, text, length
 
-    def setBookmark(self, state):
-        self._model.setBookmark(state)
-        self._view.enableSQLMode(state)
+    def saveSetting(self):
+        if self._config.hasPendingChanges():
+            self._config.commitChanges()
+            return True
+        return False
 
-    def setSQLMode(self, state):
-        self._model.setSQLMode(state)
+    def getSetting(self, name):
+        if not self._config.hasByName(name):
+            self._config.insertByName(name, self._config.createInstance())
+        return self._config.getByName(name)
+
+    def _getLoggerUrl(self, name, roller=False):
+        return getRollerHandlerUrl(self._ctx, name) if roller else self.getLoggerUrl(name)
 
