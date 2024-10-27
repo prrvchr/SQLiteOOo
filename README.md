@@ -29,7 +29,7 @@
 
 **The use of this software subjects you to our [Terms Of Use][4].**
 
-# version [1.2.2][5]
+# version [1.2.3][5]
 
 ## Introduction:
 
@@ -209,7 +209,12 @@ ___
 - Requires the latest version of **jdbcDriverOOo 1.4.4**.
 - Support for LibreOffice version 24.8.x.
 
-### What remains to be done for version 1.2.2:
+### What has been done for version 1.2.3:
+
+- The extension will ask you to install jdbcDriverOOo extension in versions 1.4.6 minimum.
+- Modification of the extension options accessible via: **Tools -> Options... -> LibreOffice Base -> Embedded SQLite Driver** in order to comply with the new graphic charter.
+
+### What remains to be done for version 1.2.3:
 
 - Add new language for internationalization...
 
@@ -219,7 +224,7 @@ ___
 [2]: <https://prrvchr.github.io/SQLiteOOo/>
 [3]: <https://prrvchr.github.io/SQLiteOOo/README_fr>
 [4]: <https://prrvchr.github.io/SQLiteOOo/source/SQLiteOOo/registration/TermsOfUse_en>
-[5]: <https://prrvchr.github.io/SQLiteOOo#what-has-been-done-for-version-122>
+[5]: <https://prrvchr.github.io/SQLiteOOo#what-has-been-done-for-version-123>
 [6]: <https://prrvchr.github.io/>
 [7]: <https://www.libreoffice.org/download/download/>
 [8]: <https://www.openoffice.org/download/index.html>
@@ -238,7 +243,7 @@ ___
 [21]: <https://img.shields.io/github/v/tag/prrvchr/jdbcDriverOOo?label=latest#right>
 [22]: <img/SQLiteOOo.svg#middle>
 [23]: <https://github.com/prrvchr/SQLiteOOo/releases/latest/download/SQLiteOOo.oxt>
-[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.2.2#right>
+[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.2.3#right>
 [25]: <img/SQLiteOOo-1.png>
 [26]: <img/SQLiteOOo-2.png>
 [27]: <img/SQLiteOOo-3.png>
