@@ -1,4 +1,3 @@
-import collections
 import os
 import re
 import urllib.parse
@@ -9,7 +8,7 @@ import pytest
 from setuptools import Distribution
 from setuptools.dist import check_package_data, check_specifier
 
-from .test_easy_install import make_nspkg_sdist
+from .test_easy_install import make_trivial_sdist
 from .test_find_packages import ensure_files
 from .textwrap import DALS
 
@@ -26,7 +25,7 @@ def test_dist_fetch_build_egg(tmpdir):
     def sdist_with_index(distname, version):
         dist_dir = index.mkdir(distname)
         dist_sdist = '%s-%s.tar.gz' % (distname, version)
-        make_nspkg_sdist(str(dist_dir.join(dist_sdist)), distname, version)
+        make_trivial_sdist(str(dist_dir.join(dist_sdist)), distname, version)
         with dist_dir.join('index.html').open('w') as fp:
             fp.write(
                 DALS(
@@ -72,15 +71,10 @@ EXAMPLE_BASE_INFO = dict(
 
 
 def test_provides_extras_deterministic_order():
-    extras = collections.OrderedDict()
-    extras['a'] = ['foo']
-    extras['b'] = ['bar']
-    attrs = dict(extras_require=extras)
+    attrs = dict(extras_require=dict(a=['foo'], b=['bar']))
     dist = Distribution(attrs)
     assert list(dist.metadata.provides_extras) == ['a', 'b']
-    attrs['extras_require'] = collections.OrderedDict(
-        reversed(list(attrs['extras_require'].items()))
-    )
+    attrs['extras_require'] = dict(reversed(attrs['extras_require'].items()))
     dist = Distribution(attrs)
     assert list(dist.metadata.provides_extras) == ['b', 'a']
 
@@ -118,8 +112,8 @@ CHECK_PACKAGE_DATA_TESTS = (
             'hello': '*.msg',
         },
         (
-            "\"values of 'package_data' dict\" "
-            "must be a list of strings (got '*.msg')"
+            "\"values of 'package_data' dict\" must be of type <tuple[str, ...] | list[str]>"
+            " (got '*.msg')"
         ),
     ),
     # Invalid value type (generators are single use)
@@ -128,8 +122,8 @@ CHECK_PACKAGE_DATA_TESTS = (
             'hello': (x for x in "generator"),
         },
         (
-            "\"values of 'package_data' dict\" must be a list of strings "
-            "(got <generator object"
+            "\"values of 'package_data' dict\" must be of type <tuple[str, ...] | list[str]>"
+            " (got <generator object"
         ),
     ),
 )
@@ -144,6 +138,7 @@ def test_check_package_data(package_data, expected_message):
             check_package_data(None, 'package_data', package_data)
 
 
+@pytest.mark.xfail(reason="#4745")
 def test_check_specifier():
     # valid specifier value
     attrs = {'name': 'foo', 'python_requires': '>=3.0, !=3.1'}

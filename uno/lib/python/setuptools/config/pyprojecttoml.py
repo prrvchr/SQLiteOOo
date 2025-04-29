@@ -15,6 +15,7 @@ import logging
 import os
 from contextlib import contextmanager
 from functools import partial
+from types import TracebackType
 from typing import TYPE_CHECKING, Any, Callable, Mapping
 
 from .._path import StrPath
@@ -43,8 +44,8 @@ def validate(config: dict, filepath: StrPath) -> bool:
 
     trove_classifier = validator.FORMAT_FUNCTIONS.get("trove-classifier")
     if hasattr(trove_classifier, "_disable_download"):
-        # Improve reproducibility by default. See issue 31 for validate-pyproject.
-        trove_classifier._disable_download()  # type: ignore
+        # Improve reproducibility by default. See abravalheri/validate-pyproject#31
+        trove_classifier._disable_download()  # type: ignore[union-attr]
 
     try:
         return validator.validate(config)
@@ -62,7 +63,7 @@ def validate(config: dict, filepath: StrPath) -> bool:
 def apply_configuration(
     dist: Distribution,
     filepath: StrPath,
-    ignore_option_errors=False,
+    ignore_option_errors: bool = False,
 ) -> Distribution:
     """Apply the configuration from a ``pyproject.toml`` file into an existing
     distribution object.
@@ -73,8 +74,8 @@ def apply_configuration(
 
 def read_configuration(
     filepath: StrPath,
-    expand=True,
-    ignore_option_errors=False,
+    expand: bool = True,
+    ignore_option_errors: bool = False,
     dist: Distribution | None = None,
 ) -> dict[str, Any]:
     """Read given configuration file and returns options from it as a dict.
@@ -128,6 +129,9 @@ def read_configuration(
     # Persist changes:
     asdict["tool"] = tool_table
     tool_table["setuptools"] = setuptools_table
+
+    if "ext-modules" in setuptools_table:
+        _ExperimentalConfiguration.emit(subject="[tool.setuptools.ext-modules]")
 
     with _ignore_errors(ignore_option_errors):
         # Don't complain about unrelated errors (e.g. tools not using the "tool" table)
@@ -303,7 +307,10 @@ class _ConfigExpander:
     def _obtain_version(self, dist: Distribution, package_dir: Mapping[str, str]):
         # Since plugins can set version, let's silently skip if it cannot be obtained
         if "version" in self.dynamic and "version" in self.dynamic_cfg:
-            return _expand.version(self._obtain(dist, "version", package_dir))
+            return _expand.version(
+                # We already do an early check for the presence of "version"
+                self._obtain(dist, "version", package_dir)  # pyright: ignore[reportArgumentType]
+            )
         return None
 
     def _obtain_readme(self, dist: Distribution) -> dict[str, str] | None:
@@ -313,9 +320,10 @@ class _ConfigExpander:
         dynamic_cfg = self.dynamic_cfg
         if "readme" in dynamic_cfg:
             return {
+                # We already do an early check for the presence of "readme"
                 "text": self._obtain(dist, "readme", {}),
                 "content-type": dynamic_cfg["readme"].get("content-type", "text/x-rst"),
-            }
+            }  # pyright: ignore[reportReturnType]
 
         self._ensure_previously_set(dist, "readme")
         return None
@@ -430,7 +438,12 @@ class _EnsurePackagesDiscovered(_expand.EnsurePackagesDiscovered):
 
         return super().__enter__()
 
-    def __exit__(self, exc_type, exc_value, traceback):
+    def __exit__(
+        self,
+        exc_type: type[BaseException] | None,
+        exc_value: BaseException | None,
+        traceback: TracebackType | None,
+    ) -> None:
         """When exiting the context, if values of ``packages``, ``py_modules`` and
         ``package_dir`` are missing in ``setuptools_cfg``, copy from ``dist``.
         """

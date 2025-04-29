@@ -7,7 +7,7 @@ from unittest.mock import Mock, patch
 import pytest
 from packaging.requirements import InvalidRequirement
 
-from setuptools.config.setupcfg import ConfigHandler, read_configuration
+from setuptools.config.setupcfg import ConfigHandler, Target, read_configuration
 from setuptools.dist import Distribution, _Distribution
 from setuptools.warnings import SetuptoolsDeprecationWarning
 
@@ -16,7 +16,7 @@ from ..textwrap import DALS
 from distutils.errors import DistutilsFileError, DistutilsOptionError
 
 
-class ErrConfigHandler(ConfigHandler):
+class ErrConfigHandler(ConfigHandler[Target]):
     """Erroneous handler. Fails to implement required methods."""
 
     section_prefix = "**err**"
@@ -415,15 +415,14 @@ class TestMetadata:
         """
         fake_env(
             tmpdir,
-            '# vim: set fileencoding=iso-8859-15 :\n'
-            '[metadata]\n'
-            'description = éàïôñ\n',
+            '# vim: set fileencoding=iso-8859-15 :\n[metadata]\ndescription = éàïôñ\n',
             encoding='iso-8859-15',
         )
         with pytest.raises(UnicodeDecodeError):
             with get_dist(tmpdir):
                 pass
 
+    @pytest.mark.xfail(reason="#4864")
     def test_warn_dash_deprecation(self, tmpdir):
         # warn_dash_deprecation() is a method in setuptools.dist
         # remove this test and the method when no longer needed
@@ -441,6 +440,7 @@ class TestMetadata:
         assert metadata.author_email == 'test@test.com'
         assert metadata.maintainer_email == 'foo@foo.com'
 
+    @pytest.mark.xfail(reason="#4864")
     def test_make_option_lowercase(self, tmpdir):
         # remove this test and the method make_option_lowercase() in setuptools.dist
         # when no longer needed

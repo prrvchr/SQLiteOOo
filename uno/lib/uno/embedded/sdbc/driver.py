@@ -4,7 +4,7 @@
 """
 ╔════════════════════════════════════════════════════════════════════════════════════╗
 ║                                                                                    ║
-║   Copyright (c) 2020-24 https://prrvchr.github.io                                  ║
+║   Copyright (c) 2020-25 https://prrvchr.github.io                                  ║
 ║                                                                                    ║
 ║   Permission is hereby granted, free of charge, to any person obtaining            ║
 ║   a copy of this software and associated documentation files (the "Software"),     ║
@@ -37,8 +37,7 @@ import traceback
 
 class Driver(DriverBase):
 
-    def __init__(self, ctx, lock, service, name):
-        DriverBase.__init__(self, ctx, lock, service, name)
-        self._services = ('com.sun.star.sdbc.Driver', )
-        self._logger.logprb(INFO, 'Driver', '__init__()', 101)
+    def __init__(self, ctx, lock, logger, service, implementation):
+        DriverBase.__init__(self, ctx, lock, logger, service, implementation)
+        self._services = (implementation, 'com.sun.star.sdbc.Driver')
 

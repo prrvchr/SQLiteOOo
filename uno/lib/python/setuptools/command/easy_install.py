@@ -34,7 +34,7 @@ import zipimport
 from collections.abc import Iterable
 from glob import glob
 from sysconfig import get_path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Callable, TypeVar
 
 from jaraco.text import yield_lines
 
@@ -63,7 +63,7 @@ from setuptools.warnings import SetuptoolsDeprecationWarning, SetuptoolsWarning
 from setuptools.wheel import Wheel
 
 from .._path import ensure_directory
-from ..compat import py39, py311
+from ..compat import py39, py311, py312
 
 from distutils import dir_util, log
 from distutils.command import install
@@ -88,6 +88,8 @@ __all__ = [
     'extract_wininst_cfg',
     'get_exe_prefixes',
 ]
+
+_T = TypeVar("_T")
 
 
 def is_64bit():
@@ -423,7 +425,7 @@ class easy_install(Command):
         ]
         self._expand_attrs(dirs)
 
-    def run(self, show_deprecation=True):
+    def run(self, show_deprecation: bool = True):
         if show_deprecation:
             self.announce(
                 "WARNING: The easy_install command is deprecated "
@@ -588,8 +590,9 @@ class easy_install(Command):
                 os.unlink(ok_file)
             dirname = os.path.dirname(ok_file)
             os.makedirs(dirname, exist_ok=True)
-            f = open(pth_file, 'w', encoding=py39.LOCALE_ENCODING)
-            # ^-- Requires encoding="locale" instead of "utf-8" (python/cpython#77102).
+            f = open(pth_file, 'w', encoding=py312.PTH_ENCODING)
+            # ^-- Python<3.13 require encoding="locale" instead of "utf-8",
+            #     see python/cpython#77102.
         except OSError:
             self.cant_write_to_target()
         else:
@@ -671,7 +674,7 @@ class easy_install(Command):
         finally:
             os.path.exists(tmpdir) and _rmtree(tmpdir)
 
-    def easy_install(self, spec, deps=False):
+    def easy_install(self, spec, deps: bool = False):
         with self._tmpdir() as tmpdir:
             if not isinstance(spec, Requirement):
                 if URL_SCHEME(spec):
@@ -708,9 +711,9 @@ class easy_install(Command):
             else:
                 return self.install_item(spec, dist.location, tmpdir, deps)
 
-    def install_item(self, spec, download, tmpdir, deps, install_needed=False):
+    def install_item(self, spec, download, tmpdir, deps, install_needed: bool = False):
         # Installation is also needed if file in tmpdir or is not an egg
-        install_needed = install_needed or self.always_copy
+        install_needed = install_needed or bool(self.always_copy)
         install_needed = install_needed or os.path.dirname(download) == tmpdir
         install_needed = install_needed or not download.endswith('.egg')
         install_needed = install_needed or (
@@ -756,7 +759,7 @@ class easy_install(Command):
         self,
         requirement,
         dist,
-        deps=True,
+        deps: bool = True,
         *info,
     ):
         self.update_pth(dist)
@@ -857,7 +860,7 @@ class easy_install(Command):
         raw_bytes = resource_string('setuptools', name)
         return raw_bytes.decode('utf-8')
 
-    def write_script(self, script_name, contents, mode="t", blockers=()):
+    def write_script(self, script_name, contents, mode: str = "t", blockers=()):
         """Write an executable file to the scripts directory"""
         self.delete_blockers(  # clean up old .py/.pyw w/o a script
             [os.path.join(self.script_dir, x) for x in blockers]
@@ -1140,7 +1143,7 @@ class easy_install(Command):
         """
     )
 
-    def installation_report(self, req, dist, what="Installed"):
+    def installation_report(self, req, dist, what: str = "Installed"):
         """Helpful installation message for display to package users"""
         msg = "\n%(what)s %(eggloc)s%(extras)s"
         if self.multi_version and not self.no_report:
@@ -1280,8 +1283,9 @@ class easy_install(Command):
         if os.path.islink(filename):
             os.unlink(filename)
 
-        with open(filename, 'wt', encoding=py39.LOCALE_ENCODING) as f:
-            # Requires encoding="locale" instead of "utf-8" (python/cpython#77102).
+        with open(filename, 'wt', encoding=py312.PTH_ENCODING) as f:
+            # ^-- Python<3.13 require encoding="locale" instead of "utf-8",
+            #     see python/cpython#77102.
             f.write(self.pth_file.make_relative(dist.location) + '\n')
 
     def unpack_progress(self, src, dst):
@@ -1507,9 +1511,8 @@ def expand_paths(inputs):  # noqa: C901  # is too complex (11)  # FIXME
                 continue
 
             # Read the .pth file
-            with open(os.path.join(dirname, name), encoding=py39.LOCALE_ENCODING) as f:
-                # Requires encoding="locale" instead of "utf-8" (python/cpython#77102).
-                lines = list(yield_lines(f))
+            content = _read_pth(os.path.join(dirname, name))
+            lines = list(yield_lines(content))
 
             # Yield existing non-dupe, non-import directory lines from it
             for line in lines:
@@ -1623,9 +1626,8 @@ class PthDistributions(Environment):
         paths = []
         dirty = saw_import = False
         seen = set(self.sitedirs)
-        f = open(self.filename, 'rt', encoding=py39.LOCALE_ENCODING)
-        # ^-- Requires encoding="locale" instead of "utf-8" (python/cpython#77102).
-        for line in f:
+        content = _read_pth(self.filename)
+        for line in content.splitlines():
             path = line.rstrip()
             # still keep imports and empty/commented lines for formatting
             paths.append(path)
@@ -1644,7 +1646,6 @@ class PthDistributions(Environment):
                 paths.pop()
                 continue
             seen.add(normalized_path)
-        f.close()
         # remove any trailing empty/blank line
         while paths and not paths[-1].strip():
             paths.pop()
@@ -1695,8 +1696,9 @@ class PthDistributions(Environment):
             data = '\n'.join(lines) + '\n'
             if os.path.islink(self.filename):
                 os.unlink(self.filename)
-            with open(self.filename, 'wt', encoding=py39.LOCALE_ENCODING) as f:
-                # Requires encoding="locale" instead of "utf-8" (python/cpython#77102).
+            with open(self.filename, 'wt', encoding=py312.PTH_ENCODING) as f:
+                # ^-- Python<3.13 require encoding="locale" instead of "utf-8",
+                #     see python/cpython#77102.
                 f.write(data)
         elif os.path.exists(self.filename):
             log.debug("Deleting empty %s", self.filename)
@@ -1786,13 +1788,14 @@ def _first_line_re():
     return re.compile(first_line_re.pattern.decode())
 
 
-def auto_chmod(func, arg, exc):
+# Must match shutil._OnExcCallback
+def auto_chmod(func: Callable[..., _T], arg: str, exc: BaseException) -> _T:
+    """shutils onexc callback to automatically call chmod for certain functions."""
+    # Only retry for scenarios known to have an issue
     if func in [os.unlink, os.remove] and os.name == 'nt':
         chmod(arg, stat.S_IWRITE)
         return func(arg)
-    et, ev, _ = sys.exc_info()
-    # TODO: This code doesn't make sense. What is it trying to do?
-    raise (ev[0], ev[1] + (" %s %s" % (func, arg)))
+    raise exc
 
 
 def update_dist_caches(dist_path, fix_zipimporter_caches):
@@ -2018,10 +2021,12 @@ def is_python_script(script_text, filename):
 
 
 try:
-    from os import chmod as _chmod
+    from os import (
+        chmod as _chmod,  # pyright: ignore[reportAssignmentType] # Losing type-safety w/ pyright, but that's ok
+    )
 except ImportError:
     # Jython compatibility
-    def _chmod(*args: object, **kwargs: object) -> None:  # type: ignore[misc] # Mypy re-uses the imported definition anyway
+    def _chmod(*args: object, **kwargs: object) -> None:  # type: ignore[misc] # Mypy reuses the imported definition anyway
         pass
 
 
@@ -2068,15 +2073,14 @@ class CommandSpec(list):
             return cls(param)
         if param is None:
             return cls.from_environment()
-        # AttributeError to keep backwards compatibility, this should really be a TypeError though
-        raise AttributeError(f"Argument has an unsupported type {type(param)}")
+        raise TypeError(f"Argument has an unsupported type {type(param)}")
 
     @classmethod
     def from_environment(cls):
         return cls([cls._sys_executable()])
 
     @classmethod
-    def from_string(cls, string):
+    def from_string(cls, string: str):
         """
         Construct a command spec from a simple string representing a command
         line parseable by shlex.split.
@@ -2084,7 +2088,7 @@ class CommandSpec(list):
         items = shlex.split(string, **cls.split_args)
         return cls(items)
 
-    def install_options(self, script_text):
+    def install_options(self, script_text: str):
         self.options = shlex.split(self._extract_options(script_text))
         cmdline = subprocess.list2cmdline(self)
         if not isascii(cmdline):
@@ -2183,7 +2187,7 @@ class ScriptWriter:
         spec = str(dist.as_requirement())
         for type_ in 'console', 'gui':
             group = type_ + '_scripts'
-            for name, ep in dist.get_entry_map(group).items():
+            for name in dist.get_entry_map(group).keys():
                 cls._ensure_safe_name(name)
                 script_text = cls.template % locals()
                 args = cls._get_script_args(type_, name, header, script_text)
@@ -2214,7 +2218,11 @@ class ScriptWriter:
         yield (name, header + script_text)
 
     @classmethod
-    def get_header(cls, script_text="", executable=None):
+    def get_header(
+        cls,
+        script_text: str = "",
+        executable: str | CommandSpec | Iterable[str] | None = None,
+    ):
         """Create a #! line, getting options (if any) from script_text"""
         cmd = cls.command_spec_class.best().from_param(executable)
         cmd.install_options(script_text)
@@ -2336,7 +2344,7 @@ def load_launcher_manifest(name):
     return manifest.decode('utf-8') % vars()
 
 
-def _rmtree(path, ignore_errors=False, onexc=auto_chmod):
+def _rmtree(path, ignore_errors: bool = False, onexc=auto_chmod):
     return py311.shutil_rmtree(path, ignore_errors, onexc)
 
 
@@ -2351,6 +2359,26 @@ def only_strs(values):
     Exclude non-str values. Ref #3063.
     """
     return filter(lambda val: isinstance(val, str), values)
+
+
+def _read_pth(fullname: str) -> str:
+    # Python<3.13 require encoding="locale" instead of "utf-8", see python/cpython#77102
+    # In the case old versions of setuptools are producing `pth` files with
+    # different encodings that might be problematic... So we fallback to "locale".
+
+    try:
+        with open(fullname, encoding=py312.PTH_ENCODING) as f:
+            return f.read()
+    except UnicodeDecodeError:  # pragma: no cover
+        # This error may only happen for Python >= 3.13
+        # TODO: Possible deprecation warnings to be added in the future:
+        #       ``.pth file {fullname!r} is not UTF-8.``
+        #       Your environment contain {fullname!r} that cannot be read as UTF-8.
+        #       This is likely to have been produced with an old version of setuptools.
+        #       Please be mindful that this is deprecated and in the future, non-utf8
+        #       .pth files may cause setuptools to fail.
+        with open(fullname, encoding=py39.LOCALE_ENCODING) as f:
+            return f.read()
 
 
 class EasyInstallDeprecationWarning(SetuptoolsDeprecationWarning):

@@ -1,4 +1,9 @@
 """Extensions to the 'distutils' for large or complex distributions"""
+# mypy: disable_error_code=override
+# Command.reinitialize_command has an extra **kw param that distutils doesn't have
+# Can't disable on the exact line because distutils doesn't exists on Python 3.12
+# and mypy isn't aware of distutils_hack, causing distutils.core.Command to be Any,
+# and a [unused-ignore] to be raised on 3.12+
 
 from __future__ import annotations
 
@@ -7,6 +12,7 @@ import os
 import re
 import sys
 from abc import abstractmethod
+from collections.abc import Mapping
 from typing import TYPE_CHECKING, TypeVar, overload
 
 sys.path.extend(((vendor_path := os.path.join(os.path.dirname(os.path.dirname(__file__)), 'setuptools', '_vendor')) not in sys.path) * [vendor_path])  # fmt: skip
@@ -54,7 +60,7 @@ def _install_setup_requires(attrs):
         fetch_build_eggs interface.
         """
 
-        def __init__(self, attrs):
+        def __init__(self, attrs: Mapping[str, object]):
             _incl = 'dependency_links', 'setup_requires'
             filtered = {k: attrs[k] for k in set(_incl) & set(attrs)}
             super().__init__(filtered)
@@ -83,7 +89,7 @@ def _install_setup_requires(attrs):
         _fetch_build_eggs(dist)
 
 
-def _fetch_build_eggs(dist):
+def _fetch_build_eggs(dist: Distribution):
     try:
         dist.fetch_build_eggs(dist.setup_requires)
     except Exception as ex:
@@ -105,8 +111,8 @@ def _fetch_build_eggs(dist):
 
 
 def setup(**attrs):
-    # Make sure we have any requirements needed to interpret 'attrs'.
     logging.configure()
+    # Make sure we have any requirements needed to interpret 'attrs'.
     _install_setup_requires(attrs)
     return distutils.core.setup(**attrs)
 
@@ -115,7 +121,7 @@ setup.__doc__ = distutils.core.setup.__doc__
 
 if TYPE_CHECKING:
     # Work around a mypy issue where type[T] can't be used as a base: https://github.com/python/mypy/issues/10962
-    _Command = distutils.core.Command
+    from distutils.core import Command as _Command
 else:
     _Command = monkey.get_unpatched(distutils.core.Command)
 
@@ -180,7 +186,7 @@ class Command(_Command):
             )
         return val
 
-    def ensure_string_list(self, option):
+    def ensure_string_list(self, option: str):
         r"""Ensure that 'option' is a list of strings.  If 'option' is
         currently a string, we split it either on /,\s*/ or /\s+/, so
         "foo bar baz", "foo,bar,baz", and "foo,   bar baz" all become
@@ -207,7 +213,7 @@ class Command(_Command):
                     "'%s' must be a list of strings (got %r)" % (option, val)
                 )
 
-    @overload  # type:ignore[override] # Extra **kw param
+    @overload
     def reinitialize_command(
         self, command: str, reinit_subcommands: bool = False, **kw
     ) -> _Command: ...

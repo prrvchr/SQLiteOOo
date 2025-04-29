@@ -30,7 +30,7 @@ from glob import iglob
 from importlib.machinery import ModuleSpec, all_suffixes
 from itertools import chain
 from pathlib import Path
-from types import ModuleType
+from types import ModuleType, TracebackType
 from typing import TYPE_CHECKING, Any, Callable, Iterable, Iterator, Mapping, TypeVar
 
 from .._path import StrPath, same_path as _same_path
@@ -40,10 +40,12 @@ from ..warnings import SetuptoolsWarning
 from distutils.errors import DistutilsOptionError
 
 if TYPE_CHECKING:
+    from typing_extensions import Self
+
     from setuptools.dist import Distribution
 
 _K = TypeVar("_K")
-_V = TypeVar("_V", covariant=True)
+_V_co = TypeVar("_V_co", covariant=True)
 
 
 class StaticModule:
@@ -61,7 +63,7 @@ class StaticModule:
             elif isinstance(statement, ast.AnnAssign) and statement.value:
                 yield (statement.target, statement.value)
 
-    def __getattr__(self, attr):
+    def __getattr__(self, attr: str):
         """Attempt to load an attribute "statically", via :func:`ast.literal_eval`."""
         try:
             return next(
@@ -201,7 +203,8 @@ def _load_spec(spec: ModuleSpec, module_name: str) -> ModuleType:
         return sys.modules[name]
     module = importlib.util.module_from_spec(spec)
     sys.modules[name] = module  # cache (it also ensures `==` works on loaded items)
-    spec.loader.exec_module(module)  # type: ignore
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
     return module
 
 
@@ -283,10 +286,11 @@ def find_packages(
 
     from setuptools.discovery import construct_package_dir
 
-    if namespaces:
-        from setuptools.discovery import PEP420PackageFinder as PackageFinder
+    # check "not namespaces" first due to python/mypy#6232
+    if not namespaces:
+        from setuptools.discovery import PackageFinder
     else:
-        from setuptools.discovery import PackageFinder  # type: ignore
+        from setuptools.discovery import PEP420PackageFinder as PackageFinder
 
     root_dir = root_dir or os.curdir
     where = kwargs.pop('where', ['.'])
@@ -350,14 +354,15 @@ def canonic_data_files(
     ]
 
 
-def entry_points(text: str, text_source="entry-points") -> dict[str, dict]:
+def entry_points(text: str, text_source: str = "entry-points") -> dict[str, dict]:
     """Given the contents of entry-points file,
     process it into a 2-level dictionary (``dict[str, dict[str, str]]``).
     The first level keys are entry-point groups, the second level keys are
     entry-point names, and the second level values are references to objects
     (that correspond to the entry-point value).
     """
-    parser = ConfigParser(default_section=None, delimiters=("=",))  # type: ignore
+    # Using undocumented behaviour, see python/typeshed#12700
+    parser = ConfigParser(default_section=None, delimiters=("=",))  # type: ignore[call-overload]
     parser.optionxform = str  # case sensitive
     parser.read_string(text, text_source)
     groups = {k: dict(v.items()) for k, v in parser.items()}
@@ -385,10 +390,15 @@ class EnsurePackagesDiscovered:
             self._called = True
             self._dist.set_defaults(name=False)  # Skip name, we can still be parsing
 
-    def __enter__(self):
+    def __enter__(self) -> Self:
         return self
 
-    def __exit__(self, _exc_type, _exc_value, _traceback):
+    def __exit__(
+        self,
+        exc_type: type[BaseException] | None,
+        exc_value: BaseException | None,
+        traceback: TracebackType | None,
+    ):
         if self._called:
             self._dist.set_defaults.analyse_name()  # Now we can set a default name
 
@@ -403,7 +413,7 @@ class EnsurePackagesDiscovered:
         return LazyMappingProxy(self._get_package_dir)
 
 
-class LazyMappingProxy(Mapping[_K, _V]):
+class LazyMappingProxy(Mapping[_K, _V_co]):
     """Mapping proxy that delays resolving the target object, until really needed.
 
     >>> def obtain_mapping():
@@ -417,16 +427,16 @@ class LazyMappingProxy(Mapping[_K, _V]):
     'other value'
     """
 
-    def __init__(self, obtain_mapping_value: Callable[[], Mapping[_K, _V]]):
+    def __init__(self, obtain_mapping_value: Callable[[], Mapping[_K, _V_co]]):
         self._obtain = obtain_mapping_value
-        self._value: Mapping[_K, _V] | None = None
+        self._value: Mapping[_K, _V_co] | None = None
 
-    def _target(self) -> Mapping[_K, _V]:
+    def _target(self) -> Mapping[_K, _V_co]:
         if self._value is None:
             self._value = self._obtain()
         return self._value
 
-    def __getitem__(self, key: _K) -> _V:
+    def __getitem__(self, key: _K) -> _V_co:
         return self._target()[key]
 
     def __len__(self) -> int:

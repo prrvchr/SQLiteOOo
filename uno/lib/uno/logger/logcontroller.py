@@ -4,7 +4,7 @@
 """
 ╔════════════════════════════════════════════════════════════════════════════════════╗
 ║                                                                                    ║
-║   Copyright (c) 2020-24 https://prrvchr.github.io                                  ║
+║   Copyright (c) 2020-25 https://prrvchr.github.io                                  ║
 ║                                                                                    ║
 ║   Permission is hereby granted, free of charge, to any person obtaining            ║
 ║   a copy of this software and associated documentation files (the "Software"),     ║
@@ -71,7 +71,7 @@ class LogController(LogWrapper):
             msg = resolver.resolveString(111)
             handler = RollerHandler(self._ctx, self.Name)
             self.addRollerHandler(handler)
-            self._logger.logp(SEVERE, 'Logger', 'clearLogger()', msg)
+            self._logger.logp(SEVERE, 'Logger', 'clearLogger', msg)
             self.removeRollerHandler(handler)
 
     def addModifyListener(self, listener):

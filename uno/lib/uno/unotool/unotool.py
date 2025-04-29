@@ -4,7 +4,7 @@
 """
 ╔════════════════════════════════════════════════════════════════════════════════════╗
 ║                                                                                    ║
-║   Copyright (c) 2020-24 https://prrvchr.github.io                                  ║
+║   Copyright (c) 2020-25 https://prrvchr.github.io                                  ║
 ║                                                                                    ║
 ║   Permission is hereby granted, free of charge, to any person obtaining            ║
 ║   a copy of this software and associated documentation files (the "Software"),     ║
@@ -47,7 +47,6 @@ from com.sun.star.ui.dialogs.ExecutableDialogResults import OK
 import binascii
 import datetime
 from packaging import version
-from six import binary_type, string_types
 import traceback
 
 
@@ -125,7 +124,7 @@ def getDocument(ctx, url):
 def getExceptionMessage(exception):
     messages = []
     if hasattr(exception, 'args'):
-        messages = [arg for arg in exception.args if isinstance(arg, string_types)]
+        messages = [arg for arg in exception.args if isinstance(arg, str)]
     count = len(messages)
     if count == 0:
         try:
@@ -136,7 +135,7 @@ def getExceptionMessage(exception):
         message = messages[0]
     else:
         message = max(messages, key=len)
-    if isinstance(message, binary_type):
+    if isinstance(message, bytes):
         message = message.decode('utf-8')
     message = ' '.join(message.split())
     return message
@@ -153,6 +152,10 @@ def getFileSequence(ctx, url, default=None):
     else:
         sequence = getStreamSequence(fs.openFileRead(path))
     return len(sequence), sequence
+
+def getPathSubstitution(ctx, path):
+     pathsubstitution = createService(ctx, 'com.sun.star.util.PathSubstitution')
+     return pathsubstitution.substituteVariables(path, True)
 
 def getStreamSequence(stream, chunk=64*1024):
     close = False
@@ -179,10 +182,9 @@ def hasService(ctx, name):
 
 def getComponentTypes(component):
     try:
-        types = component.getTypes()
+        return component.getTypes()
     except:
-        types = ()
-    return types
+        return ()
 
 def getInterfaceTypes(component):
     return getComponentTypes(component)
@@ -206,6 +208,16 @@ def getExtensionVersion(ctx, extension):
         if name == extension:
             return version
     return None
+
+def getLibreOfficeInfo(ctx):
+    config = getConfiguration(ctx, '/org.openoffice.Setup/Product')
+    name = config.getByName('ooName')
+    version = config.getByName('ooSetupVersion')
+    return name, version
+
+def getLibreOfficeVersion(ctx):
+    version = getConfiguration(ctx, '/org.openoffice.Setup/Product').getByName('ooSetupVersion')
+    return version
 
 def getResourceLocation(ctx, identifier, path=None):
     service = '/singletons/com.sun.star.deployment.PackageInformationProvider'

@@ -26,6 +26,7 @@ import pkg_resources
 import setuptools.command.easy_install as ei
 from pkg_resources import Distribution as PRDistribution, normalize_path, working_set
 from setuptools import sandbox
+from setuptools._normalization import safer_name
 from setuptools.command.easy_install import PthDistributions
 from setuptools.dist import Distribution
 from setuptools.sandbox import run_setup
@@ -327,9 +328,9 @@ class TestPTHFileWriter:
         pth_path = str(pth_subdir.join("file1.pth"))
         pth1 = PthDistributions(pth_path)
         pth2 = PthDistributions(pth_path)
-        assert (
-            pth1.paths == pth2.paths == []
-        ), "unless there would be some default added at some point"
+        assert pth1.paths == pth2.paths == [], (
+            "unless there would be some default added at some point"
+        )
         # and so putting the src_subdir in folder distinct than the pth one,
         # so to keep it absolute by PthDistributions
         new_src_path = tmpdir.join("src_subdir")
@@ -337,17 +338,17 @@ class TestPTHFileWriter:
         new_src_path_str = str(new_src_path)
         pth1.paths.append(new_src_path_str)
         pth1.save()
-        assert (
-            pth1.paths
-        ), "the new_src_path added must still be present/valid in pth1 after save"
+        assert pth1.paths, (
+            "the new_src_path added must still be present/valid in pth1 after save"
+        )
         # now,
-        assert (
-            new_src_path_str not in pth2.paths
-        ), "right before we save the entry should still not be present"
+        assert new_src_path_str not in pth2.paths, (
+            "right before we save the entry should still not be present"
+        )
         pth2.save()
-        assert (
-            new_src_path_str in pth2.paths
-        ), "the new_src_path entry should have been added by pth2 with its save() call"
+        assert new_src_path_str in pth2.paths, (
+            "the new_src_path entry should have been added by pth2 with its save() call"
+        )
         assert pth2.paths[-1] == new_src_path, (
             "and it should match exactly on the last entry actually "
             "given we append to it in save()"
@@ -669,11 +670,11 @@ class TestSetupRequires:
 
         with contexts.save_pkg_resources_state():
             with contexts.tempdir() as temp_dir:
-                foobar_1_archive = os.path.join(temp_dir, 'foo.bar-0.1.tar.gz')
+                foobar_1_archive = os.path.join(temp_dir, 'foo_bar-0.1.tar.gz')
                 make_nspkg_sdist(foobar_1_archive, 'foo.bar', '0.1')
                 # Now actually go ahead an extract to the temp dir and add the
                 # extracted path to sys.path so foo.bar v0.1 is importable
-                foobar_1_dir = os.path.join(temp_dir, 'foo.bar-0.1')
+                foobar_1_dir = os.path.join(temp_dir, 'foo_bar-0.1')
                 os.mkdir(foobar_1_dir)
                 with tarfile.open(foobar_1_archive) as tf:
                     tf.extraction_filter = lambda member, path: member
@@ -696,7 +697,7 @@ class TestSetupRequires:
                             len(foo.__path__) == 2):
                         print('FAIL')
 
-                    if 'foo.bar-0.2' not in foo.__path__[0]:
+                    if 'foo_bar-0.2' not in foo.__path__[0]:
                         print('FAIL')
                 """
                 )
@@ -717,10 +718,9 @@ class TestSetupRequires:
                         # Don't even need to install the package, just
                         # running the setup.py at all is sufficient
                         run_setup(test_setup_py, ['--name'])
-                    except pkg_resources.VersionConflict:
-                        self.fail(
-                            'Installing setup.py requirements '
-                            'caused a VersionConflict'
+                    except pkg_resources.VersionConflict:  # pragma: nocover
+                        pytest.fail(
+                            'Installing setup.py requirements caused a VersionConflict'
                         )
 
                 assert 'FAIL' not in stdout.getvalue()
@@ -1119,6 +1119,8 @@ def make_nspkg_sdist(dist_path, distname, version):
     package with the same name as distname.  The top-level package is
     designated a namespace package).
     """
+    # Assert that the distname contains at least one period
+    assert '.' in distname
 
     parts = distname.split('.')
     nspackage = parts[0]
@@ -1207,10 +1209,11 @@ def create_setup_requires_package(
     package itself is just 'test_pkg'.
     """
 
+    normalized_distname = safer_name(distname)
     test_setup_attrs = {
         'name': 'test_pkg',
         'version': '0.0',
-        'setup_requires': ['%s==%s' % (distname, version)],
+        'setup_requires': [f'{normalized_distname}=={version}'],
         'dependency_links': [os.path.abspath(path)],
     }
     if setup_attrs:
@@ -1259,7 +1262,7 @@ def create_setup_requires_package(
     with open(os.path.join(test_pkg, 'setup.py'), 'w', encoding="utf-8") as f:
         f.write(setup_py_template % test_setup_attrs)
 
-    foobar_path = os.path.join(path, '%s-%s.tar.gz' % (distname, version))
+    foobar_path = os.path.join(path, f'{normalized_distname}-{version}.tar.gz')
     make_package(foobar_path, distname, version)
 
     return test_pkg
@@ -1331,6 +1334,16 @@ class TestCommandSpec:
         cmd = ei.CommandSpec.from_param('/usr/bin/env my-python')
         assert len(cmd) == 2
         assert '"' not in cmd.as_header()
+
+    def test_from_param_raises_expected_error(self) -> None:
+        """
+        from_param should raise its own TypeError when the argument's type is unsupported
+        """
+        with pytest.raises(TypeError) as exc_info:
+            ei.CommandSpec.from_param(object())  # type: ignore[arg-type] # We want a type error here
+        assert (
+            str(exc_info.value) == "Argument has an unsupported type <class 'object'>"
+        ), exc_info.value
 
 
 class TestWindowsScriptWriter:
