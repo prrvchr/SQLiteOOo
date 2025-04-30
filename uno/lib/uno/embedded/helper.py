@@ -49,19 +49,22 @@ import traceback
 def checkConfiguration(ctx, logger):
     name, version = getLibreOfficeInfo(ctx)
     if not checkVersion(version, g_lover):
-        raise getException(logger, None, 1001, None, 122, 123, name, version, name, g_lover)
+        raise _getException(logger, 1001, 122, 123, name, version, name, g_lover)
     version = getExtensionVersion(ctx, g_jdbcid)
     if version is None:
-        raise getException(logger, None, 1001, None, 121, 124, g_jdbcext, g_extension)
+        raise _getException(logger, 1001, 121, 124, g_jdbcext, g_extension)
     if not checkVersion(version, g_jdbcver):
-        raise getException(logger, None, 1001, None, 122, 125, version, g_jdbcext, g_jdbcver)
+        raise _getException(logger, 1001, 122, 125, version, g_jdbcext, g_jdbcver)
 
-def getException(logger, ctx, code, exc, state, resource, *args):
+def getException(logger, source, code, exc, state, resource, *args):
     error = SQLException()
     error.ErrorCode = code
     error.NextException = exc
     error.SQLState = logger.resolveString(state)
     error.Message = logger.resolveString(resource, *args)
-    error.Context = ctx
+    error.Context = source
     return error
+
+def _getException(logger, code, state, resource, *args):
+    return getException(logger, None, code, None, state, resource, *args)
 

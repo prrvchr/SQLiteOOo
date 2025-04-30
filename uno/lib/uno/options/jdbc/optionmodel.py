@@ -36,27 +36,26 @@ from ..logger import getLogger
 from ..jdbcdriver import g_services
 
 from ..configuration import g_identifier
-
-g_basename = 'OptionsDialog'
+from ..configuration import g_basename
 
 import traceback
 
 
 class OptionModel():
-    def __init__(self, ctx, logger):
+    def __init__(self, ctx):
         self._keys = ('ApiLevel', 'ShowSystemTable', 'UseBookmark', 'SQLMode')
         self._levels = ('com.sun.star.sdbc',
                         'com.sun.star.sdbcx',
                         'com.sun.star.sdb')
         self._config = getConfiguration(ctx, g_identifier, True)
         self._settings = self._getSettings()
-        self._service = self.getDriverService()
-        self._logger = getLogger(ctx, logger, g_basename)
-        self._logger.logprb(INFO, 'OptionModel', '__init__', 101)
 
 # OptionModel getter methods
-    def getDriverService(self):
-        return g_services.get(self._settings['ApiLevel'])
+    def getConfigApiLevel(self):
+        return self._config.getByName('ApiLevel')
+
+    def getApiLevel(self):
+        return self._settings['ApiLevel']
 
     def getViewData(self):
         level = self._levels.index(self._settings.get('ApiLevel'))
@@ -84,6 +83,7 @@ class OptionModel():
         self._settings['SQLMode'] = bool(state)
 
     def saveSetting(self, system, bookmark, mode):
+        changed = False
         self.setSystemTable(system)
         self.setBookmark(bookmark)
         self.setSQLMode(mode)
@@ -93,7 +93,8 @@ class OptionModel():
                 self._config.replaceByName(key, value)
         if self._config.hasPendingChanges():
             self._config.commitChanges()
-        return self._service != self.getDriverService()
+            changed = True
+        return changed
 
 # OptionModel private methods
     def _getSettings(self):

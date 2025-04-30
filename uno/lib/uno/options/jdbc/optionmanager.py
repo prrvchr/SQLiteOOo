@@ -39,7 +39,7 @@ import traceback
 class OptionManager():
     def __init__(self, ctx, window, restart, offset, logger, *loggers):
         self._logmanager = LogManager(ctx, window, 'requirements.txt', logger, *loggers)
-        self._model = OptionModel(ctx, logger)
+        self._model = OptionModel(ctx)
         self._view = OptionWindow(ctx, window, WindowHandler(self), restart, offset)
 
 # OptionManager setter methods
@@ -52,8 +52,11 @@ class OptionManager():
         self._view.dispose()
 
 # OptionManager getter methods
-    def getDriverService(self):
-        return self._model.getDriverService()
+    def getConfigApiLevel(self):
+        return self._model.getConfigApiLevel()
+
+    def getApiLevel(self):
+        return self._model.getApiLevel()
 
 # OptionManager setter methods
     def saveSetting(self):
