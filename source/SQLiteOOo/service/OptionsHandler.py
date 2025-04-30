@@ -4,7 +4,7 @@
 """
 ╔════════════════════════════════════════════════════════════════════════════════════╗
 ║                                                                                    ║
-║   Copyright (c) 2020-24 https://prrvchr.github.io                                  ║
+║   Copyright (c) 2020-25 https://prrvchr.github.io                                  ║
 ║                                                                                    ║
 ║   Permission is hereby granted, free of charge, to any person obtaining            ║
 ║   a copy of this software and associated documentation files (the "Software"),     ║
@@ -42,8 +42,8 @@ import traceback
 
 # pythonloader looks for a static g_ImplementationHelper variable
 g_ImplementationHelper = unohelper.ImplementationHelper()
-g_ImplementationName = '%s.OptionsHandler' % g_identifier
-
+g_ImplementationName = 'io.github.prrvchr.SQLiteOOo.OptionsHandler'
+g_ServiceNames = ("io.github.prrvchr.SQLiteOOo.OptionsHandler", )
 
 class OptionsHandler(unohelper.Base,
                      XServiceInfo,
@@ -66,44 +66,12 @@ class OptionsHandler(unohelper.Base,
                 elif event == 'back':
                     self._manager.loadSetting()
                     handled = True
-            elif method == 'Base':
-                self._manager.setDriverService(0)
-                handled = True
-            elif method == 'Enhanced':
-                self._manager.setDriverService(1)
-                handled = True
-            elif method == 'Level0':
-                self._manager.setConnectionService(0)
-                handled = True
-            elif method == 'Level1':
-                self._manager.setConnectionService(1)
-                handled = True
-            elif method == 'Level2':
-                self._manager.setConnectionService(2)
-                handled = True
-            elif method == 'SystemTable':
-                self._manager.setSystemTable(event.Source.State)
-                handled = True
-            elif method == 'UseBookmark':
-                self._manager.setBookmark(event.Source.State)
-                handled = True
-            elif method == 'SQLMode':
-                self._manager.setSQLMode(event.Source.State)
-                handled = True
             return handled
         except Exception as e:
             print("ERROR: %s - %s" % (e, traceback.format_exc()))
 
     def getSupportedMethodNames(self):
-        return ('external_event',
-                'Base',
-                'Enhanced',
-                'Level0',
-                'Level1',
-                'Level2',
-                'SystemTable',
-                'UseBookmark',
-                'SQLMode')
+        return ('external_event', )
 
     # XServiceInfo
     def supportsService(self, service):
@@ -114,6 +82,6 @@ class OptionsHandler(unohelper.Base,
         return g_ImplementationHelper.getSupportedServiceNames(g_ImplementationName)
 
 
-g_ImplementationHelper.addImplementation(OptionsHandler,                            # UNO object class
-                                         g_ImplementationName,                      # Implementation name
-                                         (g_ImplementationName,))                   # List of implemented services
+g_ImplementationHelper.addImplementation(OptionsHandler,                  # UNO object class
+                                         g_ImplementationName,            # Implementation name
+                                         g_ServiceNames)                  # List of implemented services

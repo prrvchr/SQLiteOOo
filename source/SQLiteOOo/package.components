@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components xmlns="http://openoffice.org/2010/uno-components">
+  <component loader="com.sun.star.loader.Python" uri="service/OptionsHandler.py">
+    <implementation name="io.github.prrvchr.SQLiteOOo.OptionsHandler">
+      <service name="io.github.prrvchr.SQLiteOOo.OptionsHandler"/>
+    </implementation>
+  </component>
+  <component loader="com.sun.star.loader.Python" uri="service/Driver.py">
+    <implementation name="io.github.prrvchr.SQLiteOOo.Driver">
+      <service name="io.github.prrvchr.SQLiteOOo.Driver"/>
+      <service name="com.sun.star.sdbc.Driver"/>
+    </implementation>
+  </component>
+</components>

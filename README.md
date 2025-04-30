@@ -1,7 +1,7 @@
 <!--
 ╔════════════════════════════════════════════════════════════════════════════════════╗
 ║                                                                                    ║
-║   Copyright (c) 2020 https://prrvchr.github.io                                     ║
+║   Copyright (c) 2020-25 https://prrvchr.github.io                                  ║
 ║                                                                                    ║
 ║   Permission is hereby granted, free of charge, to any person obtaining            ║
 ║   a copy of this software and associated documentation files (the "Software"),     ║
@@ -50,16 +50,12 @@ ___
 
 ## Requirement:
 
+Due to [issue #156471][14] and following [PR#154989][15], the SQLiteOOo extension requires **LibreOffice version 24.2.x** minimum to work.
+
 The SQLiteOOo extension uses the jdbcDriverOOo extension to work.  
-It must therefore meet the [requirement of the jdbcDriverOOo extension][14].
+It must therefore meet the [requirement of the jdbcDriverOOo extension][16].
 
-**Since version 1.2.0, only LibreOffice 24.2.x or higher is supported.**
-If it is not possible for you to use such a version, use the previous version of SQLiteOOo. But in this case, this extension cannot be installed with the [HyperSQLOOo][15] extension, see [bug #156471][16].
-In addition, it will be difficult for you to migrate odb files created under lower versions of SQLiteOOo. I recommend using LibreOffice 24.2.x minimum with SQLiteOOo 1.2.0 or higher.
-
-**On Linux and macOS the Python packages** used by the extension, if already installed, may come from the system and therefore **may not be up to date**.  
-To ensure that your Python packages are up to date it is recommended to use the **System Info** option in the extension Options accessible by:  
-**Tools -> Options -> Base drivers -> Embedded SQLite Driver -> View log -> System Info**  
+If you are using **LibreOffice on Linux** and **LibreOffice was installed with the package manager**, Your Python packages may be system-provided and outdated. The extension's logging will allow you to check if this is the case. It is accessible via the menu: **Tools -> Options -> LibreOffice Base -> Embedded SQLite driver -> View log -> System Info** and requires restarting LibreOffice after activation.  
 If outdated packages appear, you can update them with the command:  
 `pip install --upgrade <package-name>`
 
@@ -202,7 +198,7 @@ ___
 
 - Fixed [issue #2][47] which appears to be a regression related to the release of JaybirdOOo. Thanks to madalienist for reporting it.
 - Updated the [Python setuptools][48] package to version 73.0.1.
-- The extension options are now accessible via: **Tools -> Options... -> LibreOffice Base -> Embedded SQLite Driver**
+- The extension options are now accessible via: **Tools -> Options -> LibreOffice Base -> Embedded SQLite Driver**
 - Logging accessible in extension options now displays correctly on Windows.
 - Changes to extension options that require a restart of LibreOffice will result in a message being displayed.
 - In the extension options it is possible to define the options: **View system tables**, **Use bookmarks** and **Force SQL mode** which will be specific to this driver.
@@ -212,9 +208,14 @@ ___
 ### What has been done for version 1.2.3:
 
 - The extension will ask you to install jdbcDriverOOo extension in versions 1.4.6 minimum.
-- Modification of the extension options accessible via: **Tools -> Options... -> LibreOffice Base -> Embedded SQLite Driver** in order to comply with the new graphic charter.
+- Modification of the extension options accessible via: **Tools -> Options -> LibreOffice Base -> Embedded SQLite Driver** in order to comply with the new graphic charter.
 
-### What remains to be done for version 1.2.3:
+### What has been done for version 1.3.0:
+
+- The extension will ask you to install jdbcDriverOOo extension in versions 1.4.6 minimum.
+- Modification of the extension options accessible via: **Tools -> Options -> LibreOffice Base -> Embedded SQLite Driver** in order to comply with the new graphic charter.
+
+### What remains to be done for version 1.3.0:
 
 - Add new language for internationalization...
 
@@ -233,9 +234,9 @@ ___
 [11]: <https://www.sqlite.org/transactional.html>
 [12]: <https://github.com/prrvchr/SQLiteOOo/>
 [13]: <https://github.com/prrvchr/SQLiteOOo/issues/new>
-[14]: <https://prrvchr.github.io/jdbcDriverOOo/#requirement>
-[15]: <https://prrvchr.github.io/HyperSQLOOo/#requirement>
-[16]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156471>
+[14]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156471>
+[15]: <https://gerrit.libreoffice.org/c/core/+/154989>
+[16]: <https://prrvchr.github.io/jdbcDriverOOo/#requirement>
 [17]: <https://prrvchr.github.io/SQLiteOOo/#what-has-been-done-for-version-115>
 [18]: <https://prrvchr.github.io/jdbcDriverOOo/img/jdbcDriverOOo.svg#middle>
 [19]: <https://prrvchr.github.io/jdbcDriverOOo>

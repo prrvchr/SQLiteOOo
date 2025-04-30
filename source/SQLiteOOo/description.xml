@@ -2,7 +2,7 @@
 <!--
 ╔════════════════════════════════════════════════════════════════════════════════════╗
 ║                                                                                    ║
-║   Copyright (c) 2020-24 https://prrvchr.github.io                                  ║
+║   Copyright (c) 2020-25 https://prrvchr.github.io                                  ║
 ║                                                                                    ║
 ║   Permission is hereby granted, free of charge, to any person obtaining            ║
 ║   a copy of this software and associated documentation files (the "Software"),     ║
@@ -24,42 +24,43 @@
 ║                                                                                    ║
 ╚════════════════════════════════════════════════════════════════════════════════════╝
 -->
-<description
-  xmlns="http://openoffice.org/extensions/description/2006"
-  xmlns:d="http://openoffice.org/extensions/description/2006"
-  xmlns:xlink="http://www.w3.org/1999/xlink">
-    <version value="1.2.3"/>
-    <identifier value="io.github.prrvchr.SQLiteOOo"/>
-    <platform value="all"/>
-    <dependencies>
-        <OpenOffice.org-minimal-version value="4.1" d:name="OpenOffice.org 4.1"/>
-    </dependencies>
-    <update-information>
-        <src xlink:href="https://github.com/prrvchr/SQLiteOOo/releases/latest/download/SQLiteOOo.update.xml"/>
-    </update-information>
-    <publisher>
-        <name xlink:href="https://prrvchr.github.io/SQLiteOOo/" lang="en-US">Embedded SQLite driver for LibreOffice</name>
-        <name xlink:href="https://prrvchr.github.io/SQLiteOOo/README_fr" lang="fr-FR">Pilote SQLite intégré pour LibreOffice</name>
-    </publisher>
-    <registration>
-        <simple-license accept-by="admin" suppress-on-update="true">
-            <license-text xlink:href="registration/TermsOfUse_en.md" lang="en-US"/>
-            <license-text xlink:href="registration/TermsOfUse_fr.md" lang="fr-FR"/>
-        </simple-license>
-    </registration>
-    <release-notes>
-        <src xlink:href="https://prrvchr.github.io/SQLiteOOo/" lang="en-US"/>
-        <src xlink:href="https://prrvchr.github.io/SQLiteOOo/README_fr" lang="fr-FR"/>
-    </release-notes>
-    <display-name>
-        <name lang="en-US">SQLiteOOo</name>
-    </display-name>
-    <icon>
-        <default xlink:href="img/SQLiteOOo.svg"/>
-        <high-contrast xlink:href="img/SQLiteOOo.svg"/>
-    </icon>
-    <extension-description>
-        <src xlink:href="description/desc_en.txt" lang="en-US"/>
-        <src xlink:href="description/desc_fr.txt" lang="fr-FR"/>
-    </extension-description>
+<description xmlns="http://openoffice.org/extensions/description/2006"
+             xmlns:d="http://openoffice.org/extensions/description/2006"
+             xmlns:l="http://libreoffice.org/extensions/description/2011"
+             xmlns:xlink="http://www.w3.org/1999/xlink">
+  <version value="1.3.0"/>
+  <identifier value="io.github.prrvchr.SQLiteOOo"/>
+  <platform value="all"/>
+  <dependencies>
+    <OpenOffice.org-minimal-version value="LibreOffice 24.2" d:name="LibreOffice 24.2"/>
+    <l:LibreOffice-minimal-version value="24.2" d:name="LibreOffice 24.2"/>
+  </dependencies>
+  <update-information>
+    <src xlink:href="https://github.com/prrvchr/SQLiteOOo/releases/latest/download/SQLiteOOo.update.xml"/>
+  </update-information>
+  <publisher>
+    <name xlink:href="https://prrvchr.github.io/SQLiteOOo/" lang="en-US">Embedded SQLite driver for LibreOffice</name>
+    <name xlink:href="https://prrvchr.github.io/SQLiteOOo/README_fr" lang="fr-FR">Pilote SQLite intégré pour LibreOffice</name>
+  </publisher>
+  <registration>
+    <simple-license accept-by="admin" suppress-on-update="true">
+      <license-text xlink:href="registration/TermsOfUse_en.md" lang="en-US"/>
+      <license-text xlink:href="registration/TermsOfUse_fr.md" lang="fr-FR"/>
+    </simple-license>
+  </registration>
+  <release-notes>
+    <src xlink:href="https://prrvchr.github.io/SQLiteOOo/" lang="en-US"/>
+    <src xlink:href="https://prrvchr.github.io/SQLiteOOo/README_fr" lang="fr-FR"/>
+  </release-notes>
+  <display-name>
+    <name lang="en-US">SQLiteOOo</name>
+  </display-name>
+  <icon>
+    <default xlink:href="img/SQLiteOOo.svg"/>
+    <high-contrast xlink:href="img/SQLiteOOo.svg"/>
+  </icon>
+  <extension-description>
+    <src xlink:href="description/desc_en.txt" lang="en-US"/>
+    <src xlink:href="description/desc_fr.txt" lang="fr-FR"/>
+  </extension-description>
 </description>
