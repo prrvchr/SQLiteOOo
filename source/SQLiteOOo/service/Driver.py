@@ -71,11 +71,11 @@ class Driver():
                         else:
                             instance = sdbcx.Driver(ctx, cls._lock, logger, g_services[apilevel], g_ImplementationName)
                         cls._instance = instance
-                        cls._log(logger, INFO, 101, g_ImplementationName, apilevel)
+                        logger.logprb(INFO, 'Driver', '__new__', 101, g_ImplementationName, apilevel)
                     except UNOException as e:
                         if cls._logger is None:
                             cls._logger = logger
-                        cls._log(logger, SEVERE, 102, g_ImplementationName, apilevel, e.Message)
+                        logger.logprb(SEVERE, 'Driver', '__new__', 102, g_ImplementationName, apilevel, e.Message)
                         raise e
         return cls._instance
 
@@ -84,9 +84,6 @@ class Driver():
     _logger = None
     _instance = None
     _lock = Lock()
-
-    def _log(logger, level, resource, *args):
-        logger.logprb(level, 'Driver', '__new__', resource, *args)
 
 g_ImplementationHelper.addImplementation(Driver,                          # UNO object class
                                          g_ImplementationName,            # Implementation name
