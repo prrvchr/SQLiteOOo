@@ -56,6 +56,7 @@ g_ServiceNames = ('io.github.prrvchr.SQLiteOOo.Driver', 'com.sun.star.sdbc.Drive
 
 # XXX: This class is simply a bootstrap to enable the following:
 # XXX: - Provide a single entry for different services meeting the required API levels
+# XXX: - Log any errors that occur while loading the Java driver
 
 class Driver():
     def __new__(cls, ctx, *args, **kwargs):
