@@ -65,12 +65,13 @@ class Driver():
                 if cls._instance is None:
                     logger = getLogger(ctx, g_defaultlog, g_basename)
                     apilevel = getConfiguration(ctx, g_identifier).getByName('ApiLevel')
+                    service = g_services[apilevel]
                     try:
                         checkConfiguration(ctx, logger)
                         if apilevel == 'com.sun.star.sdbc':
-                            instance = sdbc.Driver(ctx, cls._lock, logger, g_services[apilevel], g_ImplementationName)
+                            instance = sdbc.Driver(ctx, cls._lock, logger, service, g_ImplementationName)
                         else:
-                            instance = sdbcx.Driver(ctx, cls._lock, logger, g_services[apilevel], g_ImplementationName)
+                            instance = sdbcx.Driver(ctx, cls._lock, logger, service, g_ImplementationName)
                         cls._instance = instance
                         logger.logprb(INFO, 'Driver', '__new__', 101, g_ImplementationName, apilevel)
                     except UNOException as e:
