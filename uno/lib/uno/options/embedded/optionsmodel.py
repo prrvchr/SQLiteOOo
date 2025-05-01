@@ -36,9 +36,11 @@ from ..logger import getLogger
 
 from ..unotool import createService
 
+from ..jdbcdriver import g_service as jdbc
+
+from ..configuration import g_service as embedded
 from ..configuration import g_defaultlog
 from ..configuration import g_basename
-from ..configuration import g_service
 
 import traceback
 
@@ -55,12 +57,13 @@ class OptionsModel():
         driver = None
         version = 'N/A'
         try:
-            driver = createService(self._ctx, g_service)
-            if self._url is not None:
+            # We must try all the required services 
+            driver = createService(self._ctx, embedded)
+            driver = createService(self._ctx, jdbc)
+            if driver and self._url:
                 connection = driver.connect(self._url, ())
                 version = connection.getMetaData().getDriverVersion()
                 connection.close()
-            driver.dispose()
         except UnoException as e:
             # If the driver is None, the error is already logged
             if driver is not None:
