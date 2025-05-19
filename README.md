@@ -50,16 +50,10 @@ ___
 
 ## Requirement:
 
-Due to [issue #156471][14] and following [PR#154989][15], the SQLiteOOo extension requires **LibreOffice version 24.2.x** minimum to work.
-
 The SQLiteOOo extension uses the jdbcDriverOOo extension to work.  
-It must therefore meet the [requirement of the jdbcDriverOOo extension][16].
+It must therefore meet the [requirement of the jdbcDriverOOo extension][14].
 
-If you are using **LibreOffice on Linux** and **LibreOffice was installed with the package manager**, Your Python packages may be system-provided and outdated. The extension's logging will allow you to check if this is the case. It is accessible via the menu: **Tools -> Options -> LibreOffice Base -> Embedded SQLite driver -> View log -> System Info** and requires restarting LibreOffice after activation.  
-If outdated packages appear, you can update them with the command:  
-`pip install --upgrade <package-name>`
-
-For more information see: [What has been done for version 1.1.0][17].
+Additionally, due to [issue #156471][15] and following [PR#154989][16], the SQLiteOOo extension requires **LibreOffice version 24.2.x** minimum to work.
 
 ___
 
@@ -135,7 +129,7 @@ ___
 ## How to build the extension:
 
 Normally, the extension is created with Eclipse for Java and [LOEclipse][33]. To work around Eclipse, I modified LOEclipse to allow the extension to be created with Apache Ant.  
-To create the HyperSQLOOo extension with the help of Apache Ant, you need to:
+To create the SQLiteOOo extension with the help of Apache Ant, you need to:
 - Install the [Java SDK][34] version 8 or higher.
 - Install [Apache Ant][35] version 1.9.1 or higher.
 - Install [LibreOffice and its SDK][36] version 7.x or higher.
@@ -219,7 +213,7 @@ ___
 ### What has been done for version 1.2.2:
 
 - Fixed [issue #2][52] which appears to be a regression related to the release of JaybirdOOo. Thanks to madalienist for reporting it.
-- Updated the [Python setuptools][53] package to version 73.0.1.
+- Updated the [Python setuptools][51] package to version 73.0.1.
 - The extension options are now accessible via: **Tools -> Options -> LibreOffice Base -> Embedded SQLite Driver**
 - Logging accessible in extension options now displays correctly on Windows.
 - Changes to extension options that require a restart of LibreOffice will result in a message being displayed.
@@ -234,8 +228,12 @@ ___
 
 ### What has been done for version 1.3.0:
 
-- Passive registration deployment that allows for much faster installation of extensions and differentiation of registered UNO services from those provided by a Java or Python implementation. This passive registration is provided by the [LOEclipse][33] extension via [PR#152][54] and [PR#157][55].
-- It is now possible to build the oxt file of the HyperSQLOOo extension only with the help of Apache Ant and a copy of the GitHub repository. The [How to build the extension][56] section has been added to the documentation.
+- Updated the [Python packaging][50] package to version 25.0.
+- Updated the [Python setuptools][51] package to version 75.3.2.
+- Passive registration deployment that allows for much faster installation of extensions and differentiation of registered UNO services from those provided by a Java or Python implementation. This passive registration is provided by the [LOEclipse][33] extension via [PR#152][53] and [PR#157][54].
+- Modified [LOEclipse][33] to support the new `rdb` file format produced by the `unoidl-write` compilation utility. `idl` files have been updated to support both available compilation tools: idlc and unoidl-write.
+- Implemented [PEP 570][55] in [logging][56] to support unique multiple arguments.
+- It is now possible to build the oxt file of the SQLiteOOo extension only with the help of Apache Ant and a copy of the GitHub repository. The [How to build the extension][57] section has been added to the documentation.
 - Any errors occurring while loading the driver will be logged in the extension's log if logging has been previously enabled. This makes it easier to identify installation problems on Windows.
 - Requires the **jdbcDriverOOo extension at least version 1.5.0**.
 
@@ -258,10 +256,9 @@ ___
 [11]: <https://www.sqlite.org/transactional.html>
 [12]: <https://github.com/prrvchr/SQLiteOOo/>
 [13]: <https://github.com/prrvchr/SQLiteOOo/issues/new>
-[14]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156471>
-[15]: <https://gerrit.libreoffice.org/c/core/+/154989>
-[16]: <https://prrvchr.github.io/jdbcDriverOOo/#requirement>
-[17]: <https://prrvchr.github.io/SQLiteOOo/#what-has-been-done-for-version-115>
+[14]: <https://prrvchr.github.io/jdbcDriverOOo/#requirement>
+[15]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156471>
+[16]: <https://gerrit.libreoffice.org/c/core/+/154989>
 [18]: <https://prrvchr.github.io/jdbcDriverOOo/img/jdbcDriverOOo.svg#middle>
 [19]: <https://prrvchr.github.io/jdbcDriverOOo>
 [20]: <https://github.com/prrvchr/jdbcDriverOOo/releases/latest/download/jdbcDriverOOo.oxt>
@@ -297,7 +294,8 @@ ___
 [50]: <https://pypi.org/project/packaging/>
 [51]: <https://pypi.org/project/setuptools/>
 [52]: <https://github.com/prrvchr/SQLiteOOo/issues/2>
-[53]: <https://pypi.org/project/setuptools/>
-[54]: <https://github.com/LibreOffice/loeclipse/pull/152>
-[55]: <https://github.com/LibreOffice/loeclipse/pull/157>
-[56]: <https://prrvchr.github.io/SQLiteOOo/README_fr#comment-cr%C3%A9er-lextension>
+[53]: <https://github.com/LibreOffice/loeclipse/pull/152>
+[54]: <https://github.com/LibreOffice/loeclipse/pull/157>
+[55]: <https://peps.python.org/pep-0570/>
+[56]: <https://github.com/prrvchr/SQLiteOOo/blob/main/uno/lib/uno/logger/logwrapper.py#L109>
+[57]: <https://prrvchr.github.io/SQLiteOOo/README_fr#comment-cr%C3%A9er-lextension>

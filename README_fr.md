@@ -50,16 +50,10 @@ ___
 
 ## Prérequis:
 
-A cause du [dysfonctionnement #156471][14] et suivant le [PR#154989][15], l'extension SQLiteOOo nécessite **LibreOffice version 24.2.x** minimum pour fonctionner.
-
 L'extension SQLiteOOo utilise l'extension jdbcDriverOOo pour fonctionner.  
-Elle doit donc répondre aux [prérequis de l'extension jdbcDriverOOo][16].
+Elle doit donc répondre aux [prérequis de l'extension jdbcDriverOOo][14].
 
-Si vous utilisez **LibreOffice sous Linux** et que **LibreOffice a été installé avec le gestionnaire de paquets**, vos paquets Python peuvent être fournis par le système et obsolètes. La journalisation de l'extension vous permettera de verifier si c'est le cas. Elle est accessible via le menu: **Outils -> Options -> LibreOffice Base -> Pilote SQLite intégré -> Voir journal -> Info système** et nécessite le redemarrage de LibreOffice aprés son activation.  
-Si des paquets obsolètes apparaissent, vous pouvez les mettre à jour avec la commande:  
-`pip install --upgrade <package-name>`
-
-Pour plus d'information voir: [Ce qui a été fait pour la version 1.1.0][17].
+De plus, en raison du [dysfonctionnement #156471][15] et suivant le [PR#154989][16], l'extension SQLiteOOo nécessite **LibreOffice version 24.2.x** minimum pour fonctionner.
 
 ___
 
@@ -135,7 +129,7 @@ ___
 ## Comment créer l'extension:
 
 Normalement, l'extension est créée avec Eclipse pour Java et [LOEclipse][33]. Pour contourner Eclipse, j'ai modifié LOEclipse afin de permettre la création de l'extension avec Apache Ant.  
-Pour créer l'extension HyperSQLOOo avec l'aide d'Apache Ant, vous devez:
+Pour créer l'extension SQLiteOOo avec l'aide d'Apache Ant, vous devez:
 - Installer le [SDK Java][34] version 8 ou supérieure.
 - Installer [Apache Ant][35] version 1.9.1 ou supérieure.
 - Installer [LibreOffice et son SDK][36] version 7.x ou supérieure.
@@ -219,7 +213,7 @@ ___
 ### Ce qui a été fait pour la version 1.2.2:
 
 - Correction du [problème n°2][52] qui semble être une régression liée à la sortie de JaybirdOOo. Merci à madalienist de l'avoir signalé.
-- Mise à jour du paquet [Python setuptools][53] vers la version 73.0.1.
+- Mise à jour du paquet [Python setuptools][51] vers la version 73.0.1.
 - Les options de l'extension sont désormais accessibles via: **Outils -> Options -> LibreOffice Base -> Pilote SQLite intégré**
 - La journalisation accessible dans les options de l’extension s’affiche désormais correctement sous Windows.
 - Les modifications apportées aux options de l'extension, qui nécessitent un redémarrage de LibreOffice, entraîneront l'affichage d'un message.
@@ -234,8 +228,12 @@ ___
 
 ### Ce qui a été fait pour la version 1.3.0:
 
-- Déploiement de l'enregistrement passif permettant une installation beaucoup plus rapide des extensions et de différencier les services UNO enregistrés de ceux fournis par une implémentation Java ou Python. Cet enregistrement passif est assuré par l'extension [LOEclipse][33] via les [PR#152][54] et [PR#157][55].
-- Il est désormais possible de créer le fichier oxt de l'extension SQLiteOOo uniquement avec Apache Ant et une copie du dépôt GitHub. La section [Comment créer l'extension][56] a été ajoutée à la documentation.
+- Mise à jour du paquet [Python packaging][50] vers la version 25.0.
+- Mise à jour du paquet [Python setuptools][51] vers la version 75.3.2.
+- Déploiement de l'enregistrement passif permettant une installation beaucoup plus rapide des extensions et de différencier les services UNO enregistrés de ceux fournis par une implémentation Java ou Python. Cet enregistrement passif est assuré par l'extension [LOEclipse][33] via les [PR#152][53] et [PR#157][54].
+- Modification de [LOEclipse][33] pour prendre en charge le nouveau format de fichier `rdb` produit par l'utilitaire de compilation `unoidl-write`. Les fichiers `idl` ont été mis à jour pour prendre en charge les deux outils de compilation disponibles: idlc et unoidl-write.
+- Implémentation de [PEP 570][55] dans la [journalisation][56] pour prendre en charge les arguments multiples uniques.
+- Il est désormais possible de créer le fichier oxt de l'extension SQLiteOOo uniquement avec Apache Ant et une copie du dépôt GitHub. La section [Comment créer l'extension][57] a été ajoutée à la documentation.
 - Toute erreur survenant lors du chargement du pilote sera consignée dans le journal de l'extension si la journalisation a été préalablement activé. Cela facilite l'identification des problèmes d'installation sous Windows.
 - Nécessite l'extension **jdbcDriverOOo en version 1.5.0 minimum**.
 
@@ -258,10 +256,9 @@ ___
 [11]: <https://www.sqlite.org/transactional.html>
 [12]: <https://github.com/prrvchr/SQLiteOOo/>
 [13]: <https://github.com/prrvchr/SQLiteOOo/issues/new>
-[14]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156471>
-[15]: <https://gerrit.libreoffice.org/c/core/+/154989>
-[16]: <https://prrvchr.github.io/jdbcDriverOOo/README_fr#pr%C3%A9requis>
-[17]: <https://prrvchr.github.io/SQLiteOOo/README_fr#ce-qui-a-%C3%A9t%C3%A9-fait-pour-la-version-115>
+[14]: <https://prrvchr.github.io/jdbcDriverOOo/README_fr#pr%C3%A9requis>
+[15]: <https://bugs.documentfoundation.org/show_bug.cgi?id=156471>
+[16]: <https://gerrit.libreoffice.org/c/core/+/154989>
 [18]: <https://prrvchr.github.io/jdbcDriverOOo/img/jdbcDriverOOo.svg#middle>
 [19]: <https://prrvchr.github.io/jdbcDriverOOo/README_fr>
 [20]: <https://github.com/prrvchr/jdbcDriverOOo/releases/latest/download/jdbcDriverOOo.oxt>
@@ -297,7 +294,8 @@ ___
 [50]: <https://pypi.org/project/packaging/>
 [51]: <https://pypi.org/project/setuptools/>
 [52]: <https://github.com/prrvchr/SQLiteOOo/issues/2>
-[53]: <https://pypi.org/project/setuptools/>
-[54]: <https://github.com/LibreOffice/loeclipse/pull/152>
-[55]: <https://github.com/LibreOffice/loeclipse/pull/157>
-[56]: <https://prrvchr.github.io/SQLiteOOo/README_fr#comment-cr%C3%A9er-lextension>
+[53]: <https://github.com/LibreOffice/loeclipse/pull/152>
+[54]: <https://github.com/LibreOffice/loeclipse/pull/157>
+[55]: <https://peps.python.org/pep-0570/>
+[56]: <https://github.com/prrvchr/SQLiteOOo/blob/main/uno/lib/uno/logger/logwrapper.py#L109>
+[57]: <https://prrvchr.github.io/SQLiteOOo/README_fr#comment-cr%C3%A9er-lextension>
