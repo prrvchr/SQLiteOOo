@@ -4,7 +4,7 @@
 """
 ╔════════════════════════════════════════════════════════════════════════════════════╗
 ║                                                                                    ║
-║   Copyright (c) 2020 https://prrvchr.github.io                                     ║
+║   Copyright (c) 2020-25 https://prrvchr.github.io                                  ║
 ║                                                                                    ║
 ║   Permission is hereby granted, free of charge, to any person obtaining            ║
 ║   a copy of this software and associated documentation files (the "Software"),     ║
@@ -30,8 +30,10 @@
 from com.sun.star.logging.LogLevel import INFO
 from com.sun.star.logging.LogLevel import SEVERE
 
-from .card import DataBase
-from .card import Provider
+from .database import DataBase
+
+from .provider import Provider
+
 from .card import User
 
 from .card import Replicator
@@ -41,7 +43,7 @@ from .card import TerminateListener
 
 from .unotool import getDesktop
 
-from .cardtool import getSqlException
+from .helper import getSqlException
 
 
 from threading import Event
@@ -99,7 +101,7 @@ class DataSource():
             self._users[name] = user
             self._maps[uri] = name
         if user.isOnLine():
-            self._provider.initAddressbooks(logger, self._database, user)
+            self._provider.initAddressbooks(self._database, user)
         connection = self._database.getConnection(name, user.getPassword())
         user.addSession(self._database.getSessionId(connection))
         # User and/or AddressBooks has been initialized and the connection to the database is done...

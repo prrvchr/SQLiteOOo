@@ -4,7 +4,7 @@
 """
 ╔════════════════════════════════════════════════════════════════════════════════════╗
 ║                                                                                    ║
-║   Copyright (c) 2020 https://prrvchr.github.io                                     ║
+║   Copyright (c) 2020-25 https://prrvchr.github.io                                  ║
 ║                                                                                    ║
 ║   Permission is hereby granted, free of charge, to any person obtaining            ║
 ║   a copy of this software and associated documentation files (the "Software"),     ║
@@ -35,9 +35,9 @@ from com.sun.star.ucb.ConnectionMode import ONLINE
 
 from .book import Book
 
-from ..cardtool import getSqlException
-from ..cardtool import getUserId
-from ..cardtool import getUserSchema
+from ..helper import getSqlException
+from ..helper import getUserId
+from ..helper import getUserSchema
 
 from ..unotool import getConnectionMode
 
@@ -49,34 +49,34 @@ class User(object):
     def __init__(self, ctx, source, logger, database, provider, url, scheme, server, name, pwd=''):
         self._cls = 'User'
         mtd = '__init__'
-        logger.logprb(INFO, self._cls, mtd, 1351, name)
+        logger.logprb(INFO, self._cls, mtd, 1501, name)
         self._ctx = ctx
         self._password = pwd
         self._sessions = []
-        logger.logprb(INFO, self._cls, mtd, 1352, name)
+        logger.logprb(INFO, self._cls, mtd, 1502, name)
         metadata, args = database.selectUser(server, name)
         new = metadata is None
         if not new:
-            logger.logprb(INFO, self._cls, mtd, 1353, name)
+            logger.logprb(INFO, self._cls, mtd, 1503, name)
             request = provider.getRequest(url, name)
             if request is None:
-                raise getSqlException(ctx, source, 1002, 1501, self._cls, mtd, name, g_extension)
+                raise getSqlException(ctx, source, 1002, 1506, self._cls, mtd, name, g_extension)
         else:
-            logger.logprb(INFO, self._cls, mtd, 1354, name)
+            logger.logprb(INFO, self._cls, mtd, 1504, name)
             if self._isOffLine(server):
-                raise getSqlException(ctx, source, 1004, 1502, self._cls, mtd, server)
+                raise getSqlException(ctx, source, 1004, 1507, self._cls, mtd, server)
             request = provider.getRequest(url, name)
             if request is None:
-                raise getSqlException(ctx, source, 1002, 1501, self._cls, mtd, name, g_extension)
-            metadata, args = provider.insertUser(logger, database, request, scheme, server, name, pwd)
+                raise getSqlException(ctx, source, 1002, 1506, self._cls, mtd, name, g_extension)
+            metadata, args = provider.insertUser(database, request, scheme, server, name, pwd)
             if metadata is None:
-                raise getSqlException(ctx, source, 1005, 1503, self._cls, mtd, name)
+                raise getSqlException(ctx, source, 1005, 1508, self._cls, mtd, name)
             database.createUser(getUserSchema(metadata), getUserId(metadata), name, '')
         self._request = request
         self._metadata = metadata
         books = (Book(new, **kwargs) for kwargs in args)
         self._books = {book.Uri: book for book in books}
-        logger.logprb(INFO, self._cls, mtd, 1355, name)
+        logger.logprb(INFO, self._cls, mtd, 1505, name)
 
     @property
     def Id(self):

@@ -4,7 +4,7 @@
 """
 ╔════════════════════════════════════════════════════════════════════════════════════╗
 ║                                                                                    ║
-║   Copyright (c) 2020 https://prrvchr.github.io                                     ║
+║   Copyright (c) 2020-25 https://prrvchr.github.io                                  ║
 ║                                                                                    ║
 ║   Permission is hereby granted, free of charge, to any person obtaining            ║
 ║   a copy of this software and associated documentation files (the "Software"),     ║
@@ -166,7 +166,7 @@ def _getAddressbookColumns(ctx, connection):
     call.close()
 
 def _getProcedures():
-    for name in ('SelectUser', 'InsertUser', 'InsertBook', 'UpdateBookName',
+    for name in ('SelectUser', 'SelectBooks', 'InsertUser', 'InsertBook', 'UpdateBookName',
                  'MergeCard', 'MergeGroup', 'MergeGroupMembers', 'DeleteCard',
                  'UpdateCardSync', 'GetLastCardSync', 'GetLastBookSync',
                  'GetLastGroupSync', 'SelectChangedCards', 'SelectColumns', 'SelectColumnIds',

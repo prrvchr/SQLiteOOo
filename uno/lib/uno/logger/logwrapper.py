@@ -36,6 +36,7 @@ from .loggerpool import LoggerPool
 from ..unotool import getResourceLocation
 from ..unotool import getStringResourceWithLocation
 
+from ..configuration import g_extension
 from ..configuration import g_identifier
 from ..configuration import g_resource
 
@@ -52,7 +53,9 @@ class LogWrapper():
     def __init__(self, ctx, name, basename):
         self._ctx = ctx
         self._basename = basename
-        self._url, self._logger = self._getPoolLogger(name, basename)
+        url , logger = self._getPoolLogger(name, basename)
+        self._url = url
+        self._logger = logger
         self._level = ALL
 
     # XLogger
@@ -71,7 +74,7 @@ class LogWrapper():
     def isLoggable(self, level):
         return self._logger.isLoggable(level)
 
-    def resolveString(self, resource, *args):
+    def resolveString(self, resource, /, *args):
         if self._logger.hasEntryForId(resource):
             return self._logger.resolveString(resource, args)
         else:
@@ -100,13 +103,13 @@ class LogWrapper():
     def logp(self, level, clazz, method, message):
         self._logger.logp(level, clazz, method, message)
 
-    def logrb(self, level, resource, *args):
+    def logrb(self, level, resource, /, *args):
         if self._logger.hasEntryForId(resource):
             self._logger.logrb(level, resource, args)
         else:
             self._logger.log(level, self._getErrorMessage(resource))
 
-    def logprb(self, level, clazz, method, resource, *args):
+    def logprb(self, level, clazz, method, resource, /, *args):
         if self._logger.hasEntryForId(resource):
             self._logger.logprb(level, clazz, method, resource, args)
         else:
@@ -118,7 +121,7 @@ class LogWrapper():
         return self._resolveErrorMessage(resolver, resource)
 
     def _resolveErrorMessage(self, resolver, resource):
-        return resolver.resolveString(101).format(resource, self._url, self._basename)
+        return resolver.resolveString(101).format(resource, g_extension, g_resource, self._basename)
 
     def _getPoolLogger(self, name, basename):
         url = getResourceLocation(self._ctx, g_identifier, g_resource)
