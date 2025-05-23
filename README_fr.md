@@ -29,7 +29,7 @@
 
 **L'utilisation de ce logiciel vous soumet à nos [Conditions d'utilisation][4].**
 
-# version [1.2.3][5]
+# version [1.3.0][5]
 
 ## Introduction:
 
@@ -131,7 +131,7 @@ ___
 Normalement, l'extension est créée avec Eclipse pour Java et [LOEclipse][33]. Pour contourner Eclipse, j'ai modifié LOEclipse afin de permettre la création de l'extension avec Apache Ant.  
 Pour créer l'extension SQLiteOOo avec l'aide d'Apache Ant, vous devez:
 - Installer le [SDK Java][34] version 8 ou supérieure.
-- Installer [Apache Ant][35] version 1.9.1 ou supérieure.
+- Installer [Apache Ant][35] version 1.10.0 ou supérieure.
 - Installer [LibreOffice et son SDK][36] version 7.x ou supérieure.
 - Cloner le dépôt [SQLiteOOo][37] sur GitHub dans un dossier.
 - Depuis ce dossier, accédez au répertoire: `source/SQLiteOOo/`
@@ -247,7 +247,7 @@ ___
 [2]: <https://prrvchr.github.io/SQLiteOOo/>
 [3]: <https://prrvchr.github.io/SQLiteOOo/>
 [4]: <https://prrvchr.github.io/SQLiteOOo/source/SQLiteOOo/registration/TermsOfUse_fr>
-[5]: <https://prrvchr.github.io/SQLiteOOo/README_fr#ce-qui-a-%C3%A9t%C3%A9-fait-pour-la-version-123>
+[5]: <https://prrvchr.github.io/SQLiteOOo/README_fr#ce-qui-a-%C3%A9t%C3%A9-fait-pour-la-version-130>
 [6]: <https://prrvchr.github.io/README_fr>
 [7]: <https://fr.libreoffice.org/download/telecharger-libreoffice/>
 [8]: <https://www.openoffice.org/fr/Telecharger/>
@@ -265,7 +265,7 @@ ___
 [21]: <https://img.shields.io/github/v/tag/prrvchr/jdbcDriverOOo?label=latest#right>
 [22]: <img/SQLiteOOo.svg#middle>
 [23]: <https://github.com/prrvchr/SQLiteOOo/releases/latest/download/SQLiteOOo.oxt>
-[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.2.3#right>
+[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.3.0#right>
 [25]: <img/SQLiteOOo-1_fr.png>
 [26]: <img/SQLiteOOo-2_fr.png>
 [27]: <img/SQLiteOOo-3_fr.png>
