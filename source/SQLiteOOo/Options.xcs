@@ -31,11 +31,9 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   oor:package="io.github.prrvchr"
   oor:name="SQLiteOOo">
-    <component>
-        <prop oor:name="DriverService" oor:type="xs:string"/>
-        <prop oor:name="ApiLevel" oor:type="xs:string"/>
-        <prop oor:name="ShowSystemTable" oor:type="xs:boolean"/>
-        <prop oor:name="UseBookmark" oor:type="xs:boolean"/>
-        <prop oor:name="SQLMode" oor:type="xs:boolean"/>
-    </component>
+  <component>
+    <prop oor:name="ApiLevel" oor:type="xs:int"/>
+    <prop oor:name="CachedRowSet" oor:type="xs:int"/>
+    <prop oor:name="ShowSystemTable" oor:type="xs:boolean"/>
+  </component>
 </oor:component-schema>

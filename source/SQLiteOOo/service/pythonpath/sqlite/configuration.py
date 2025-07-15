@@ -49,5 +49,8 @@ g_path = True
 g_driver = ''
 g_shutdown = ''
 
+g_disabled = (0, )
+g_memory = 'xdbc:sqlite::memory:'
+
 # LibreOffice configuration
 g_lover = '24.2'
