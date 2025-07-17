@@ -32,8 +32,8 @@
   oor:package="io.github.prrvchr"
   oor:name="SQLiteOOo">
   <component>
-    <prop oor:name="ApiLevel" oor:type="xs:int"/>
-    <prop oor:name="CachedRowSet" oor:type="xs:int"/>
+    <prop oor:name="ApiLevel" oor:type="xs:short"/>
+    <prop oor:name="CachedRowSet" oor:type="xs:short"/>
     <prop oor:name="ShowSystemTable" oor:type="xs:boolean"/>
   </component>
 </oor:component-schema>
