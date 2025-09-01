@@ -29,7 +29,7 @@
 
 **The use of this software subjects you to our [Terms Of Use][4].**
 
-# version [1.3.2][5]
+# version [1.3.3][5]
 
 ## Introduction:
 
@@ -64,7 +64,7 @@ If necessary, rename it before installing it.
 
 - [![jdbcDriverOOo logo][18]][19] Install **[jdbcDriverOOo.oxt][20]** extension [![Version][21]][20]
 
-    This extension is necessary to use SQLite version 3.42.0.0 with all its features.
+    This extension is required to use the latest version of SQLite with all its features.
 
 - ![SQLiteOOo logo][22] Install **[SQLiteOOo.oxt][23]** extension [![Version][24]][23]
 
@@ -246,7 +246,11 @@ ___
 
 - Requires the **jdbcDriverOOo extension at least version 1.5.4**.
 
-### What remains to be done for version 1.3.2:
+### What has been done for version 1.3.3:
+
+- Requires the **jdbcDriverOOo extension at least version 1.5.7**.
+
+### What remains to be done for version 1.3.3:
 
 - Add new language for internationalization...
 
@@ -256,7 +260,7 @@ ___
 [2]: <https://prrvchr.github.io/SQLiteOOo/>
 [3]: <https://prrvchr.github.io/SQLiteOOo/README_fr>
 [4]: <https://prrvchr.github.io/SQLiteOOo/source/SQLiteOOo/registration/TermsOfUse_en>
-[5]: <https://prrvchr.github.io/SQLiteOOo#what-has-been-done-for-version-132>
+[5]: <https://prrvchr.github.io/SQLiteOOo#what-has-been-done-for-version-133>
 [6]: <https://prrvchr.github.io/>
 [7]: <https://www.libreoffice.org/download/download/>
 [8]: <https://www.openoffice.org/download/index.html>
@@ -274,7 +278,7 @@ ___
 [21]: <https://img.shields.io/github/v/tag/prrvchr/jdbcDriverOOo?label=latest#right>
 [22]: <img/SQLiteOOo.svg#middle>
 [23]: <https://github.com/prrvchr/SQLiteOOo/releases/latest/download/SQLiteOOo.oxt>
-[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.3.2#right>
+[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.3.3#right>
 [25]: <img/SQLiteOOo-1.png>
 [26]: <img/SQLiteOOo-2.png>
 [27]: <img/SQLiteOOo-3.png>

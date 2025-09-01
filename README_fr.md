@@ -29,7 +29,7 @@
 
 **L'utilisation de ce logiciel vous soumet à nos [Conditions d'utilisation][4].**
 
-# version [1.3.2][5]
+# version [1.3.3][5]
 
 ## Introduction:
 
@@ -64,7 +64,7 @@ Si nécessaire, renommez-le avant de l'installer.
 
 - [![jdbcDriverOOo logo][18]][19] Installer l'extension **[jdbcDriverOOo.oxt][20]** [![Version][21]][20]
 
-    Cette extension est nécessaire pour utiliser SQLite version 3.42.0.0 avec toutes ses fonctionnalités.
+    Cette extension est nécessaire pour utiliser la dernière version de SQLite avec toutes ses fonctionnalités.
 
 - ![SQLiteOOo logo][22] Installer l'extension **[SQLiteOOo.oxt][23]** [![Version][24]][23]
 
@@ -246,7 +246,11 @@ ___
 
 - Nécessite l'extension **jdbcDriverOOo en version 1.5.4 minimum**.
 
-### Que reste-t-il à faire pour la version 1.3.2:
+### Ce qui a été fait pour la version 1.3.3:
+
+- Nécessite l'extension **jdbcDriverOOo en version 1.5.7 minimum**.
+
+### Que reste-t-il à faire pour la version 1.3.3:
 
 - Ajouter de nouvelles langue pour l'internationalisation...
 
@@ -256,7 +260,7 @@ ___
 [2]: <https://prrvchr.github.io/SQLiteOOo/>
 [3]: <https://prrvchr.github.io/SQLiteOOo/>
 [4]: <https://prrvchr.github.io/SQLiteOOo/source/SQLiteOOo/registration/TermsOfUse_fr>
-[5]: <https://prrvchr.github.io/SQLiteOOo/README_fr#ce-qui-a-%C3%A9t%C3%A9-fait-pour-la-version-132>
+[5]: <https://prrvchr.github.io/SQLiteOOo/README_fr#ce-qui-a-%C3%A9t%C3%A9-fait-pour-la-version-133>
 [6]: <https://prrvchr.github.io/README_fr>
 [7]: <https://fr.libreoffice.org/download/telecharger-libreoffice/>
 [8]: <https://www.openoffice.org/fr/Telecharger/>
@@ -274,7 +278,7 @@ ___
 [21]: <https://img.shields.io/github/v/tag/prrvchr/jdbcDriverOOo?label=latest#right>
 [22]: <img/SQLiteOOo.svg#middle>
 [23]: <https://github.com/prrvchr/SQLiteOOo/releases/latest/download/SQLiteOOo.oxt>
-[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.3.2#right>
+[24]: <https://img.shields.io/github/downloads/prrvchr/SQLiteOOo/latest/total?label=v1.3.3#right>
 [25]: <img/SQLiteOOo-1_fr.png>
 [26]: <img/SQLiteOOo-2_fr.png>
 [27]: <img/SQLiteOOo-3_fr.png>
