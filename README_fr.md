@@ -254,7 +254,7 @@ ___
 ### Ce qui a été fait pour la version 1.4.0:
 
 - Si l'extension jdbcDriverOOo fonctionne sans l'instrumentation Java, un message d'avertissement s'affichera dans les options de l'extension.
-- Nécessite l'extension **jdbcDriverOOo en version 1.6.0 minimum**.
+- Nécessite l'extension **jdbcDriverOOo en version 1.6.1 minimum**.
 - A été testé sous LibreOfficeDev 26.2.
 
 ### Que reste-t-il à faire pour la version 1.4.0:
