@@ -24,96 +24,99 @@
 ║                                                                                    ║
 ╚════════════════════════════════════════════════════════════════════════════════════╝
 -->
+<!DOCTYPE oor:component-data SYSTEM "component-update.dtd">
 <oor:component-data
+  xmlns:install="http://openoffice.org/2004/installation"
   xmlns:oor="http://openoffice.org/2001/registry"
   xmlns:xs="http://www.w3.org/2001/XMLSchema"
   oor:package="org.openoffice.Office.DataAccess"
   oor:name="Drivers">
-    <node oor:name="Installed">
-        <node oor:name="sdbc:embedded:sqlite" oor:op="replace">
-            <prop oor:name="Driver">
-                <value>io.github.prrvchr.SQLiteOOo.Driver</value>
-            </prop>
-            <prop oor:name="DriverTypeDisplayName" oor:type="xs:string">
-                <value xml:lang="en-US">Embedded SQLite Driver</value>
-                <value xml:lang="fr-FR">Pilote SQLite intégré</value>
-            </prop>
-            <node oor:name="Properties">
-                <node oor:name="RespectDriverResultSetType" oor:op="replace">
-                    <prop oor:name="Value" oor:type="xs:boolean">
-                        <value>true</value>
-                    </prop>
-                </node>
-                <node oor:name="IsAutoRetrievingEnabled" oor:op="replace">
-                    <prop oor:name="Value" oor:type="xs:boolean">
-                        <value>true</value>
-                    </prop>
-                </node>
-                <node oor:name="AutoIncrementCreation" oor:op="replace">
-                    <prop oor:name="Value" oor:type="xs:string">
-                        <value>PRIMARY KEY AUTOINCREMENT</value>
-                    </prop>
-                </node>
-                <node oor:name="AutoRetrievingStatement" oor:op="replace">
-                    <prop oor:name="Value" oor:type="xs:string">
-                        <value></value>
-                    </prop>
-                </node>
-                <node oor:name="AutoIncrementIsPrimaryKey" oor:op="replace">
-                    <prop oor:name="Value" oor:type="xs:boolean">
-                        <value>true</value>
-                    </prop>
-                </node>
-                <node oor:name="IgnoreDriverPrivileges" oor:op="replace">
-                    <prop oor:name="Value" oor:type="xs:boolean">
-                        <value>true</value>
-                    </prop>
-                </node>
-            </node>
-            <node oor:name="Features">
-                <node oor:name="RespectDriverResultSetType" oor:op="replace">
-                    <prop oor:name="Value" oor:type="xs:boolean">
-                        <value>true</value>
-                    </prop>
-                </node>
-                <node oor:name="GeneratedValues" oor:op="replace">
-                    <prop oor:name="Value" oor:type="xs:boolean">
-                        <value>true</value>
-                    </prop>
-                </node>
-                <node oor:name="EscapeDateTime" oor:op="replace">
-                    <prop oor:name="Value" oor:type="xs:boolean">
-                        <value>true</value>
-                    </prop>
-                </node>
-                <node oor:name="UseDOSLineEnds" oor:op="replace">
-                    <prop oor:name="Value" oor:type="xs:boolean">
-                        <value>true</value>
-                    </prop>
-                </node>
-                <node oor:name="UseKeywordAsBeforeAlias" oor:op="replace">
-                    <prop oor:name="Value" oor:type="xs:boolean">
-                        <value>true</value>
-                    </prop>
-                </node>
-                <node oor:name="FormsCheckRequiredFields" oor:op="replace">
-                    <prop oor:name="Value" oor:type="xs:boolean">
-                        <value>true</value>
-                    </prop>
-                </node>
-            </node>
-            <node oor:name="MetaData">
-                <node oor:name="SupportsBrowsing" oor:op="replace">
-                    <prop oor:name="Value" oor:type="xs:boolean">
-                        <value>true</value>
-                    </prop>
-                </node>
-                <node oor:name="SupportsTableCreation" oor:op="replace">
-                    <prop oor:name="Value" oor:type="xs:boolean">
-                        <value>true</value>
-                    </prop>
-                </node>
-            </node>
+  <node oor:name="Installed">
+    <node oor:name="sdbc:embedded:sqlite" oor:op="replace">
+      <prop oor:name="Driver">
+        <value>io.github.prrvchr.SQLiteOOo.Driver</value>
+      </prop>
+      <prop oor:name="DriverTypeDisplayName" oor:type="xs:string">
+        <value xml:lang="en-US">Embedded SQLite Driver</value>
+        <value xml:lang="fr-FR">Pilote SQLite intégré</value>
+      </prop>
+      <node oor:name="Properties">
+        <node oor:name="RespectDriverResultSetType" oor:op="replace">
+          <prop oor:name="Value" oor:type="xs:boolean">
+            <value>true</value>
+          </prop>
         </node>
-     </node>
+        <node oor:name="IsAutoRetrievingEnabled" oor:op="replace">
+          <prop oor:name="Value" oor:type="xs:boolean">
+            <value>true</value>
+          </prop>
+        </node>
+        <node oor:name="AutoIncrementCreation" oor:op="replace">
+          <prop oor:name="Value" oor:type="xs:string">
+            <value>PRIMARY KEY AUTOINCREMENT</value>
+          </prop>
+        </node>
+        <node oor:name="AutoRetrievingStatement" oor:op="replace">
+          <prop oor:name="Value" oor:type="xs:string">
+            <value></value>
+          </prop>
+        </node>
+        <node oor:name="AutoIncrementIsPrimaryKey" oor:op="replace">
+          <prop oor:name="Value" oor:type="xs:boolean">
+            <value>true</value>
+          </prop>
+        </node>
+        <node oor:name="IgnoreDriverPrivileges" oor:op="replace">
+          <prop oor:name="Value" oor:type="xs:boolean">
+            <value>true</value>
+          </prop>
+        </node>
+      </node>
+      <node oor:name="Features">
+        <node oor:name="RespectDriverResultSetType" oor:op="replace">
+          <prop oor:name="Value" oor:type="xs:boolean">
+            <value>true</value>
+          </prop>
+        </node>
+        <node oor:name="GeneratedValues" oor:op="replace">
+          <prop oor:name="Value" oor:type="xs:boolean">
+            <value>true</value>
+          </prop>
+        </node>
+        <node oor:name="EscapeDateTime" oor:op="replace">
+          <prop oor:name="Value" oor:type="xs:boolean">
+            <value>true</value>
+          </prop>
+        </node>
+        <node oor:name="UseDOSLineEnds" oor:op="replace">
+          <prop oor:name="Value" oor:type="xs:boolean">
+            <value>true</value>
+          </prop>
+        </node>
+        <node oor:name="UseKeywordAsBeforeAlias" oor:op="replace">
+          <prop oor:name="Value" oor:type="xs:boolean">
+            <value>true</value>
+          </prop>
+        </node>
+        <node oor:name="FormsCheckRequiredFields" oor:op="replace">
+          <prop oor:name="Value" oor:type="xs:boolean">
+            <value>true</value>
+          </prop>
+        </node>
+      </node>
+      <node oor:name="MetaData">
+        <node oor:name="SupportsBrowsing" oor:op="replace">
+          <prop oor:name="Value" oor:type="xs:boolean">
+            <value>true</value>
+          </prop>
+        </node>
+        <node oor:name="SupportsTableCreation" oor:op="replace">
+          <prop oor:name="Value" oor:type="xs:boolean">
+            <value>true</value>
+          </prop>
+        </node>
+      </node>
+    </node>
+  </node>
 </oor:component-data>
+
