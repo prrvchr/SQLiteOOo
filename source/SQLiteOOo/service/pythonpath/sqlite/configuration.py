@@ -1,5 +1,5 @@
 #!
-# -*- coding: utf_8 -*-
+# -*- coding: utf-8 -*-
 
 """
 ╔════════════════════════════════════════════════════════════════════════════════════╗
@@ -30,16 +30,15 @@
 # General configuration
 g_catalog = 'sqlite'
 g_dbname = 'SQLite'
-g_extension = '%sOOo' % g_dbname
-g_identifier = 'io.github.prrvchr.%s' % g_extension
-g_service = '%s.Driver' % g_identifier
-g_resource = 'resource'
+g_extension = f'{g_dbname}OOo'
+g_identifier = f'io.github.prrvchr.{g_extension}'
+g_service = f'{g_identifier}.Driver'
+g_defaultlog = f'{g_dbname}Logger'
+g_errorlog = f'{g_dbname}Error'
 g_basename = 'Driver'
-g_defaultlog = '%sLogger' % g_dbname
-g_errorlog = '%sError' % g_dbname
 
 # DataBase configuration
-g_protocol = 'xdbc:sqlite:'
+g_protocol = 'juda:sqlite:'
 g_url = 'sdbc:embedded:sqlite'
 g_user = ''
 g_options = ''
@@ -50,7 +49,6 @@ g_driver = ''
 g_shutdown = ''
 
 g_disabled = (0, )
-g_memory = 'xdbc:sqlite::memory:'
+g_memory = 'juda:sqlite::memory:'
 
-# LibreOffice configuration
-g_lover = '24.2'
+g_version = '1.5.0'
