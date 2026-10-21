@@ -1,5 +1,5 @@
 #!
-# -*- coding: utf_8 -*-
+# -*- coding: utf-8 -*-
 
 """
 ╔════════════════════════════════════════════════════════════════════════════════════╗
@@ -27,7 +27,6 @@
 ╚════════════════════════════════════════════════════════════════════════════════════╝
 """
 
-import uno
 import unohelper
 
 from com.sun.star.logging.LogLevel import SEVERE
@@ -42,9 +41,7 @@ from sqlite import getLogger
 
 from sqlite import g_basename
 from sqlite import g_defaultlog
-from sqlite import g_identifier
 
-from sqlite import g_disabled
 from sqlite import g_memory
 
 import traceback
@@ -68,7 +65,7 @@ class OptionsHandler(unohelper.Base,
             handled = False
             if method == 'external_event':
                 if event == 'initialize':
-                    self._manager = OptionsManager(self._ctx, self._logger, window, g_disabled, g_memory)
+                    self._manager = OptionsManager(self._ctx, self._logger, window, g_memory)
                     handled = True
                 elif event == 'ok':
                     self._manager.saveSetting()
@@ -76,13 +73,17 @@ class OptionsHandler(unohelper.Base,
                 elif event == 'back':
                     self._manager.loadSetting()
                     handled = True
+            elif method == 'ShowSetup':
+                self._manager.showSetup()
+                handled = True
             return handled
         except Exception as e:
             print("OptionsHandler.callHandlerMethod() ERROR: %s" % traceback.format_exc())
             self._logger.logprb(SEVERE, 'OptionsHandler', 'callHandlerMethod', 301, e, traceback.format_exc())
 
     def getSupportedMethodNames(self):
-        return ('external_event', )
+        return ('external_event',
+                'ShowSetup' )
 
     # XServiceInfo
     def supportsService(self, service):
@@ -91,6 +92,7 @@ class OptionsHandler(unohelper.Base,
         return g_ImplementationName
     def getSupportedServiceNames(self):
         return g_ImplementationHelper.getSupportedServiceNames(g_ImplementationName)
+
 
 g_ImplementationHelper.addImplementation(OptionsHandler,                  # UNO object class
                                          g_ImplementationName,            # Implementation name

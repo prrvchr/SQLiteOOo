@@ -33,8 +33,11 @@
   xml:lang="en-US">
   <component>
     <prop oor:name="ApiLevel" oor:type="xs:short"/>
-    <prop oor:name="CachedRowSet" oor:type="xs:short"/>
+    <prop oor:name="ResultSetType" oor:type="xs:short"/>
+    <prop oor:name="UseCachedRowSet" oor:type="xs:boolean"/>
     <prop oor:name="ShowSystemTable" oor:type="xs:boolean"/>
+    <prop oor:name="SetupPosSize" oor:type="oor:int-list"/>
+    <prop oor:name="SetupUpdate" oor:type="xs:short"/>
   </component>
 </oor:component-schema>
 
