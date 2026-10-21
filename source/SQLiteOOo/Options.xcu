@@ -40,5 +40,11 @@
   <prop oor:name="ShowSystemTable" oor:op="fuse">
     <value>false</value>
   </prop>
+  <prop oor:name="SetupPosition" oor:op="fuse">
+    <value>-1 -1</value>
+  </prop>
+  <prop oor:name="SetupUpdate">
+    <value>0</value>
+  </prop>
 </oor:component-data>
 

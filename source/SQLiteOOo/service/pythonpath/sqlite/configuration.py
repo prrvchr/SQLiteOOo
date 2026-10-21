@@ -39,7 +39,7 @@ g_defaultlog = '%sLogger' % g_dbname
 g_errorlog = '%sError' % g_dbname
 
 # DataBase configuration
-g_protocol = 'xdbc:sqlite:'
+g_protocol = 'juda:sqlite:'
 g_url = 'sdbc:embedded:sqlite'
 g_user = ''
 g_options = ''
@@ -50,7 +50,10 @@ g_driver = ''
 g_shutdown = ''
 
 g_disabled = (0, )
-g_memory = 'xdbc:sqlite::memory:'
+g_memory = 'juda:sqlite::memory:'
 
-# LibreOffice configuration
-g_lover = '24.2'
+# Setup frame and Job name
+g_setup = '%s.Setup' % g_extension
+
+class State:
+    restart = False

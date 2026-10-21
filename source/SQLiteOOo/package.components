@@ -11,4 +11,10 @@
       <service name="com.sun.star.sdbc.Driver"/>
     </implementation>
   </component>
+  <component loader="com.sun.star.loader.Python" uri="service/Setup.py">
+    <implementation name="io.github.prrvchr.SQLiteOOo.Setup">
+      <service name="io.github.prrvchr.SQLiteOOo.Setup"/>
+      <service name="com.sun.star.task.Job"/>
+    </implementation>
+  </component>
 </components>
