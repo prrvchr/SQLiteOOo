@@ -27,14 +27,11 @@
 ╚════════════════════════════════════════════════════════════════════════════════════╝
 """
 
-from ..setup import canUpdatePackages
-
+from ..unotool import canUpdatePackages
 from ..unotool import getConfiguration
 from ..unotool import getStringResource
 
 from ..configuration import g_identifier
-
-import traceback
 
 
 class OptionsModel():
