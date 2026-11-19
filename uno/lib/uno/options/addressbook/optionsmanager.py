@@ -60,7 +60,7 @@ class OptionsManager():
         self._java = g_extension, g_java, g_script
         self._agent = g_service, g_protocol, g_agent
         self._model = OptionsModel(ctx)
-        self._view = OptionsView(window, *self._model.getViewData())
+        self._view = OptionsView(ctx, window, *self._model.getViewData())
         self._manager = OptionManager(ctx, logger, self._view.getFrame(), self._model.getConfig())
         window.addEventListener(OptionsListener(self))
         self._loadView(self.init)
@@ -69,15 +69,15 @@ class OptionsManager():
     def init(self, state):
         if not self._disposed:
             self._manager.init(state)
-            self._view.initView(*self._model.getInitData(state))
+            self._view.refreshView(*self._model.getRefreshData(state))
 
     def refresh(self, state):
         if not self._disposed:
             self._manager.refresh(state)
-            self._view.refreshView(state)
+            self._view.refreshView(*self._model.getRefreshData(state))
 
     def saveSetting(self):
-        self._model.saveData(self._view.getData())
+        self._model.saveData(self._view.getSetupMode())
         if self._manager.saveSetting():
             State.restart = True
             self._loadView(self.refresh)

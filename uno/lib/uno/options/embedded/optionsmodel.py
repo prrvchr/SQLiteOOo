@@ -53,15 +53,18 @@ class OptionsModel():
         self._config = getConfiguration(ctx, g_identifier, True)
         self._resolver = getStringResource(ctx, g_identifier, 'dialogs', 'OptionsDialog')
         self._logger.logprb(INFO, 'OptionsModel', '__init__', 401)
-        self._resources = {'SetupLabel': 'OptionsDialog.FixedLine1.Label',
-                           'Links':      'OptionsDialog.Hyperlink%s.Url'}
+        self._resources = {'Title': 'OptionsDialog.FixedLine1.Label',
+                           'Link':  'OptionsDialog.Label4.Url.%s'}
 
 # OptionsModel getter methods
     def getViewData(self):
-        return self._getSetupLabel(), self._getLinks(), self._update
+        return self._getTitle()
 
     def getInitData(self, state):
-        return self._getSetupMode(), state
+        return self._getSetupMode(), self._update, *self.getRefreshData(state)
+
+    def getRefreshData(self, state):
+        return state.getMessage(self._ctx), self._getLink(state.code)
 
     def saveSetting(self, mode):
         if self._update and mode != self._getSetupMode():
@@ -83,18 +86,19 @@ class OptionsModel():
             # If the driver is None, the error is already logged
             if driver is not None:
                 self._logger.logprb(SEVERE, 'OptionsModel', 'getDriverVersion', 102, embedded, apilevel, e.Message)
+        except Exception as ex:
+            # If the driver is None, the error is already logged
+            if driver is not None:
+                self._logger.logprb(SEVERE, 'OptionsModel', 'getDriverVersion', 102, embedded, apilevel, str(ex))
         return version
 
     def _getSetupMode(self):
         return self._config.getByName('SetupUpdate')
 
-    def _getLinks(self):
-        links = []
-        for i in range(1, 2):
-            resource = self._resources.get('Links') % i
-            links.append(self._resolver.resolveString(resource))
-        return tuple(links)
-
-    def _getSetupLabel(self):
-        resource = self._resources.get('SetupLabel')
+    def _getTitle(self):
+        resource = self._resources.get('Title')
         return self._resolver.resolveString(resource).format(extension=g_extension)
+
+    def _getLink(self, code):
+        resource = self._resources.get('Link') % code
+        return self._resolver.resolveString(resource)
