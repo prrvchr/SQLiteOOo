@@ -35,16 +35,19 @@ from .optionview import OptionView
 
 from .optionhandler import OptionHandler
 
+from ..logger.logmanager import LogManager
+
+from ...unotool import createService
 from ...unotool import getDesktop
 
-from ..logger import LogManager
-
 from ...configuration import g_defaultlog
+from ...configuration import g_implementation
+from ...configuration import g_protocol
 from ...configuration import g_synclog
 
 
 class OptionManager():
-    def __init__(self, ctx, logger, window, config):
+    def __init__(self, ctx, window, config, logger):
         self._ctx = ctx
         self._model = OptionModel(ctx, config)
         self._view = OptionView(ctx, window, OptionHandler(self), self._model.getViewData())
@@ -64,9 +67,15 @@ class OptionManager():
         self._view.initView(*self._model.getInitData(state))
         self._logmanager.loadSetting()
         self._logger.logprb(INFO, 'OptionManager', 'init()', 311)
+        self._checkDriver()
 
     def refresh(self, state):
         self._view.refreshView(state)
+        self._checkDriver()
+
+    def dispose(self):
+        self._logmanager.dispose()
+        self._view.dispose()
 
     def saveSetting(self):
         option = self._model.setViewData(*self._view.getViewData())
@@ -76,3 +85,6 @@ class OptionManager():
 
     def viewData(self):
         getDesktop(self._ctx).loadComponentFromURL(self.getDataSourceUrl(), '_default', 0, ())
+
+    def _checkDriver(self):
+        createService(self._ctx, g_implementation).getPropertyInfo(g_protocol, ())

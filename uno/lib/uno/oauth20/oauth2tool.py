@@ -33,7 +33,7 @@ from ..unotool import createService
 from ..unotool import executeDesktopDispatch
 from ..unotool import getExtensionVersion
 
-from ..configuration import State
+from ..config.configuration import State
 
 from .configuration import g_chunk
 from .configuration import g_identifier
@@ -58,7 +58,7 @@ def getRequest(ctx, url=None, name=None):
     return request
 
 
-def showOAuth2(ctx, listener=None, /, **kwargs):
+def showOAuth2(ctx, listener=None, /, **kwargs):  # noqa
     url = 'vnd.sun.star.job:service=io.github.prrvchr.OAuth2OOo.OAuth2'
     executeDesktopDispatch(ctx, url, listener, **kwargs)
 

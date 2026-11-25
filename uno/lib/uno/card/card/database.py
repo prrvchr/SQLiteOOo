@@ -34,7 +34,8 @@ from com.sun.star.sdbc.DataType import VARCHAR
 from com.sun.star.sdbcx.CheckOption import CASCADE
 from com.sun.star.sdbcx.PrivilegeObject import TABLE
 
-from ..dbtool import Array
+from ..dbtool.array import Array
+
 from ..dbtool import createUser
 from ..dbtool import createViews
 from ..dbtool import currentDateTimeInTZ
@@ -351,7 +352,7 @@ class DataBase():
 
     def createGroupView(self, user, group):
         schema = user.getSchema()
-        template = {'Catalog': g_catalog, 'Schema':  g_schema, 'ItemId': group.Id}
+        template = {'Catalog': g_catalog, 'Schema': g_schema, 'ItemId': group.Id}
         command = getSqlQuery(self._ctx, 'getGroupViewCommand', template)
         self._createUserView(g_catalog, schema, group.Name, command, CASCADE)
         self._grantPrivileges(g_catalog, schema, group.Name, user.Name, TABLE, 1)

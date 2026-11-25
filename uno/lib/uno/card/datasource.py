@@ -37,26 +37,23 @@ from .database import DataBase
 
 from .provider import Provider
 
-from .setup import SetupCheck
+from .setup.setupcheck import Check
 
-from .card import EventListener
-from .card import User
+from .card.listener import EventListener
 
-from .runner import DispatchListener
+from .card.user import User
 
-from .card import getSqlException
+from .runner.listener import DispatchListener
+
+from .card.helper import getSqlException
 
 from .dbinit import getDataSourceUrl
-# from .setup import showSetup
 
 from .helper import getExtensions
 from .helper import startReplication
 
-from .jdbcdriver import g_agent
-from .jdbcdriver import g_java
-from .jdbcdriver import g_protocol
-from .jdbcdriver import g_script
-from .jdbcdriver import g_service
+from .jdbcdriver.configuration import g_java
+from .jdbcdriver.configuration import g_script
 
 from .configuration import g_extension
 
@@ -121,7 +118,6 @@ class DataSource():
         # User and/or AddressBooks has been initialized and the connection to the database is done...
         # We can start the database replication in a background task.
         connection.addEventListener(self._listener)
-        # showSetup(self._ctx, Dispatch=DispatchListener(self), Mode=0)
         startReplication(self._ctx, Dispatch=DispatchListener(self), Args=self._getUserSessions())
         return connection
 
@@ -134,8 +130,7 @@ class DataSource():
     @classmethod
     def checkSetup(cls, ctx, source):
         java = g_extension, g_java, g_script
-        agent = g_service, g_protocol, g_agent
         database = getDataSourceUrl(ctx)
-        state = SetupCheck.getState(ctx, database=database, java=java, agent=agent, python=True, extensions=getExtensions())
+        state = Check.getState(ctx, database=database, java=java, python=True, extensions=getExtensions())
         if not state.runnable:
             raise SQLException(state.getMessage(ctx), source, '08001', state.code, None)

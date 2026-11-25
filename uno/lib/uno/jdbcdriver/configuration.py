@@ -29,12 +29,16 @@
 
 # jdbcDriverOOo general configuration
 g_extension = 'jdbcDriverOOo'
-g_identifier = 'io.github.prrvchr.%s' % g_extension
+g_identifier = f'io.github.prrvchr.{g_extension}'
 g_services = ('io.github.prrvchr.jdbcdriver.sdbc.Driver',
               'io.github.prrvchr.jdbcdriver.sdbcx.Driver',
               'io.github.prrvchr.jdbcdriver.sdb.Driver')
-g_service = g_services[0]
-g_version = '1.7.1'
+g_service = f'{g_identifier}.Driver'
+g_drivers = f'{g_identifier}.Drivers'
+g_apilevel = {0: 'com.sun.star.sdbc',
+              1: 'com.sun.star.sdbcx',
+              2: 'com.sun.star.sdb'}
+
 g_agent = 'SupportsInstrumentationAgent'
 g_url = 'juda:'
 g_protocol = g_url + 'jdbc'
@@ -42,14 +46,8 @@ g_java = '17'
 g_script = 'JavaInfo.io.github.prrvchr.java.info.JavaInfo.getVersion'
 
 # jdbcDriverOOo special configuration
-g_resource = 'resource'
 g_basename = 'Driver'
 g_defaultlog = 'Driver'
 g_errorlog = 'jdbcDriverError'
 
-# Setup frame and Job name
-g_setup = '%s.Setup' % g_extension
-
-
-class State:
-    restart = False
+g_version = '1.7.1'

@@ -38,23 +38,23 @@ from ..unotool import getResourceLocation
 from ..unotool import getSimpleFile
 from ..unotool import getStringResource
 
-from .helper import checkAgent
-from .helper import checkExtension
-from .helper import checkPython
-from .helper import getJavaStatus
-from .helper import getJavaVersion
-from .helper import getRequirementsUrl
-from .helper import getSetupUpdateMode
+from .task.helper import checkAgent
+from .task.helper import checkExtension
+from .task.helper import checkPython
+from .task.helper import getJavaStatus
+from .task.helper import getJavaVersion
+from .task.helper import getRequirementsUrl
+from .task.helper import getSetupUpdateMode
+
+from ..config.configuration import g_resource
 
 from ..configuration import g_identifier
-from ..configuration import g_resource
 
 from threading import Timer
 
 
 class Check():
     def __init__(self, ctx, *, database=None, java=None, agent=None, python=False, extensions=None, mode=None):
-        self._ctx = ctx
         self._state = SetupState()
         self._steps = self._getCheckStep(ctx, database, java, agent, python, extensions, mode)
 
@@ -141,7 +141,7 @@ class Check():
 class SetupCheck(unohelper.Base,
                  XCallback,
                  Check):
-    def __init__(self, ctx, callback, /, database=None, java=None, agent=None, python=False, extensions=None, mode=None, progress=None, **kwargs):
+    def __init__(self, ctx, callback, /, database=None, java=None, agent=None, python=False, extensions=None, mode=None, progress=None, **kwargs):  # noqa
         Check.__init__(self, ctx, database=database, java=java, agent=agent, python=python, extensions=extensions, mode=mode)
         self._delai = 0.1
         self._callback = callback

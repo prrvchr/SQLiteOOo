@@ -32,16 +32,15 @@ from .unotool import executeDesktopDispatch
 from .unotool import getDesktop
 from .unotool import getNamedValue
 
-from .oauth20 import g_identifier as g_identifier1
-from .oauth20 import g_extension as g_extension1
-from .oauth20 import g_version as g_version1
+from .oauth20.configuration import g_identifier as g_identifier1
+from .oauth20.configuration import g_extension as g_extension1
+from .oauth20.configuration import g_version as g_version1
 
-from .jdbcdriver import g_identifier as g_identifier2
-from .jdbcdriver import g_extension as g_extension2
-from .jdbcdriver import g_version as g_version2
+from .jdbcdriver.configuration import g_identifier as g_identifier2
+from .jdbcdriver.configuration import g_extension as g_extension2
+from .jdbcdriver.configuration import g_version as g_version2
 
 from .configuration import g_extension
-# from .configuration import g_identifier
 
 import traceback
 
@@ -60,7 +59,7 @@ def getExtensions():
 #        runner.start()
 
 
-def startReplication1(ctx, listener=None, /, **arguments):
+def startReplication1(ctx, listener=None, /, **arguments):  # noqa
     try:
         service = 'com.sun.star.task.Job'
         args = getNamedValue('JobName', f'{g_extension}.Replicator')
@@ -71,7 +70,7 @@ def startReplication1(ctx, listener=None, /, **arguments):
         print("helper.startReplication() ERROR: %s" % traceback.format_exc())
 
 
-def startReplication(ctx, listener=None, /, **kwargs):
+def startReplication(ctx, listener=None, /, **kwargs):  # noqa
     url = f'vnd.sun.star.job:alias={g_extension}.Replicator'
     executeDesktopDispatch(ctx, url, listener, **kwargs)
 

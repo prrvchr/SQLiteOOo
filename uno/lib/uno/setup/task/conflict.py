@@ -29,12 +29,12 @@
 
 from .setup import Setup
 
-from ...unotool import Resource
+from ...unotool.resource import Resource
 
-from ..helper import getExtensionName
-from ..helper import getInstalledPackages
-from ..helper import getOsLocation
-from ..helper import parsePackageName
+from .helper import getExtensionName
+from .helper import getInstalledPackages
+from .helper import getOsLocation
+from .helper import parsePackageName
 
 from ...unotool import getResourceLocation
 

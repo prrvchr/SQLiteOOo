@@ -29,9 +29,9 @@
 
 from .setup import Setup
 
-from ...unotool import Resource
+from ...unotool.resource import Resource
 
-from ..helper import checkExtension
+from .helper import checkExtension
 
 
 class Extension(Setup):

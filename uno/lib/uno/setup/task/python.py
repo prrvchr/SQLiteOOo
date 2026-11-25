@@ -29,19 +29,19 @@
 
 from .setup import Setup
 
-from ...unotool import Resource
+from ...unotool.resource import Resource
 
-from ..helper import getInstalledPackages
-from ..helper import getOsLocation
-from ..helper import getPackageSimpleData
-from ..helper import getPackageVersionData
-from ..helper import getRequirementversion
-from ..helper import parsePackageName
-from ..helper import parsePackageSimpleData
-from ..helper import parsePackageVersionData
-from ..helper import parseRequirements
-from ..helper import getRequirementsUrl
-from ..helper import getSetupUpdateMode
+from .helper import getInstalledPackages
+from .helper import getOsLocation
+from .helper import getPackageSimpleData
+from .helper import getPackageVersionData
+from .helper import getRequirementversion
+from .helper import parsePackageName
+from .helper import parsePackageSimpleData
+from .helper import parsePackageVersionData
+from .helper import parseRequirements
+from .helper import getRequirementsUrl
+from .helper import getSetupUpdateMode
 
 from ...unotool import checkInternet
 from ...unotool import getResourceLocation
@@ -52,7 +52,7 @@ from ...configuration import g_identifier
 class Python(Setup):
     def __init__(self, ctx, callback, mode):
         super().__init__(ctx, callback)
-        self._packages ={}
+        self._packages = {}
         self._data = None
         self._url = None
         self._version = None

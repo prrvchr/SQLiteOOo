@@ -30,7 +30,7 @@
 import uno
 import unohelper
 
-from com.sun.star.logging import XLogger2
+from com.sun.star.logging import XLogger2  # @UnresolvedImport
 
 
 class Logger(unohelper.Base,
@@ -72,6 +72,10 @@ class Logger(unohelper.Base,
             self._logp(level, clazz, method, message)
 
     # XLogger2
+    @property
+    def Logger(self):
+        return self._logger
+
     @property
     def ResourceResolver(self):
         return self._resolver

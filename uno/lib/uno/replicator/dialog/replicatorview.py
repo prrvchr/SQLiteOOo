@@ -36,8 +36,9 @@ from com.sun.star.awt.PosSize import HEIGHT
 
 from com.sun.star.util.MeasureUnit import APPFONT
 
-from ...unotool import Layout
-from ...unotool import Indicator
+from ...unotool.layout import Layout
+
+from ...unotool.indicator import Factory as Indicator
 
 from ...unotool import getContainerWindow
 from ...unotool import getDesktop
@@ -47,7 +48,6 @@ from ...unotool import setWindowPosSize
 
 from ...configuration import g_replicator
 from ...configuration import g_identifier
-from ...configuration import g_offset
 
 
 class ReplicatorView():
@@ -76,7 +76,7 @@ class ReplicatorView():
         self._layout = Layout(self._window, **self._getLayouts())
         self._window.addWindowListener(self._layout)
 
-        self._indicator = Indicator(frame=self._frame, offset=g_offset)
+        self._indicator = Indicator(frame=self._frame)
         self._frame.setTitle(title)
         self._window.setVisible(True)
         window.setVisible(True)
